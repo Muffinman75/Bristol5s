@@ -1,0 +1,44 @@
+{
+  "name": "lookup-server",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@sendgrid/mail": "^6.3.1",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "fs": "0.0.2",
+    "gravatar": "^1.6.0",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.3.10",
+    "morgan": "^1.9.1",
+    "nodemailer": "^4.7.0",
+    "nodemailer-sendgrid-transport": "^0.2.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "sql.js": "0.3.2",
+    "validator": "^10.9.0"
+  },
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client \"",
+    "client": "node start-client.js",
+    "server": "nodemon --exec babel-node server.js",
+    "test": "mocha",
+    "lint": "eslint"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "concurrently": "^3.1.0",
+    "eslint": "3.15.0",
+    "eslint-config-airbnb": "14.1.0",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jsx-a11y": "4.0.0",
+    "eslint-plugin-react": "6.9.0",
+    "mocha": "^5.2.0"
+  }
+}
