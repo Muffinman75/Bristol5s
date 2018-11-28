@@ -5,6 +5,7 @@ const passport = require("passport");
 const Fixture = require("../models/Fixture");
 const User = require("../models/User");
 const Application = require("../models/ApplicationForGame");
+const newEmail = require("../utils/emailer");
 
 router.post(
   "/apply",
@@ -26,9 +27,26 @@ router.post(
             user_id: req.user._id,
             game_id: req.body.game_id,
             approved: false
-          }).then(dbResponse => {
-            res.status(201).json({ dbResponse });
-          });
+          })
+            .then(dbResponse => {
+              res.status(201).json({ dbResponse });
+            })
+            .then(
+              Fixture.findOne({
+                game_id: req.body.game_id
+              }).then(fixture => {
+                if (fixture) {
+                  console.log("fixture after application created:", fixture);
+                  User.findOne({
+                    user_id: fixture.user_id
+                  }).then(user => {
+                    console.log("Before Email:");
+                    newEmail(req.user.userName);
+                    console.log("After Email:", json({ newEmail }));
+                  });
+                }
+              })
+            );
         }
       })
       .catch(err =>

@@ -3,9 +3,6 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const morgan = require("morgan");
-const nodemailer = require("nodemailer");
-const sgMail = require("@sendgrid/mail");
-const sendgridTransport = require("nodemailer-sendgrid-transport");
 
 const config = require("./db");
 const users = require("./routes/users");
@@ -25,35 +22,6 @@ mongoose
       console.log("Can not connect to the database" + err);
     }
   );
-
-// Configure Nodemailer SendGrid Transporter
-const transporter = nodemailer.createTransport(
-  sendgridTransport({
-    auth: {
-      api_key: process.env.SENDGRID_API_KEY // SG password
-    }
-  })
-);
-
-//sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-// Create Email Options
-const options = {
-  to: "manojmodhwadia@outlook.com",
-  from: "slenderprince75@gmail.com", // Totally up to you
-  subject: "Sending with SendGrid is Fun",
-  html: "<strong>and easy to do anywhere, even with Node.js</strong>" // For sending HTML emails
-};
-
-sgMail.send(options);
-
-// Send Email
-// transporter.sendEmail(options, (err, resp) => {
-//   if (err) {
-//     // handle error
-//   } else {
-//     // handle success
-//   }
-// });
 
 const app = express();
 app.use(passport.initialize());
