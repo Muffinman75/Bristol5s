@@ -5,12 +5,25 @@ const passport = require("passport");
 const Fixture = require("../models/Fixture");
 const User = require("../models/User");
 const Application = require("../models/ApplicationForGame");
-const newEmail = require("../utils/emailer");
+const { newEmail } = require("../utils/emailer");
+
+router.get("/fixtures", (req, res) => {
+  Fixture.find().then(fixtures => {
+    res.send(fixtures);
+  });
+});
+
+router.get("/fixtures/:id", (req, res) => {
+  Fixture.findOne({ _id: req.params.id }).then(fixtures => {
+    res.send(fixtures);
+  });
+});
 
 router.post(
   "/apply",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    let newApplication;
     console.log("Apply for game:" + JSON.stringify(req.body));
     Application.findOne({
       $and: [{ game_id: req.body.game_id }, { user_id: req.user._id }]
@@ -29,24 +42,26 @@ router.post(
             approved: false
           })
             .then(dbResponse => {
-              res.status(201).json({ dbResponse });
+              console.log("application created");
+              return (newApplication = dbResponse);
             })
-            .then(
-              Fixture.findOne({
-                game_id: req.body.game_id
-              }).then(fixture => {
-                if (fixture) {
-                  console.log("fixture after application created:", fixture);
-                  User.findOne({
-                    user_id: fixture.user_id
-                  }).then(user => {
-                    console.log("Before Email:");
-                    newEmail(req.user.userName);
-                    console.log("After Email:", json({ newEmail }));
-                  });
-                }
-              })
-            );
+            .then(() => {
+              console.log("fixture findOne", req.body.game_id);
+              Fixture.findOne({ _id: req.body.game_id });
+            })
+            .then(fixture => {
+              console.log(
+                "fixture after application created:",
+                req.body.user_id
+              );
+              User.findOne({ _id: req.body.user_id });
+            })
+            .then(dbResponse => {
+              console.log("Before Email:");
+              newEmail(req.user.userName);
+              console.log("After Email:");
+              res.status(201).json({ dbResponse });
+            });
         }
       })
       .catch(err =>
