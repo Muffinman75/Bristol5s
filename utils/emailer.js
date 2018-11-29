@@ -1,22 +1,21 @@
-const {SG_API_KEY} = ()
+require("dotenv").config();
 
 const SGmail = require("@sendgrid/mail");
-SGmail.setApiKey(
-  SG_API_KEY
-);
+SGmail.setApiKey(process.env.SENDGRID_API_KEY);
 
-function newEmail(name) {
+function newEmail(email, name, applicant, date, time) {
   const message = {
-    to: "manojmodhwadia@outlook.com", //email variable
+    to: email, //email variable
 
     from: {
-      email: "slenderprince75@gmail.com",
+      email: "Bristol5s@doNotReply.com",
       name: "Muffinman"
     },
 
-    message: `Hi there, ${name}`,
+    message: `Hi there, ${name}, ${applicant} wishes to play in your game on ${date} at ${time}. 
+              Please visit Bristol5s for more details and to accept or reject ${name} for your game`,
 
-    subject: "This is a test Email"
+    subject: "Someone wants to play in your game!"
   };
 
   SGmail.send(message).then(sent => {

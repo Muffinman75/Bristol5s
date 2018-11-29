@@ -8,6 +8,7 @@ const config = require("./db");
 const users = require("./routes/users");
 const fixtures = require("./routes/fixtures");
 const applicationForGame = require("./routes/applicationForGame");
+const approvalForGame = require("./routes/approvalForGame");
 
 mongoose
   .connect(
@@ -33,7 +34,7 @@ app.use(bodyParser.json());
 
 app.use("/api/users", users);
 app.use("/api/fixtures", fixtures);
-app.use("/api/applications", applicationForGame);
+app.use("/api/applications", applicationForGame, approvalForGame);
 
 app.get("/", function(req, res) {
   res.send("hello");

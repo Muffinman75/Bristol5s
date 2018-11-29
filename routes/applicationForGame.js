@@ -19,11 +19,18 @@ router.get("/fixtures/:id", (req, res) => {
   });
 });
 
+router.get("/users", (req, ress) => {
+  Users.find().then(users => {
+    res.send(users);
+  });
+});
+
 router.post(
   "/apply",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     let newApplication;
+    let applicant;
     console.log("Apply for game:" + JSON.stringify(req.body));
     Application.findOne({
       $and: [{ game_id: req.body.game_id }, { user_id: req.user._id }]
@@ -46,21 +53,40 @@ router.post(
               return (newApplication = dbResponse);
             })
             .then(() => {
+              return User.findOne({ _id: req.body.user_id });
+            })
+            .then(user => {
+              console.log("Applicant Username:", user.userName);
+              return (applicant = user.userName);
+            })
+            .then(() => {
               console.log("fixture findOne", req.body.game_id);
-              Fixture.findOne({ _id: req.body.game_id });
+              return Fixture.findOne({ _id: req.body.game_id });
             })
             .then(fixture => {
               console.log(
                 "fixture after application created:",
-                req.body.user_id
+                fixture.user_id
               );
-              User.findOne({ _id: req.body.user_id });
+              return User.findOne({ _id: fixture.user_id });
             })
-            .then(dbResponse => {
-              console.log("Before Email:");
-              newEmail(req.user.userName);
-              console.log("After Email:");
-              res.status(201).json({ dbResponse });
+            .then(user => {
+              console.log(
+                "Sending email to:",
+                user.userName,
+                "at:",
+                user.email
+              );
+              newEmail(
+                user.email,
+                user.userName,
+                applicant,
+                user.date,
+                user.time
+              );
+              res
+                .status(201)
+                .json({ message: `email sent to ${user.userName}` });
             });
         }
       })
