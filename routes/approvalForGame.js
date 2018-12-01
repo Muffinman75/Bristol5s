@@ -7,6 +7,54 @@ const User = require("../models/User");
 const Application = require("../models/ApplicationForGame");
 const { approvalEmail, rejectionEmail } = require("../utils/emailer");
 
+router.delete(
+  "/reject",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    let gameId;
+    let applicant;
+    let email;
+    let date;
+    let time;
+    let venue;
+    console.log("Approve applicant for game:" + JSON.stringify(req.body));
+    Application.findOneAndDelete({
+      $and: [
+        { gamePoster_id: req.body.gamePoster_id },
+        { applicant_id: req.body.applicant_id }
+      ]
+    })
+      .then(application => {
+        gameId = application.game_id;
+        console.log("Application:", JSON.stringify(application));
+        return User.findOne({ _id: application.applicant_id });
+      })
+      .then(user => {
+        console.log("Applicant:", user.userName);
+        return (applicant = user.userName), (email = user.email);
+      })
+      .then(() => {
+        return Fixture.findOne({ _id: gameId });
+      })
+      .then(fixture => {
+        console.log("Game Rejected for:", JSON.stringify(fixture));
+        return (
+          (date = fixture.date), (time = fixture.time), (venue = fixture.venue)
+        );
+      })
+      .then(() => {
+        console.log("Sending rejection email to:", applicant, "at:", email);
+        rejectionEmail(email, userName, applicant, date, time, venue);
+        res.status(200).json({ message: `email sent to ${applicant}` });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ message: "Cannot reject this player...dunno why" });
+      });
+  }
+);
+
 router.put(
   "/approve",
   passport.authenticate("jwt", { session: false }),
@@ -19,7 +67,12 @@ router.put(
     let venue;
     console.log("Approve applicant for game:" + JSON.stringify(req.body));
     return Application.findOneAndUpdate(
-      { gamePoster_id: req.body.gamePoster_id },
+      {
+        $and: [
+          { gamePoster_id: req.body.gamePoster_id },
+          { applicant_id: req.body.applicant_id }
+        ]
+      },
       {
         $set: {
           approved: true
