@@ -5,23 +5,23 @@ const passport = require("passport");
 const Fixture = require("../models/Fixture");
 const User = require("../models/User");
 const Application = require("../models/ApplicationForGame");
-const { newEmail } = require("../utils/emailer");
+const { applicationEmail } = require("../utils/emailer");
 
-router.get("/fixtures", (req, res) => {
-  Fixture.find().then(fixtures => {
-    res.send(fixtures);
-  });
-});
+// router.get("/fixtures", (req, res) => {
+//   Fixture.find().then(fixtures => {
+//     res.send(fixtures);
+//   });
+// });
+//
+// router.get("/fixtures/:id", (req, res) => {
+//   Fixture.findOne({ _id: req.params.id }).then(fixtures => {
+//     res.send(fixtures);
+//   });
+// });
 
-router.get("/fixtures/:id", (req, res) => {
-  Fixture.findOne({ _id: req.params.id }).then(fixtures => {
-    res.send(fixtures);
-  });
-});
-
-router.get("/users", (req, ress) => {
-  Users.find().then(users => {
-    res.send(users);
+router.get("/applicationForGame/:id", (req, res) => {
+  ApplicationForGame.find({}).then(applications => {
+    res.send(applications);
   });
 });
 
@@ -31,9 +31,14 @@ router.post(
   (req, res) => {
     let newApplication;
     let applicant;
+    let id;
+    let date;
+    let time;
+    let venue;
+    let gamePoster;
     console.log("Apply for game:" + JSON.stringify(req.body));
     Application.findOne({
-      $and: [{ game_id: req.body.game_id }, { user_id: req.user._id }]
+      $and: [{ game_id: req.body.game_id }, { applicant_id: req.user._id }]
     })
       .then(application => {
         console.log("inside the then:", application);
@@ -42,12 +47,22 @@ router.post(
             .status(302)
             .json({ message: "You have already applied to join this game" });
         } else {
-          console.log("now I'm here!");
-          Application.create({
-            user_id: req.user._id,
-            game_id: req.body.game_id,
-            approved: false
+          return Fixture.findOne({
+            _id: req.body.game_id
           })
+            .then(fixture => {
+              console.log("fixture in apply:", fixture);
+              return (gamePoster = fixture.user_id);
+            })
+            .then(() => {
+              console.log("now I'm here!");
+              Application.create({
+                applicant_id: req.user._id,
+                game_id: req.body.game_id,
+                gamePoster_id: req.body.gamePoster_id,
+                approved: false
+              });
+            })
             .then(dbResponse => {
               console.log("application created");
               return (newApplication = dbResponse);
@@ -68,7 +83,15 @@ router.post(
                 "fixture after application created:",
                 fixture.user_id
               );
-              return User.findOne({ _id: fixture.user_id });
+              return (
+                (id = fixture.user_id),
+                (date = fixture.date),
+                (time = fixture.time),
+                (venue = fixture.venue)
+              );
+            })
+            .then(() => {
+              return User.findOne({ _id: id });
             })
             .then(user => {
               console.log(
@@ -77,12 +100,13 @@ router.post(
                 "at:",
                 user.email
               );
-              newEmail(
+              applicationEmail(
                 user.email,
                 user.userName,
                 applicant,
-                user.date,
-                user.time
+                date,
+                time,
+                venue
               );
               res
                 .status(201)

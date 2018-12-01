@@ -92,7 +92,7 @@ router.put(
       return res.status(400).json(errors);
     }
     Fixture.findOneAndUpdate(
-      { user_id: req.user._id },
+      { user_id: req.body.user_id },
       {
         $set: {
           date: req.body.date,

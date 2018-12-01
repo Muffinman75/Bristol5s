@@ -3,8 +3,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ApplicationSchema = new Schema({
-  user_id: { type: String, required: true },
+  applicant_id: { type: String, required: true },
   game_id: { type: String, required: true },
+  gamePoster_id: { type: String, required: true },
   approved: { type: Boolean, default: false }
 });
 
