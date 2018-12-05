@@ -20,7 +20,7 @@ const { applicationEmail } = require("../utils/emailer");
 // });
 
 router.get("/applicationForGame/:id", (req, res) => {
-  ApplicationForGame.find({}).then(applications => {
+  ApplicationForGame.find().then(applications => {
     res.send(applications);
   });
 });
@@ -59,8 +59,7 @@ router.post(
               Application.create({
                 applicant_id: req.user._id,
                 game_id: req.body.game_id,
-                gamePoster_id: req.body.gamePoster_id,
-                approved: false
+                gamePoster_id: req.body.gamePoster_id
               });
             })
             .then(dbResponse => {

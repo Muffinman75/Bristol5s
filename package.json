@@ -15,11 +15,13 @@
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.3.10",
     "morgan": "^1.9.1",
+    "node-cron": "^2.0.3",
     "nodemailer": "^4.7.0",
     "nodemailer-sendgrid-transport": "^0.2.0",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
+    "run-middleware": "^0.9.10",
     "sql.js": "0.3.2",
     "validator": "^10.9.0"
   },

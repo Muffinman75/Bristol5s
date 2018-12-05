@@ -10,7 +10,8 @@ const FixtureSchema = new Schema({
   cost: { type: Number, required: true },
   venue: { type: String, required: true },
   pitchNo: { type: Number, required: true },
-  comments: { type: String, default: "" }
+  comments: { type: String, default: "" },
+  archive: { type: Boolean, default: false }
 });
 
 const Fixture = mongoose.model("Fixtures", FixtureSchema);
