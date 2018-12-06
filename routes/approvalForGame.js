@@ -7,7 +7,7 @@ const User = require("../models/User");
 const Application = require("../models/ApplicationForGame");
 const { approvalEmail, rejectionEmail } = require("../utils/emailer");
 
-router.delete(
+router.put(
   "/reject",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
@@ -17,20 +17,25 @@ router.delete(
     let date;
     let time;
     let venue;
-    console.log("Approve applicant for game:" + JSON.stringify(req.body));
-    Application.findOneAndDelete({
-      $and: [
-        { gamePoster_id: req.body.gamePoster_id },
-        { applicant_id: req.body.applicant_id }
-      ]
-    })
+    console.log("Reject applicant for game:" + JSON.stringify(req.body));
+    Application.findOneAndUpdate(
+      {
+        $and: [
+          { gamePoster_id: req.body.gamePoster_id },
+          { applicant_id: req.body.applicant_id }
+        ]
+      },
+      {
+        $set: { archive: true }
+      }
+    )
       .then(application => {
         gameId = application.game_id;
-        console.log("Application:", JSON.stringify(application));
+        console.log("Rejected Application:", JSON.stringify(application));
         return User.findOne({ _id: application.applicant_id });
       })
       .then(user => {
-        console.log("Applicant:", user.userName);
+        console.log("Rejected Applicant:", user.userName);
         return (applicant = user.userName), (email = user.email);
       })
       .then(() => {
@@ -45,7 +50,7 @@ router.delete(
       .then(() => {
         console.log("Sending rejection email to:", applicant, "at:", email);
         rejectionEmail(email, userName, applicant, date, time, venue);
-        res.status(200).json({ message: `email sent to ${applicant}` });
+        return res.status(200).json({ message: `email sent to ${applicant}` });
       })
       .catch(err => {
         res
