@@ -19,7 +19,7 @@ const { applicationEmail } = require("../utils/emailer");
 //   });
 // });
 
-router.get("/applicationForGame/:id", (req, res) => {
+router.get("/applicationForGame/:applicant_id", (req, res) => {
   ApplicationForGame.find().then(applications => {
     res.send(applications);
   });

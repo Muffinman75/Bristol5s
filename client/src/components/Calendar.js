@@ -24,15 +24,15 @@ export default class Calendar extends Component {
   handleSubmit(e) {
     e.preventDefault();
     let main = this.state.startDate;
-    console.log(main.format("L"));
+    //console.log(main.format("L"));
+    this.props.calendarChange(main);
   }
 
   render() {
     return (
       <div className="container">
         <h3>Select Fixture Date/Time</h3>
-        {/* <form onSubmit={this.handleSubmit}> */}
-        <div className="form-group" onSubmit={this.handleSubmit}>
+        <div className="form-group">
           <label>Select Date: </label>
           <DatePicker
             // customInput={<Calendar />}
@@ -40,19 +40,15 @@ export default class Calendar extends Component {
             onChange={this.handleChange}
             // calendarContainer={MyContainer}
             name="startDate"
-            dateFormat="LLL"
+            dateFormat="yyyy/MM/dd"
             showTimeSelect
             timeFormat="HH:mm"
-            timeCaption="time"
+            timeCaption="Time"
             timeIntervals={15}
             className="green-border"
             shouldCloseOnSelect={false}
           />
         </div>
-        <div className="form-group">
-          <button className="btn btn-success">Add Fixture</button>
-        </div>
-        {/* </form> */}
       </div>
     );
   }

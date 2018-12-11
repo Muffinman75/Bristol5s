@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const morgan = require("morgan");
 const cron = require("node-cron");
+const timings = require("server-timings");
 
 const config = require("./db");
 const users = require("./routes/users");
@@ -36,13 +37,11 @@ app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+//app.use(timings.start("routing"));
 app.use("/api/users", users);
 app.use("/api/fixtures", fixtures, fixtureAndApplicationChecker);
 app.use("/api/applications", applicationForGame, approvalForGame);
-
-app.get("/", function(req, res) {
-  res.send("hello");
-});
+//app.use(timings.end("routing"));
 
 let server;
 
@@ -74,16 +73,20 @@ function closeServer() {
   });
 }
 
+function runCron(app) {
+  cron.schedule("*/5 * * * * *", () => {
+    console.log("cron running");
+    app.runMiddleware("/api/fixtures/fixtureAndApplicationChecker", function(
+      response
+    ) {
+      console.log("Cron Response:", response);
+    });
+  });
+}
+
 if (require.main === module) {
   runServer().catch(err => console.error(err));
 }
-
-// cron.schedule("*/5 * * * * *", () => {
-//   console.log("cron running");
-//   app.runMiddleware("/fixtureAndApplicationChecker", function(response) {
-//     console.log("Cron Response:", response);
-//   });
-// });
 
 module.exports = { app, runServer, closeServer };
 

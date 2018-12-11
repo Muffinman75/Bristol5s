@@ -21,6 +21,8 @@ router.get("/fixtureAndApplicationChecker", (req, res) => {
         .json({ message: "Old fixtures and applications archived" });
     }
   );
+  console.log("hello");
+  res.send(200);
 });
 
 module.exports = router;

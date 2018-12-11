@@ -10,8 +10,10 @@ import Navbar from "./components/Navbar";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Home from "./components/Home";
-import PostGame from "./components/PostGame";
 import FindGame from "./components/FindGame";
+
+import CreateGame from "./containers/CreateGame";
+//import FixtureList from "./containers/FixtureList";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -39,7 +41,7 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/find-players" component={FindGame} />
-              <Route exact path="/add-game" component={PostGame} />
+              <Route exact path="/add-game" component={CreateGame} />
             </div>
           </div>
         </Router>
