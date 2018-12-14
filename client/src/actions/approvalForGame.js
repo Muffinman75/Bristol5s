@@ -1,12 +1,10 @@
 import { ACCEPT_APPLICANT, REJECT_APPLICANT } from "./types";
 import axios from "axios";
 
-const approvalApiUrl = "localhost:8000/approvalForGame";
-
 export const updateApprovalAccept = ({ approved }) => {
   return dispatch => {
     return axios
-      .put(`${approvalApiUrl}/accept`, { approved })
+      .put("/api/approvalForGame/accept", { approved })
       .then(response => {
         dispatch(updateApprovalAcceptSuccess(response.data));
       })
@@ -28,7 +26,7 @@ export const updateApprovalAcceptSuccess = data => {
 export const updateApprovalReject = ({ archive }) => {
   return dispatch => {
     return axios
-      .put(`${approvalApiUrl}/reject`, { archive })
+      .put("/api/approvalForGame/reject", { archive })
       .then(response => {
         dispatch(updateApprovalRejectSuccess(response.data));
       })

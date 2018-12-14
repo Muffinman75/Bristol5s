@@ -66,9 +66,9 @@ router.post(
           let dateToday = new Date();
           dateToday =
             dateToday.getFullYear() +
-            "/" +
+            "-" +
             (dateToday.getMonth() + 1) +
-            "/" +
+            "-" +
             dateToday.getDate();
           console.log("Todays Date:", dateToday, req.body.date);
           if (dateToday < req.body.date) {

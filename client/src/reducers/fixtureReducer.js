@@ -17,9 +17,10 @@ export default function fixtureReducer(state = initialState, action) {
     case REMOVE_GAME:
       return state.filter(fixture => fixture._id !== action.payload.fixtureId);
     case GET_GAME:
-      return action.posts;
+      console.log("fixture reducer:", action.fixtures);
+      return action.fixtures;
     case GET_GAME_BY_ID:
-      return action.posts;
+      return action.fixtures;
     default:
       return state;
   }

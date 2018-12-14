@@ -10,25 +10,18 @@ const styles = {
 };
 
 export default ({
-  fixture: { _id, date, time, playersReq, cost, pitchNo, venue, comments },
+  fixture: { id, date, time, playersReq, cost, pitchNo, venue, comments },
   onRemove
 }) => {
   return (
     <div style={styles}>
-      <p>{date}</p>
-      <p>{time}</p>
-      <p>{playersReq}</p>
-      <p>{cost}</p>
-      <p>{pitchNo}</p>
-      <p>{venue}</p>
-      <p>{comments}</p>
-      <button
-        className="btn btn-danger"
-        type="button"
-        onClick={() => onRemove(_id)}
-      >
-        Remove
-      </button>
+      <p>Date: {date}</p>
+      <p>Time: {time}</p>
+      <p>PlayersReq: {playersReq}</p>
+      <p>Cost: {cost}</p>
+      <p>PitchNo: {pitchNo}</p>
+      <p>Venue: {venue}</p>
+      <p>Comments: {comments}</p>
     </div>
   );
 };

@@ -1,8 +1,6 @@
 import { APPLY_FOR_GAME } from "./types";
 import axios from "axios";
 
-const applicationApiUrl = "localhost:8000/applicationForGame";
-
 export const createApplicationForGame = ({
   applicant_id,
   game_id,
@@ -10,7 +8,7 @@ export const createApplicationForGame = ({
 }) => {
   return dispatch => {
     return axios
-      .post(`${applicationApiUrl}/apply`, {
+      .post("/api/applicationForGame/apply", {
         applicant_id,
         game_id,
         gamePoster_id

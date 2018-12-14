@@ -5,7 +5,7 @@ import Calendar from "./Calendar";
 
 // import "bootstrap/dist/css/bootstrap.min.css";
 
-export default class PostGame extends Component {
+export default class UpdateGame extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -120,7 +120,7 @@ export default class PostGame extends Component {
             placeholder="Instructions/notes about game, i.e. skill level, phone numbers, possible lifts"
             value={this.state.comments}
           />
-          <button className="btn btn-success">Add Fixture</button>
+          <button className="btn btn-success">Update This Fixture</button>
         </form>
       </div>
     );

@@ -8,3 +8,5 @@ export const REMOVE_GAME = "REMOVE_GAME";
 export const APPLY_FOR_GAME = "APPLY_FOR_GAME";
 export const ACCEPT_APPLICANT = "ACCEPT_APPLICANT";
 export const REJECT_APPLICANT = "REJECT_APPLICANT";
+export const ADD_DATE = "ADD_DATE";
+export const ADD_TIME = "ADD_TIME";

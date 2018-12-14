@@ -13,7 +13,6 @@ import Home from "./components/Home";
 import FindGame from "./components/FindGame";
 
 import CreateGame from "./containers/CreateGame";
-//import FixtureList from "./containers/FixtureList";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 

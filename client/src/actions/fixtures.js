@@ -7,8 +7,6 @@ import {
   REMOVE_GAME
 } from "./types";
 
-const fixtureApiUrl = "localhost:8000/api/fixtures";
-
 export const createFixture = ({
   date,
   time,
@@ -20,7 +18,7 @@ export const createFixture = ({
 }) => {
   return dispatch => {
     return axios
-      .post(`${fixtureApiUrl}/add-game`, {
+      .post("/api/fixtures/add-game", {
         date,
         time,
         playersReq,
@@ -64,7 +62,7 @@ export const updateFixture = ({
 }) => {
   return dispatch => {
     return axios
-      .put(`${fixtureApiUrl}/update-game`, {
+      .put("/api/fixtures/update-game", {
         date,
         time,
         playersReq,
@@ -109,7 +107,7 @@ export const removeFixtureSuccess = fixtureId => {
 export const removeFixture = gameId => {
   return dispatch => {
     return axios
-      .put(`${fixtureApiUrl}/remove-game`)
+      .put("/api/fixtures/remove-game")
       .then(response => {
         dispatch(removeFixtureSuccess(response.data));
       })
@@ -129,7 +127,7 @@ export const fetchFixtures = fixtures => {
 export const fetchAllFixtures = () => {
   return dispatch => {
     return axios
-      .get(fixtureApiUrl)
+      .get("/api/fixtures/display-games")
       .then(response => {
         dispatch(fetchFixtures(response.data));
       })
@@ -151,7 +149,7 @@ export const fixturesById = id => {
 export const fetchFixturesById = () => {
   return dispatch => {
     return axios
-      .get(fixtureApiUrl)
+      .get("/api/fixtures/display-games/:id")
       .then(response => {
         dispatch(fixturesById(response.data));
       })
