@@ -138,6 +138,7 @@ export const fetchAllFixtures = () => {
 };
 
 export const fixturesById = id => {
+  //let user_id = localStorage.getItem("user_id");
   return {
     type: GET_GAME_BY_ID,
     payload: {
@@ -148,8 +149,9 @@ export const fixturesById = id => {
 
 export const fetchFixturesById = () => {
   return dispatch => {
+    let user_id = localStorage.getItem("user_id");
     return axios
-      .get("/api/fixtures/display-games/:id")
+      .get(`/api/fixtures/display-games/${user_id}`)
       .then(response => {
         dispatch(fixturesById(response.data));
       })

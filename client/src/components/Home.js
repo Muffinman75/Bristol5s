@@ -2,16 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import FixtureList from "../containers/FixtureList";
+import UserFixturesPostedList from "../containers/UserFixturesPostedList";
 
 export default class Home extends Component {
-  componentDidMount() {}
-
   render() {
+    let userName = localStorage.getItem("user_name");
     return (
       <React.Fragment>
-        <p>Welcome, User!</p>
-        <FixtureList />
+        <p>Welcome, {userName}!</p>
+        <UserFixturesPostedList />
       </React.Fragment>
     );
   }

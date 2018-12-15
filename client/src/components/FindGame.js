@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
-import FixtureList from "../containers/FixtureList";
+import AllFixturesList from "../containers/AllFixturesList";
 
 export default class FindGame extends Component {
   render() {
     return (
       <div>
-        <FixtureList />
+        <AllFixturesList />
       </div>
     );
   }
