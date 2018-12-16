@@ -19,8 +19,8 @@ const { applicationEmail } = require("../utils/emailer");
 //   });
 // });
 
-router.get("/applicationForGame/:applicant_id", (req, res) => {
-  ApplicationForGame.find().then(applications => {
+router.get("/applicationForGame", (req, res) => {
+  Application.find().then(applications => {
     res.send(applications);
   });
 });
@@ -31,6 +31,7 @@ router.post(
   (req, res) => {
     let newApplication;
     let applicant;
+    let applicantName;
     let id;
     let date;
     let time;
@@ -57,7 +58,8 @@ router.post(
             .then(() => {
               console.log("now I'm here!");
               Application.create({
-                applicant_id: req.user._id,
+                applicant_id: req.body._id,
+                applicant_name: req.body.userName,
                 game_id: req.body.game_id,
                 gamePoster_id: req.body.gamePoster_id
               });

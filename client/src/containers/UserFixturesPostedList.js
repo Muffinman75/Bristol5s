@@ -27,10 +27,6 @@ const styles = {
 };
 
 export class UserFixturesPostedList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     console.log(this.props);
     this.props.dispatch(fetchAllFixtures());
@@ -38,7 +34,11 @@ export class UserFixturesPostedList extends React.Component {
 
   render() {
     if (!this.props.fixtures.length) {
-      return <div>You Have Not Posted Any Fixtures</div>;
+      return (
+        <div>
+          <h2>You Have Not Posted Any Fixtures</h2>
+        </div>
+      );
     }
     return (
       <div>
@@ -63,7 +63,7 @@ export class UserFixturesPostedList extends React.Component {
                 </button>
                 <button
                   style={styles}
-                  type="submit"
+                  type={removeFixture}
                   className="btn btn-primary"
                 >
                   Remove This Game

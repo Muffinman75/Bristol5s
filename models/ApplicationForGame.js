@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const ApplicationSchema = new Schema({
   applicant_id: { type: String, required: true },
+  applicant_name: { type: String, required: true },
   game_id: { type: String, required: true },
   gamePoster_id: { type: String, required: true },
   approved: { type: Boolean, default: false },

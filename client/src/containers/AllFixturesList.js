@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import Fixture from "../components/Fixture";
-import { removeFixture, fetchAllFixtures } from "../actions/fixtures";
+import { fetchAllFixtures } from "../actions/fixtures";
+import { createApplicationForGame } from "../actions/applicationForGame";
 
 /*function FixtureList(props) {
   if (!this.props.fixtures.length) {
@@ -27,10 +28,6 @@ const styles = {
 };
 
 export class AllFixturesList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     console.log(this.props);
     this.props.dispatch(fetchAllFixtures());
@@ -59,7 +56,8 @@ export class AllFixturesList extends React.Component {
                 />
                 <button
                   style={styles}
-                  type="submit"
+                  type="button"
+                  onclick={createApplicationForGame}
                   className="btn btn-primary"
                 >
                   Apply To Play

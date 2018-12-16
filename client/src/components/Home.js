@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import UserFixturesPostedList from "../containers/UserFixturesPostedList";
+import ApplicationsForGamesList from "../containers/ApplicationsForGamesList";
 
 export default class Home extends Component {
   render() {
@@ -10,6 +11,7 @@ export default class Home extends Component {
     return (
       <React.Fragment>
         <p>Welcome, {userName}!</p>
+        <ApplicationsForGamesList />
         <UserFixturesPostedList />
       </React.Fragment>
     );
