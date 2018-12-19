@@ -11,6 +11,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import FindGame from "./components/FindGame";
+import UpdateGame from "./components/UpdateGame";
 
 import CreateGame from "./containers/CreateGame";
 
@@ -41,6 +42,7 @@ class App extends Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/find-players" component={FindGame} />
               <Route exact path="/add-game" component={CreateGame} />
+              <Route exact path="/update-game" component={UpdateGame} />
             </div>
           </div>
         </Router>

@@ -1,21 +1,22 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 // import classnames from "classnames";
 import Calendar from "./Calendar";
 
 // import "bootstrap/dist/css/bootstrap.min.css";
 
-export default class UpdateGame extends Component {
+class UpdateGame extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: "",
-      time: "",
-      playersReq: "",
-      cost: "",
-      pitchNo: "",
-      venue: "",
-      comments: ""
+      date: this.props.fixture.date.value,
+      time: this.props.fixture.time.value,
+      playersReq: this.props.fixture.playersReq.value,
+      cost: this.props.fixture.cost.value,
+      pitchNo: this.props.fixture.pitchNo.value,
+      venue: this.props.fixture.venue.value,
+      comments: this.props.fixture.comments.value
     };
   }
 
@@ -91,7 +92,7 @@ export default class UpdateGame extends Component {
             name="playersReq"
             onChange={this.handleInputChange}
             placeholder="Num of players needed"
-            value={this.state.playersReq}
+            value={this.props.fixture.time.value}
           />
           <input
             type="text"
@@ -120,9 +121,19 @@ export default class UpdateGame extends Component {
             placeholder="Instructions/notes about game, i.e. skill level, phone numbers, possible lifts"
             value={this.state.comments}
           />
-          <button className="btn btn-success">Update This Fixture</button>
+          <button type="submit" className="btn btn-success">
+            Save Updated Fixture
+          </button>
         </form>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    fixtures: state.fixture
+  };
+};
+
+export default connect(mapStateToProps)(UpdateGame);

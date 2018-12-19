@@ -1,7 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import Fixture from "../components/Fixture";
-import { removeFixture, fetchAllFixtures } from "../actions/fixtures";
+import {
+  removeFixture,
+  fetchAllFixtures,
+  updateFixture
+} from "../actions/fixtures";
 
 /*function FixtureList(props) {
   if (!this.props.fixtures.length) {
@@ -26,10 +31,10 @@ const styles = {
   margin: ".75rem auto"
 };
 
-export class UserFixturesPostedList extends React.Component {
+class UserFixturesPostedList extends React.Component {
   componentDidMount() {
-    console.log(this.props);
-    this.props.dispatch(fetchAllFixtures());
+    console.log("User Fixtures list, props:", this.props);
+    fetchAllFixtures();
   }
 
   render() {
@@ -53,17 +58,20 @@ export class UserFixturesPostedList extends React.Component {
                   //onDelete={this.props.dispatch(removeFixture(fixture._id))}
                   //onDelete={this.props.onRemove}
                   key={fixture._id}
+                  displayApps="true"
                 />
+                <Link to="/update-game">
+                  <button
+                    style={styles}
+                    onClick={() => updateFixture()}
+                    className="btn btn-primary"
+                  >
+                    Update This Game
+                  </button>
+                </Link>
                 <button
                   style={styles}
-                  //type="submit"
-                  className="btn btn-primary"
-                >
-                  Update This Game
-                </button>
-                <button
-                  style={styles}
-                  //type={removeFixture}
+                  onClick={() => removeFixture()}
                   className="btn btn-primary"
                 >
                   Remove This Game
@@ -82,15 +90,18 @@ const mapStateToProps = state => {
   };
 };
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     onRemove: id => {
-//       dispatch(removeFixture(id));
-//     },
-//     fetchAllFixtures: () => {
-//       dispatch(fetchAllFixtures);
-//     }
-//   };
-// };
+const mapDispatchToProps = dispatch => {
+  return {
+    removeFixture: () => {
+      dispatch(removeFixture);
+    },
+    fetchAllFixtures: () => {
+      dispatch(fetchAllFixtures);
+    },
+    updateFixture: () => {
+      dispatch(updateFixture);
+    }
+  };
+};
 
 export default connect(mapStateToProps)(UserFixturesPostedList);

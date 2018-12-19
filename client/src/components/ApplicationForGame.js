@@ -1,26 +1,43 @@
-import React from "react";
+import React, { Component, PropTypes } from "react";
+import { connect } from "react-redux";
+import { fetchAllApplications } from "../actions/applicationForGame";
 
-const styles = {
-  borderBottom: "2px solid #eee",
-  background: "#fafafa",
-  margin: ".75rem auto",
-  padding: ".6rem 1rem",
-  maxWidth: "500px",
-  borderRadius: "7px"
+class ApplicationForGame extends Component {
+  constructor(props) {
+    super(props);
+  }
+  componentDidMount() {
+    fetchAllApplications();
+    console.log("line 34 applications list:", this.props);
+  }
+  render() {
+    return (
+      <div>
+        <h2>Someone Wants To Play In Your Game!</h2>
+        <p>Applicant: {} who, this peep?</p>
+        <button>Accept</button>
+        <button>Reject</button>
+      </div>
+    );
+  }
+}
+ApplicationForGame.propTypes = {};
+
+const mapStateToProps = state => {
+  return {
+    applications: state.application
+  };
 };
 
-export default ({
-  application: { id, date, time, playersReq, cost, pitchNo, venue },
-  onRemove
-}) => {
-  return (
-    <div style={styles}>
-      <p>Date: {date}</p>
-      <p>Time: {time}</p>
-      <p>PlayersReq: {playersReq}</p>
-      <p>Cost: {cost}</p>
-      <p>PitchNo: {pitchNo}</p>
-      <p>Venue: {venue}</p>
-    </div>
-  );
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchAllApplications: () => {
+      dispatch(fetchAllApplications);
+    }
+  };
 };
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ApplicationForGame);
