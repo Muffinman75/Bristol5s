@@ -57,7 +57,7 @@ export class AllFixturesList extends React.Component {
                 <button
                   style={styles}
                   type="button"
-                  onclick={createApplicationForGame}
+                  onClick={createApplicationForGame}
                   className="btn btn-primary"
                 >
                   Apply To Play
@@ -78,11 +78,8 @@ const mapStateToProps = state => {
 
 // const mapDispatchToProps = dispatch => {
 //   return {
-//     onRemove: id => {
-//       dispatch(removeFixture(id));
-//     },
-//     fetchAllFixtures: () => {
-//       dispatch(fetchAllFixtures);
+//     createApplicationForGame: () => {
+//       dispatch(createApplicationForGame);
 //     }
 //   };
 // };

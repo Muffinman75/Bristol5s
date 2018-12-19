@@ -56,14 +56,14 @@ export class UserFixturesPostedList extends React.Component {
                 />
                 <button
                   style={styles}
-                  type="submit"
+                  //type="submit"
                   className="btn btn-primary"
                 >
                   Update This Game
                 </button>
                 <button
                   style={styles}
-                  type={removeFixture}
+                  //type={removeFixture}
                   className="btn btn-primary"
                 >
                   Remove This Game

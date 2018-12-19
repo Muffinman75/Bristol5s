@@ -10,7 +10,7 @@ const styles = {
 };
 
 export default ({
-  fixture: { id, date, time, playersReq, cost, pitchNo, venue, comments },
+  fixture: { _id, date, time, playersReq, cost, pitchNo, venue, comments },
   onRemove
 }) => {
   return (
