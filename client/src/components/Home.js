@@ -8,10 +8,10 @@ export default class Home extends Component {
   render() {
     let userName = localStorage.getItem("user_name");
     return (
-      <React.Fragment>
+      <div>
         <p>Welcome, {userName}!</p>
         <UserFixturesPostedList />
-      </React.Fragment>
+      </div>
     );
   }
 }

@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 
-import "react-datepicker/dist/react-datepicker.css";
-// import "bootstrap/dist/css/bootstrap.min.css";
-
 export default class Calendar extends Component {
   constructor(props) {
     super(props);

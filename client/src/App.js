@@ -9,13 +9,12 @@ import { setCurrentUser, logoutUser } from "./actions/authentication";
 import Navbar from "./components/Navbar";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import Landing from "./components/Landing";
 import Home from "./components/Home";
 import FindGame from "./components/FindGame";
 import UpdateGame from "./components/UpdateGame";
 
 import CreateGame from "./containers/CreateGame";
-
-import "bootstrap/dist/css/bootstrap.min.css";
 
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
@@ -37,7 +36,8 @@ class App extends Component {
           <div>
             <Navbar />
             <div className="container">
-              <Route exact path="/" component={Home} />
+              <Route exact path="/" component={Landing} />
+              <Route exact path="/home" component={Home} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/find-players" component={FindGame} />

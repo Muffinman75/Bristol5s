@@ -14,27 +14,83 @@ class Navbar extends Component {
   render() {
     const { isAuthenticated, user } = this.props.auth;
     const authLinks = (
-      <ul className="navbar-nav ml-auto">
-        <Link className="nav-link" to="/find-players">
-          Find a Game
-        </Link>
-        <Link className="nav-link" to="/add-game">
-          Find Players
-        </Link>
-        <button className="nav-link" onClick={this.onLogout.bind(this)}>
-          <img
-            src={user.avatar}
-            alt={user.name}
-            title={user.name}
-            className="rounded-circle"
-            style={{ width: "25px", marginRight: "5px" }}
-          />
-          Logout
-        </button>
+      <ul className="right hide-on-med-and-down">
+        <li>
+          <Link className="nav-link" to="/">
+            About
+          </Link>
+        </li>
+        <li>
+          <Link className="nav-link" to="/find-players">
+            Find a Game
+          </Link>
+        </li>
+        <li>
+          <Link className="nav-link" to="/add-game">
+            Find Players
+          </Link>
+        </li>
+        <li>
+          <button className="nav-link" onClick={this.onLogout.bind(this)}>
+            <img
+              src={user.avatar}
+              alt={user.name}
+              title={user.name}
+              className="rounded-circle"
+              style={{ width: "25px", marginRight: "5px" }}
+            />
+            Logout
+          </button>
+        </li>
+      </ul>
+    );
+    const mobileAuthLinks = (
+      <ul className="sidenav" id="mobile-auth-links">
+        <li>
+          <Link className="nav-link" to="/">
+            About
+          </Link>
+        </li>
+        <li>
+          <Link className="nav-link" to="/find-players">
+            Find a Game
+          </Link>
+        </li>
+        <li>
+          <Link className="nav-link" to="/add-game">
+            Find Players
+          </Link>
+        </li>
+        <li>
+          <button className="nav-link" onClick={this.onLogout.bind(this)}>
+            <img
+              src={user.avatar}
+              alt={user.name}
+              title={user.name}
+              className="rounded-circle"
+              style={{ width: "25px", marginRight: "5px" }}
+            />
+            Logout
+          </button>
+        </li>
+      </ul>
+    );
+    const moblieGuestLinks = (
+      <ul className="sidenav" id="mobile-guest-links">
+        <li className="nav-item">
+          <Link className="nav-link" to="/register">
+            Become a Member
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/login">
+            Sign In
+          </Link>
+        </li>
       </ul>
     );
     const guestLinks = (
-      <ul className="navbar-nav ml-auto">
+      <ul className="right hide-on-med-and-down">
         <li className="nav-item">
           <Link className="nav-link" to="/register">
             Become a Member
@@ -48,12 +104,33 @@ class Navbar extends Component {
       </ul>
     );
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <Link className="navbar-brand" to="/">
-          Bristol5s
-        </Link>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          {isAuthenticated ? authLinks : guestLinks}
+      <nav className="nav-wraper indigo">
+        <div className="container">
+          <Link className="brand-logo" to="/home">
+            Bristol5s
+          </Link>
+          <div>
+            {isAuthenticated ? (
+              <Link
+                className="sidenav-trigger"
+                to="#"
+                data-target="mobile-auth-links"
+              >
+                <i className="material-icons">menu</i>
+              </Link>
+            ) : (
+              <Link
+                className="sidenav-trigger"
+                to="#"
+                data-target="mobile-guest-links"
+              >
+                <i className="material-icons">menu</i>
+              </Link>
+            )}
+          </div>
+          <div className="" id="navbarSupportedContent">
+            {isAuthenticated ? authLinks : guestLinks}
+          </div>
         </div>
       </nav>
     );
