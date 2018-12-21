@@ -1,25 +1,33 @@
 import React, { Component, PropTypes } from "react";
-import ApplicationForGame from "../components/ApplicationForGame";
+import ApplicantForGame from "../components/ApplicantForGame";
 import { connect } from "react-redux";
-import { fetchAllFixtures } from "../actions/fixtures";
-import { fetchAllApplications } from "../actions/applicationForGame";
 
 class Fixture extends Component {
-  componentDidMount() {
-    console.log("Fixture, props:", this.props);
-    this.props.fetchAllFixtures();
-  }
   render() {
     return (
       <div>
-        <p>Date: {this.props.fixture.date}</p>
-        <p>Time: {this.props.fixture.time}</p>
-        <p>PlayersReq: {this.props.fixture.playersReq}</p>
-        <p>Cost: {this.props.fixture.cost}</p>
-        <p>PitchNo: {this.props.fixture.pitchNo}</p>
-        <p>Venue: {this.props.fixture.venue}</p>
-        <p>Comments: {this.props.fixture.comments}</p>
-        <ApplicationForGame />
+        <p className="card-panel teal lighten-3">
+          Date: {this.props.fixture.date}
+        </p>
+        <p className="card-panel teal lighten-3">
+          Time: {this.props.fixture.time}
+        </p>
+        <p className="card-panel teal lighten-3">
+          PlayersReq: {this.props.fixture.playersReq}
+        </p>
+        <p className="card-panel teal lighten-3">
+          Cost: {this.props.fixture.cost}
+        </p>
+        <p className="card-panel teal lighten-3">
+          PitchNo: {this.props.fixture.pitchNo}
+        </p>
+        <p className="card-panel teal lighten-3">
+          Venue: {this.props.fixture.venue}
+        </p>
+        <p className="card-panel teal lighten-3">
+          Comments: {this.props.fixture.comments}
+        </p>
+        <ApplicantForGame fixtureID={this.props.fixture._id} />
       </div>
     );
   }
@@ -33,21 +41,5 @@ class Fixture extends Component {
 //   onRemove
 // }) => {
 // };
-const mapStateToProps = state => {
-  return {
-    applications: state.application
-  };
-};
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchAllFixtures: () => {
-      dispatch(fetchAllFixtures);
-    }
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Fixture);
+export default Fixture;

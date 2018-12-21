@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import Fixture from "../components/Fixture";
-import ApplicationForGame from "../components/ApplicationForGame";
+import ApplicantForGame from "../components/ApplicantForGame";
+import PostApplication from "../components/PostApplication";
 import { fetchAllFixtures } from "../actions/fixtures";
 import { createApplicationForGame } from "../actions/applicationForGame";
 
@@ -29,10 +30,10 @@ const styles = {
 };
 
 class AllFixturesList extends React.Component {
-  componentDidMount() {
-    console.log("Apply to this, props:", this.props);
-    fetchAllFixtures();
-  }
+  // componentDidMount() {
+  //   console.log("Apply to this, props:", this.props);
+  //   fetchAllFixtures();
+  // }
 
   render() {
     if (!this.props.fixtures.length) {
@@ -58,7 +59,7 @@ class AllFixturesList extends React.Component {
                 <button
                   style={styles}
                   type="button"
-                  onClick={() => this.props(createApplicationForGame())}
+                  onClick={() => this.props.createApplicationForGame()}
                   className="btn btn-primary"
                 >
                   Apply To Play
@@ -77,18 +78,15 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    createApplicationForGame: () => {
-      dispatch(createApplicationForGame);
-    },
-    fetchAllFixtures: () => {
-      dispatch(fetchAllFixtures);
-    }
-  };
-};
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     createApplicationForGame: () => {
+//       dispatch(createApplicationForGame);
+//     },
+//     fetchAllFixtures: () => {
+//       dispatch(fetchAllFixtures);
+//     }
+//   };
+// };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AllFixturesList);
+export default connect(mapStateToProps)(AllFixturesList);

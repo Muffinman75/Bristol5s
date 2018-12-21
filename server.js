@@ -37,11 +37,13 @@ app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-//app.use(timings.start("routing"));
 app.use("/api/users", users);
 app.use("/api/fixtures", fixtures, fixtureAndApplicationChecker);
 app.use("/api/applications", applicationForGame, approvalForGame);
-//app.use(timings.end("routing"));
+
+// app.use(timings.start("routing"));
+// app.use(require("./routes"));
+// app.use(timings.end("routing"));
 
 let server;
 

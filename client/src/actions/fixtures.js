@@ -125,10 +125,13 @@ export const fetchFixtures = fixtures => {
 };
 
 export const fetchAllFixtures = () => {
+  console.log("fixture here");
   return dispatch => {
+    console.log("fixture here2");
     return axios
       .get("/api/fixtures/display-games")
       .then(response => {
+        console.log("fixture response");
         dispatch(fetchFixtures(response.data));
       })
       .catch(error => {

@@ -4,8 +4,15 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../actions/authentication";
 import { withRouter } from "react-router-dom";
+import M from "materialize-css";
 
 class Navbar extends Component {
+  componentDidMount() {
+    document.addEventListener("DOMContentLoaded", function() {
+      var elems = document.querySelectorAll(".sidenav");
+      var instances = M.Sidenav.init(elems);
+    });
+  }
   onLogout(e) {
     e.preventDefault();
     this.props.logoutUser(this.props.history);
@@ -16,22 +23,25 @@ class Navbar extends Component {
     const authLinks = (
       <ul className="right hide-on-med-and-down">
         <li>
-          <Link className="nav-link" to="/">
+          <Link className="nav-link active" to="/">
             About
           </Link>
         </li>
         <li>
-          <Link className="nav-link" to="/find-players">
+          <Link className="nav-link active" to="/find-players">
             Find a Game
           </Link>
         </li>
         <li>
-          <Link className="nav-link" to="/add-game">
+          <Link className="nav-link active" to="/add-game">
             Find Players
           </Link>
         </li>
         <li>
-          <button className="nav-link" onClick={this.onLogout.bind(this)}>
+          <button
+            className="nav-link active"
+            onClick={this.onLogout.bind(this)}
+          >
             <img
               src={user.avatar}
               alt={user.name}
@@ -62,16 +72,19 @@ class Navbar extends Component {
           </Link>
         </li>
         <li>
-          <button className="nav-link" onClick={this.onLogout.bind(this)}>
+          <a
+            className="nav-link waves-effect waves-light btn-small"
+            onClick={this.onLogout.bind(this)}
+          >
             <img
               src={user.avatar}
               alt={user.name}
               title={user.name}
-              className="rounded-circle"
+              className="rounded-circle right"
               style={{ width: "25px", marginRight: "5px" }}
             />
             Logout
-          </button>
+          </a>
         </li>
       </ul>
     );
@@ -92,12 +105,12 @@ class Navbar extends Component {
     const guestLinks = (
       <ul className="right hide-on-med-and-down">
         <li className="nav-item">
-          <Link className="nav-link" to="/register">
+          <Link className="nav-link active" to="/register">
             Become a Member
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/login">
+          <Link className="nav-link active" to="/login">
             Sign In
           </Link>
         </li>

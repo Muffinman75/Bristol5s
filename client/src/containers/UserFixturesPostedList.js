@@ -2,11 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Fixture from "../components/Fixture";
-import {
-  removeFixture,
-  fetchAllFixtures,
-  updateFixture
-} from "../actions/fixtures";
+import { removeFixture, updateFixture } from "../actions/fixtures";
+import { fetchAllApplications } from "../actions/applicationForGame";
 
 /*function FixtureList(props) {
   if (!this.props.fixtures.length) {
@@ -33,10 +30,8 @@ const styles = {
 
 class UserFixturesPostedList extends React.Component {
   componentDidMount() {
-    console.log("User Fixtures list, props:", this.props);
-    fetchAllFixtures();
+    this.props.fetchAllApplications();
   }
-
   render() {
     if (!this.props.fixtures.length) {
       return (
@@ -63,16 +58,16 @@ class UserFixturesPostedList extends React.Component {
                 <Link to="/update-game">
                   <button
                     style={styles}
-                    onClick={() => updateFixture()}
-                    className="btn btn-primary"
+                    //onClick={() => this.props.updateFixture()}
+                    className="btn teal darken-3"
                   >
                     Update This Game
                   </button>
                 </Link>
                 <button
                   style={styles}
-                  onClick={() => removeFixture()}
-                  className="btn btn-primary"
+                  onClick={this.props.removeFixture}
+                  className="btn teal darken-3"
                 >
                   Remove This Game
                 </button>
@@ -92,16 +87,19 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    removeFixture: () => {
-      dispatch(removeFixture);
-    },
-    fetchAllFixtures: () => {
-      dispatch(fetchAllFixtures);
+    fetchAllApplications: () => {
+      dispatch(fetchAllApplications());
     },
     updateFixture: () => {
-      dispatch(updateFixture);
+      dispatch(updateFixture());
+    },
+    removeFixture: () => {
+      dispatch(removeFixture());
     }
   };
 };
 
-export default connect(mapStateToProps)(UserFixturesPostedList);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserFixturesPostedList);
