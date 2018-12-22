@@ -47,20 +47,27 @@ class AllFixturesList extends React.Component {
         <p>that you would like to play in their game.</p>
         {this.props.fixtures.map(fixture => {
           let user_id = localStorage.getItem("user_id");
+          let user_name = localStorage.getItem("user_name");
           if (fixture.user_id !== user_id)
             return (
-              <div>
+              <div key={fixture._id}>
                 <Fixture
                   fixture={fixture}
                   //onDelete={this.props.dispatch(removeFixture(fixture._id))}
                   //onDelete={this.props.onRemove}
-                  key={fixture._id}
                 />
                 <button
                   style={styles}
                   type="button"
-                  onClick={() => this.props.createApplicationForGame()}
-                  className="btn btn-primary"
+                  onClick={() =>
+                    this.props.createApplicationForGame(
+                      user_id,
+                      user_name,
+                      fixture._id,
+                      fixture.user_id
+                    )
+                  }
+                  className="btn teal darken-3"
                 >
                   Apply To Play
                 </button>
@@ -78,15 +85,15 @@ const mapStateToProps = state => {
   };
 };
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     createApplicationForGame: () => {
-//       dispatch(createApplicationForGame);
-//     },
-//     fetchAllFixtures: () => {
-//       dispatch(fetchAllFixtures);
-//     }
-//   };
-// };
+const mapDispatchToProps = dispatch => {
+  return {
+    createApplicationForGame: () => {
+      dispatch(createApplicationForGame());
+    }
+  };
+};
 
-export default connect(mapStateToProps)(AllFixturesList);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AllFixturesList);

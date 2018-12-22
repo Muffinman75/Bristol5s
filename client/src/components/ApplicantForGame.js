@@ -6,17 +6,13 @@ import {
 } from "../actions/approvalForGame";
 
 class ApplicantForGame extends Component {
-  constructor(props) {
-    super(props);
-  }
-  componentDidMount() {}
   render() {
     return (
       <div>
         {this.props.applications.map(application => {
-          if (application.game_id == this.props.fixtureID) {
+          if (application.game_id === this.props.fixtureID) {
             return (
-              <div className="applicant">
+              <div className="applicant" key={application._id}>
                 <h2>
                   {application.applicant_name} Wants To Play In Your Game!
                 </h2>
@@ -53,4 +49,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps)(ApplicantForGame);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ApplicantForGame);

@@ -9,16 +9,10 @@ import Calendar from "./Calendar";
 class UpdateGame extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      date: this.props.fixture.date.value,
-      time: this.props.fixture.time.value,
-      playersReq: this.props.fixture.playersReq.value,
-      cost: this.props.fixture.cost.value,
-      pitchNo: this.props.fixture.pitchNo.value,
-      venue: this.props.fixture.venue.value,
-      comments: this.props.fixture.comments.value
-    };
+    console.log(props);
   }
+
+  // componentDidMount that dispatches getFixtureById using this.props.match.params.id
 
   handleInputChange = e => {
     this.setState({
@@ -92,34 +86,34 @@ class UpdateGame extends Component {
             name="playersReq"
             onChange={this.handleInputChange}
             placeholder="Num of players needed"
-            value={this.props.fixture.time.value}
+            value=""
           />
           <input
             type="text"
             name="cost"
             onChange={this.handleInputChange}
             placeholder="Price to Play"
-            value={this.state.cost}
+            value=""
           />
           <input
             type="text"
             name="pitchNo"
             onChange={this.handleInputChange}
             placeholder="Pitch No."
-            value={this.state.pitchNo}
+            value=""
           />
           <input
             type="text"
             name="venue"
             onChange={this.handleInputChange}
             placeholder="Venue"
-            value={this.state.venue}
+            value=""
           />
           <textarea
             name="comments"
             onChange={this.handleInputChange}
             placeholder="Instructions/notes about game, i.e. skill level, phone numbers, possible lifts"
-            value={this.state.comments}
+            value=""
           />
           <button type="submit" className="btn btn-success">
             Save Updated Fixture
@@ -135,5 +129,13 @@ const mapStateToProps = state => {
     fixtures: state.fixture
   };
 };
+
+// map dispatch to props for getFixtureById
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     fetchAllApplications: () => {
+//       dispatch(fetchAllApplications());
+//     },
+// };
 
 export default connect(mapStateToProps)(UpdateGame);

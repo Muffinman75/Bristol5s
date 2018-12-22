@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import { logoutUser } from "../actions/authentication";
 import { withRouter } from "react-router-dom";
@@ -8,10 +9,16 @@ import M from "materialize-css";
 
 class Navbar extends Component {
   componentDidMount() {
-    document.addEventListener("DOMContentLoaded", function() {
-      var elems = document.querySelectorAll(".sidenav");
-      var instances = M.Sidenav.init(elems);
-    });
+    ReactDOM.findDOMNode(this).addEventListener(
+      "material-icons",
+      this._handleEvent
+    );
+
+    // document.addEventListener("DOMContentLoaded", function() {
+    //   console.log("inside listener:");
+    //   var elems = document.querySelectorAll(".sidenav");
+    //   var instances = M.Sidenav.init(elems);
+    // });
   }
   onLogout(e) {
     e.preventDefault();
@@ -73,6 +80,7 @@ class Navbar extends Component {
         </li>
         <li>
           <a
+            href="#"
             className="nav-link waves-effect waves-light btn-small"
             onClick={this.onLogout.bind(this)}
           >
@@ -141,9 +149,7 @@ class Navbar extends Component {
               </Link>
             )}
           </div>
-          <div className="" id="navbarSupportedContent">
-            {isAuthenticated ? authLinks : guestLinks}
-          </div>
+          <div className="">{isAuthenticated ? authLinks : guestLinks}</div>
         </div>
       </nav>
     );

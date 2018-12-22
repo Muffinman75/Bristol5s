@@ -45,19 +45,6 @@ export const fetchApplications = applications => {
 };
 
 export const fetchAllApplications = () => {
-  // return dispatch => {
-  //   console.log("here2");
-  //   return axios
-  //     .get("/api/applications/applicationForGame")
-  //     .then(response => {
-  //       console.log("---response from applicationForGame", response);
-  //       dispatch(fetchApplications(response.data));
-  //     })
-  //     .catch(error => {
-  //       console.log("***error***", error);
-  //       throw error;
-  //     });
-  // };
   return dispatch => {
     return axios
       .get("/api/applications/applicationForGame")

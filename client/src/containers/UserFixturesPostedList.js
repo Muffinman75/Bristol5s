@@ -47,17 +47,17 @@ class UserFixturesPostedList extends React.Component {
           let user_id = localStorage.getItem("user_id");
           if (fixture.user_id === user_id)
             return (
-              <div>
+              <div key={fixture._id}>
                 <Fixture
                   fixture={fixture}
                   //onDelete={this.props.dispatch(removeFixture(fixture._id))}
                   //onDelete={this.props.onRemove}
-                  key={fixture._id}
                   displayApps="true"
                 />
-                <Link to="/update-game">
+                <Link to={"/update-game/" + fixture._id}>
                   <button
                     style={styles}
+                    fixture={fixture}
                     //onClick={() => this.props.updateFixture()}
                     className="btn teal darken-3"
                   >

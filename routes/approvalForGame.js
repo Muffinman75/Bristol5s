@@ -27,6 +27,9 @@ router.put(
       },
       {
         $set: { archive: true }
+      },
+      {
+        new: true
       }
     )
       .then(application => {
@@ -73,10 +76,7 @@ router.put(
     console.log("Approve applicant for game:" + JSON.stringify(req.body));
     return Application.findOneAndUpdate(
       {
-        $and: [
-          { gamePoster_id: req.body.gamePoster_id },
-          { applicant_id: req.body.applicant_id }
-        ]
+        game_id: req.body.fixtureID
       },
       {
         $set: {
@@ -112,10 +112,18 @@ router.put(
         return (email = user.email), (applicant = user.userName);
       })
       .then(() => {
-        return Fixture.findOne({ _id: gameId });
+        return Fixture.findOneAndUpdate(
+          { _id: gameId },
+          { $inc: { "fixture.playersReq": -1 } },
+          { new: true }
+        );
       })
       .then(fixture => {
+        if (fixture.playersReq < 1) {
+          fixture.update({ archive: true });
+        }
         console.log("The Game in question:", fixture);
+
         return (
           (date = fixture.date), (time = fixture.time), (venue = fixture.venue)
         );
