@@ -44,25 +44,34 @@ export default class Calendar extends Component {
   render() {
     return (
       <div className="container">
-        <h3>Select Fixture Date/Time</h3>
+        <h3 className="center">Please Fill In All Fixture Details</h3>
         <div className="form-group">
-          <label>Select Date & Time: </label>
-          <input
-            type="date"
-            name="date"
-            value={this.state.date}
-            min="2018-12-13"
-            max="2019-12-13"
-            onChange={e => this.handleDateChange(e)}
-          />
-          <input
-            type="time"
-            name="time"
-            min="7:00"
-            max="20:00"
-            value={this.state.time}
-            onChange={e => this.handleTimeChange(e)}
-          />
+          <div className="input-field">
+            <i className="material-icons prefix">today</i>
+            <input
+              type="date"
+              name="date"
+              id="date"
+              value={this.state.date}
+              min={Date.now()}
+              max="2019-12-13"
+              onChange={e => this.handleDateChange(e)}
+            />
+            <label htmlFor="date">Select Date</label>
+          </div>
+          <div className="input-field">
+            <i className="material-icons prefix">access_time</i>
+            <input
+              type="time"
+              name="time"
+              id="time"
+              min="7:00"
+              max="20:00"
+              value={this.state.time}
+              onChange={e => this.handleTimeChange(e)}
+            />
+            <label htmlFor="time">Select Time</label>
+          </div>
           {/*<DatePicker
             selected={this.state.fixtureDate}
             onChange={e => this.handleChange(e)}

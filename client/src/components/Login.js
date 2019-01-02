@@ -51,13 +51,19 @@ class Login extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <div className="container" style={{ marginTop: "50px", width: "700px" }}>
-        <h2 style={{ marginBottom: "40px" }}>Login</h2>
+      <div
+        className="container form-group"
+        style={{ marginTop: "50px", width: "700px" }}
+      >
+        <h2 className="center" style={{ marginBottom: "40px" }}>
+          Login
+        </h2>
         <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
+          <div className="input-field ">
+            <i className="material-icons prefix">email</i>
             <input
+              id="email"
               type="email"
-              placeholder="Email"
               className={classnames("form-control form-control-lg", {
                 "is-invalid": errors.email
               })}
@@ -65,14 +71,16 @@ class Login extends Component {
               onChange={this.handleInputChange}
               value={this.state.email}
             />
+            <label htmlFor="email">Email</label>
             {errors.email && (
               <div className="invalid-feedback">{errors.email}</div>
             )}
           </div>
-          <div className="form-group">
+          <div className="input-field ">
+            <i className="material-icons prefix">lock_outline</i>
             <input
+              id="password"
               type="password"
-              placeholder="Password"
               className={classnames("form-control form-control-lg", {
                 "is-invalid": errors.password
               })}
@@ -80,6 +88,7 @@ class Login extends Component {
               onChange={this.handleInputChange}
               value={this.state.password}
             />
+            <label htmlFor="password">Password</label>
             {errors.password && (
               <div className="invalid-feedback">{errors.password}</div>
             )}

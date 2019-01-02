@@ -57,12 +57,15 @@ class Register extends Component {
     const { errors } = this.state;
     return (
       <div className="container" style={{ marginTop: "50px", width: "700px" }}>
-        <h2 style={{ marginBottom: "40px" }}>Registration</h2>
+        <h2 className="center" style={{ marginBottom: "40px" }}>
+          Registration
+        </h2>
         <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
+          <div className="form-group input-field">
+            <i className="material-icons prefix">person_pin</i>
             <input
+              id="name"
               type="text"
-              placeholder="Username"
               className={classnames("form-control form-control-lg", {
                 "is-invalid": errors.name
               })}
@@ -70,14 +73,16 @@ class Register extends Component {
               onChange={this.handleInputChange}
               value={this.state.name}
             />
+            <label htmlFor="name">Username</label>
             {errors.name && (
               <div className="invalid-feedback">{errors.name}</div>
             )}
           </div>
-          <div className="form-group">
+          <div className="form-group input-field">
+            <i className="material-icons prefix">email</i>
             <input
+              id="email"
               type="email"
-              placeholder="Email"
               className={classnames("form-control form-control-lg", {
                 "is-invalid": errors.email
               })}
@@ -85,14 +90,16 @@ class Register extends Component {
               onChange={this.handleInputChange}
               value={this.state.email}
             />
+            <label htmlFor="email">Email</label>
             {errors.email && (
               <div className="invalid-feedback">{errors.email}</div>
             )}
           </div>
-          <div className="form-group">
+          <div className="form-group input-field">
+            <i className="material-icons prefix">lock_open</i>
             <input
+              id="password"
               type="password"
-              placeholder="Password"
               className={classnames("form-control form-control-lg", {
                 "is-invalid": errors.password
               })}
@@ -100,14 +107,16 @@ class Register extends Component {
               onChange={this.handleInputChange}
               value={this.state.password}
             />
+            <label htmlFor="password">Password</label>
             {errors.password && (
               <div className="invalid-feedback">{errors.password}</div>
             )}
           </div>
-          <div className="form-group">
+          <div className="form-group input-field">
+            <i className="material-icons prefix">lock_outline</i>
             <input
+              id="password_confirm"
               type="password"
-              placeholder="Confirm Password"
               className={classnames("form-control form-control-lg", {
                 "is-invalid": errors.password_confirm
               })}
@@ -115,6 +124,7 @@ class Register extends Component {
               onChange={this.handleInputChange}
               value={this.state.password_confirm}
             />
+            <label htmlFor="password_confirm">Confirm Password</label>
             {errors.password_confirm && (
               <div className="invalid-feedback">{errors.password_confirm}</div>
             )}

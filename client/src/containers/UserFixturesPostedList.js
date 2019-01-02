@@ -61,6 +61,7 @@ class UserFixturesPostedList extends React.Component {
                     //onClick={() => this.props.updateFixture()}
                     className="btn teal darken-3"
                   >
+                    <i className="material-icons right Tiny">arrow_upward</i>
                     Update This Game
                   </button>
                 </Link>
@@ -69,6 +70,7 @@ class UserFixturesPostedList extends React.Component {
                   onClick={this.props.removeFixture}
                   className="btn teal darken-3"
                 >
+                  <i className="material-icons right Tiny">delete</i>
                   Remove This Game
                 </button>
               </div>

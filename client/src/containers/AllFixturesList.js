@@ -69,6 +69,7 @@ class AllFixturesList extends React.Component {
                   }
                   className="btn teal darken-3"
                 >
+                  <i className="material-icons right">chevron_right</i>
                   Apply To Play
                 </button>
               </div>

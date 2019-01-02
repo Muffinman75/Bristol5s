@@ -13,13 +13,21 @@ class ApplicantForGame extends Component {
           if (application.game_id === this.props.fixtureID) {
             return (
               <div className="applicant" key={application._id}>
-                <h2>
+                <h4 className="card-panel red darken-1 pulse">
                   {application.applicant_name} Wants To Play In Your Game!
-                </h2>
-                <button onClick={this.props.updateApprovalAccept}>
+                </h4>
+                <button
+                  className="btn teal darken-3"
+                  onClick={this.props.updateApprovalAccept}
+                >
+                  <i className="material-icons right">check</i>
                   Accept
                 </button>
-                <button onClick={this.props.updateApprovalReject}>
+                <button
+                  className="btn teal darken-3"
+                  onClick={this.props.updateApprovalReject}
+                >
+                  <i className="material-icons right">clear</i>
                   Reject
                 </button>
               </div>

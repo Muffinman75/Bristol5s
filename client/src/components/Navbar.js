@@ -9,11 +9,18 @@ import M from "materialize-css";
 
 class Navbar extends Component {
   componentDidMount() {
-    ReactDOM.findDOMNode(this).addEventListener(
-      "material-icons",
-      this._handleEvent
-    );
-
+    // ReactDOM.findDOMNode(this).addEventListener(
+    //   "material-icons",
+    //   this._handleEvent
+    // );
+    // (function() {
+    //   const sidenav = document.querySelector(".sidenav");
+    //   const nav = document.querySelector("#" + sidenav.dataset.target);
+    //   sidenav.addEventListener("click", function() {
+    //     sidenav.classList.toggle("is-active");
+    //     nav.classList.toggle("is-active");
+    //   });
+    // })();
     // document.addEventListener("DOMContentLoaded", function() {
     //   console.log("inside listener:");
     //   var elems = document.querySelectorAll(".sidenav");
@@ -46,7 +53,7 @@ class Navbar extends Component {
         </li>
         <li>
           <button
-            className="nav-link active"
+            className="nav-link active btn"
             onClick={this.onLogout.bind(this)}
           >
             <img

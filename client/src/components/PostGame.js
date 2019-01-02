@@ -86,41 +86,63 @@ export default class PostGame extends Component {
             callbackFromDateCalendar={this.fromDateCalendar}
             callbackFromTimePicker={this.fromTimePicker}
           />
-          <input
-            type="text"
-            name="playersReq"
-            onChange={this.handleInputChange}
-            placeholder="Num of players needed"
-            value={this.state.playersReq}
-          />
-          <input
-            type="text"
-            name="cost"
-            onChange={this.handleInputChange}
-            placeholder="Price to Play"
-            value={this.state.cost}
-          />
-          <input
-            type="text"
-            name="pitchNo"
-            onChange={this.handleInputChange}
-            placeholder="Pitch No."
-            value={this.state.pitchNo}
-          />
-          <input
-            type="text"
-            name="venue"
-            onChange={this.handleInputChange}
-            placeholder="Venue"
-            value={this.state.venue}
-          />
-          <textarea
-            name="comments"
-            onChange={this.handleInputChange}
-            placeholder="Instructions/notes about game, i.e. skill level, phone numbers, possible lifts"
-            value={this.state.comments}
-          />
-          <button className="btn btn-success">Add Fixture</button>
+          <div className="input-field">
+            <i className="material-icons prefix">person_add</i>
+            <input
+              id="playersReq"
+              type="text"
+              name="playersReq"
+              onChange={this.handleInputChange}
+              value={this.state.playersReq}
+            />
+            <label htmlFor="playersReq">Num of players needed</label>
+          </div>
+          <div className="input-field">
+            <i className="material-icons prefix">euro_symbol</i>
+            <input
+              id="cost"
+              type="text"
+              name="cost"
+              onChange={this.handleInputChange}
+              value={this.state.cost}
+            />
+            <label htmlFor="cost">Price to Play</label>
+          </div>
+          <div className="input-field">
+            <i className="material-icons prefix">filter_5</i>
+            <input
+              id="pitchNo"
+              type="text"
+              name="pitchNo"
+              onChange={this.handleInputChange}
+              value={this.state.pitchNo}
+            />
+            <label htmlFor="pitchNo">Pitch No.</label>
+          </div>
+          <div className="input-field">
+            <i className="material-icons prefix">near_me</i>
+            <input
+              id="venue"
+              type="text"
+              name="venue"
+              onChange={this.handleInputChange}
+              value={this.state.venue}
+            />
+            <label htmlFor="venue">Venue</label>
+          </div>
+          <div className="input-field">
+            <i className="material-icons prefix">message</i>
+            <textarea
+              id="comments"
+              name="comments"
+              onChange={this.handleInputChange}
+              value={this.state.comments}
+            />
+            <label htmlFor="comments"> Comments For Applicant</label>
+            <button className="btn btn-success">
+              <i className="material-icons right">access_time</i>Add Fixture
+            </button>
+          </div>
         </form>
       </div>
     );

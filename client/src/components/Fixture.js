@@ -5,29 +5,19 @@ import { connect } from "react-redux";
 class Fixture extends Component {
   render() {
     return (
-      <div>
-        <p className="card-panel teal lighten-3">
-          Date: {this.props.fixture.date}
-        </p>
-        <p className="card-panel teal lighten-3">
-          Time: {this.props.fixture.time}
-        </p>
-        <p className="card-panel teal lighten-3">
-          PlayersReq: {this.props.fixture.playersReq}
-        </p>
-        <p className="card-panel teal lighten-3">
-          Cost: {this.props.fixture.cost}
-        </p>
-        <p className="card-panel teal lighten-3">
-          PitchNo: {this.props.fixture.pitchNo}
-        </p>
-        <p className="card-panel teal lighten-3">
-          Venue: {this.props.fixture.venue}
-        </p>
-        <p className="card-panel teal lighten-3">
-          Comments: {this.props.fixture.comments}
-        </p>
-        <ApplicantForGame fixtureID={this.props.fixture._id} />
+      <div className="card-panel blue-grey darken-1">
+        <div className="card-content white-text">
+          <p className="">Date: {this.props.fixture.date}</p>
+          <p className="">Time: {this.props.fixture.time}</p>
+          <p className="">
+            Num of players needed: {this.props.fixture.playersReq}
+          </p>
+          <p className="">Cost To Play: {this.props.fixture.cost}</p>
+          <p className="">Pitch No: {this.props.fixture.pitchNo}</p>
+          <p className="">Venue: {this.props.fixture.venue}</p>
+          <p className="">Comments: {this.props.fixture.comments}</p>
+          <ApplicantForGame fixtureID={this.props.fixture._id} />
+        </div>
       </div>
     );
   }
