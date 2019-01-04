@@ -13,6 +13,7 @@
     "fs": "0.0.2",
     "gravatar": "^1.6.0",
     "jsonwebtoken": "^8.3.0",
+    "moment": "^2.23.0",
     "mongoose": "^5.3.10",
     "morgan": "^1.9.1",
     "node-cron": "^2.0.3",

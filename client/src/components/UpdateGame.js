@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 // import classnames from "classnames";
+import { fetchFixtureById, updateFixture } from "../actions/fixtures";
 import Calendar from "./Calendar";
 
 // import "bootstrap/dist/css/bootstrap.min.css";
@@ -9,55 +10,55 @@ import Calendar from "./Calendar";
 class UpdateGame extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
+    this.state = {
+      fixture: null
+    };
+    //console.log("props:", this.props, "state:", this.state);
+    // create the stateeeeeeeeeeeeeeeeeeeeeeeeeeee object, with an empty fixture property
   }
 
+  componentDidMount() {
+    //this.props.fetchFixtureById(this.props.match.params.id);
+    {
+      this.props.fixtures.map(fixture => {
+        if (fixture._id === this.props.match.params.id) {
+          this.setState({
+            fixture: fixture
+          });
+        }
+      });
+      console.log("props:", this.props, "state:", this.state);
+    }
+    // loop over this.props.fixtures to find the onnnnnnnnnnnnnne whose id matches params.id
+    // setstate fixture: the matching fixutre
+  }
   // componentDidMount that dispatches getFixtureById using this.props.match.params.id
 
   handleInputChange = e => {
+    let fixture = this.state.fixture;
+    fixture[e.target.name] = e.target.value;
     this.setState({
-      [e.target.name]: e.target.value
+      fixture: fixture
     });
   };
-
-  fromDateCalendar = dateFromCalendar => {
-    console.log("Date From Calendar:", dateFromCalendar);
-    this.setState({
-      date: dateFromCalendar
-    });
-  };
-
-  fromTimePicker = timeFromCalendar => {
-    console.log("Time From Calendar:", timeFromCalendar);
-    this.setState({
-      time: timeFromCalendar
-    });
-  };
-  // handleCalendarChange = value => {
-  //   value.split(" ");
-  //   let date = value[0];
-  //   let time = value[1];
-  //   //console.log("Date:", value[0], "Time:", value[1]);
-  //   this.setState(
-  //     {
-  //       date: date,
-  //       time: time
-  //     },
-  //     () => console.log("calendar date:", this.state.date)
-  //   );
-  // };
 
   handleSubmit = e => {
     e.preventDefault();
+    console.log(
+      this.state.fixture.playersReq,
+      typeof this.state.fixture.playersReq
+    );
     if (
-      this.state.playersReq.trim() &&
-      this.state.cost.trim() &&
-      this.state.pitchNo.trim() &&
-      this.state.venue.trim() &&
-      this.state.comments.trim()
+      this.state.fixture.date &&
+      this.state.fixture.time &&
+      this.state.fixture.playersReq &&
+      this.state.fixture.cost &&
+      this.state.fixture.pitchNo &&
+      this.state.fixture.venue &&
+      this.state.fixture.comments
     ) {
-      this.props.onAddFixture(this.state);
-      console.log(this.state);
+      this.props.onUpdateFixture(this.state.fixture); // todo update fixture
+      console.log(this.state.fixture);
       this.handleReset();
     }
   };
@@ -74,50 +75,110 @@ class UpdateGame extends Component {
     });
   };
   render() {
+    if (!this.state.fixture) {
+      return (
+        <div className="container">
+          <div className="preloader-wrapper big active">
+            <div className="spinner-layer spinner-blue">
+              <div className="circle-clipper left">
+                <div className="circle" />
+              </div>
+              <div className="gap-patch">
+                <div className="circle" />
+              </div>
+              <div className="circle-clipper right">
+                <div className="circle" />
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
     return (
       <div className="form-group">
         <form onSubmit={this.handleSubmit}>
-          <Calendar
+          {/* <Calendar
             callbackFromDateCalendar={this.fromDateCalendar}
             callbackFromTimePicker={this.fromTimePicker}
-          />
-          <input
-            type="text"
-            name="playersReq"
-            onChange={this.handleInputChange}
-            placeholder="Num of players needed"
-            value=""
-          />
-          <input
-            type="text"
-            name="cost"
-            onChange={this.handleInputChange}
-            placeholder="Price to Play"
-            value=""
-          />
-          <input
-            type="text"
-            name="pitchNo"
-            onChange={this.handleInputChange}
-            placeholder="Pitch No."
-            value=""
-          />
-          <input
-            type="text"
-            name="venue"
-            onChange={this.handleInputChange}
-            placeholder="Venue"
-            value=""
-          />
-          <textarea
-            name="comments"
-            onChange={this.handleInputChange}
-            placeholder="Instructions/notes about game, i.e. skill level, phone numbers, possible lifts"
-            value=""
-          />
-          <button type="submit" className="btn btn-success">
-            Save Updated Fixture
-          </button>
+          /> */}
+          <div className="input-field">
+            <i className="material-icons prefix">today</i>
+            <input
+              type="date"
+              name="date"
+              id="date"
+              onChange={this.handleInputChange}
+              defaultValue={"" + this.state.fixture.date + ""}
+            />
+          </div>
+          <div className="input-field">
+            <i className="material-icons prefix">access_time</i>
+            <input
+              type="time"
+              name="time"
+              id="time"
+              onChange={this.handleInputChange}
+              defaultValue={"" + this.state.fixture.time + ""}
+            />
+          </div>
+          <div className="input-field">
+            <i className="material-icons prefix">person_add</i>
+            <input
+              id="playersReq"
+              type="text"
+              name="playersReq"
+              onChange={this.handleInputChange}
+              value={"" + this.state.fixture.playersReq + ""}
+            />
+            {/*<label htmlFor="playersReq">Num of Players Needed</label>*/}
+          </div>
+          <div className="input-field">
+            <i className="material-icons prefix">euro_symbol</i>
+            <input
+              id="cost"
+              type="text"
+              name="cost"
+              onChange={this.handleInputChange}
+              value={"" + this.state.fixture.cost + ""}
+            />
+            {/*<label htmlFor="cost">Price to Play</label>*/}
+          </div>
+          <div className="input-field">
+            <i className="material-icons prefix">filter_5</i>
+            <input
+              id="pitchNo"
+              type="text"
+              name="pitchNo"
+              onChange={this.handleInputChange}
+              value={"" + this.state.fixture.pitchNo + ""}
+            />
+            {/*<label htmlFor="pitchNo">Pitch No.</label>*/}
+          </div>
+          <div className="input-field">
+            <i className="material-icons prefix">near_me</i>
+            <input
+              id="venue"
+              type="text"
+              name="venue"
+              onChange={this.handleInputChange}
+              value={"" + this.state.fixture.venue + ""}
+            />
+            {/*<label htmlFor="venue">Venue</label>*/}
+          </div>
+          <div className="input-field">
+            <i className="material-icons prefix">message</i>
+            <textarea
+              id="comments"
+              name="comments"
+              onChange={this.handleInputChange}
+              value={"" + this.state.fixture.comments + ""}
+            />
+            {/*<label htmlFor="comments"> Comments For Applicant</label>*/}
+            <button className="btn btn-success">
+              <i className="material-icons right">chevron_right</i>Save Updated
+              Fixture
+            </button>
+          </div>
         </form>
       </div>
     );
@@ -130,12 +191,19 @@ const mapStateToProps = state => {
   };
 };
 
-// map dispatch to props for getFixtureById
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     fetchAllApplications: () => {
-//       dispatch(fetchAllApplications());
-//     },
-// };
+//map dispatch to props for getFixtureById
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchFixtureById: () => {
+      dispatch(fetchFixtureById());
+    },
+    onUpdateFixture: fixture => {
+      dispatch(updateFixture(fixture));
+    }
+  };
+};
 
-export default connect(mapStateToProps)(UpdateGame);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UpdateGame);

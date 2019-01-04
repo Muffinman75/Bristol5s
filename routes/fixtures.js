@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
+const moment = require("moment");
 
 const Fixture = require("../models/Fixture");
 const User = require("../models/User");
@@ -46,12 +47,12 @@ router.post(
   "/add-game",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log("post:" + JSON.stringify(req.body));
-    const { errors, isValid } = validateAddGameInput(req.body);
+    console.log("post:", req.body);
+    //const { errors, isValid } = validateAddGameInput(req.body);
 
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
+    // if (!isValid) {
+    //   return res.status(400).json(errors);
+    // }
     Fixture.findOne({
       user_id: req.user.id,
       date: req.body.date,
@@ -71,6 +72,7 @@ router.post(
             "-" +
             dateToday.getDate();
           console.log("Todays Date:", dateToday, req.body.date);
+          moment(dateToday).format("YYYY/MM/DD");
           if (dateToday < req.body.date) {
             console.log("here75");
             Fixture.create({
@@ -108,52 +110,82 @@ router.put(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     console.log("post:" + JSON.stringify(req.body));
-    const { errors, isValid } = validateAddGameInput(req.body);
+    //const { errors, isValid } = validateAddGameInput(req.body);
 
-    if (!isValid) {
-      return res.status(400).json(errors);
-    } else {
-      let dateToday = new Date();
-      dateToday =
-        dateToday.getFullYear() +
-        "/" +
-        (dateToday.getMonth() + 1) +
-        "/" +
-        dateToday.getDate();
-      console.log("Todays Date:", dateToday, req.body.date);
-      if (dateToday < req.body.date) {
-        Fixture.findOneAndUpdate(
-          { user_id: req.body.user_id },
-          {
-            $set: {
-              date: req.body.date,
-              time: req.body.time,
-              playersReq: parseInt(req.body.playersReq),
-              cost: parseFloat(req.body.cost),
-              venue: req.body.venue,
-              pitchNo: parseInt(req.body.pitchNo),
-              comments: req.body.comments
-            }
+    // if (!isValid) {
+    //   return res.status(400).json(errors);
+    //} else {
+    let dateTimeObj = new Date();
+    let fullDateTimeToday = JSON.stringify(dateTimeObj);
+    console.log(
+      "fullDateTimeToday:",
+      typeof fullDateTimeToday,
+      fullDateTimeToday
+    );
+    // dateToday =
+    //   dateToday.getFullYear() +
+    //   "-" +
+    //   (dateToday.getMonth() + 1) +
+    //   "-" +
+    //   dateToday.getDate();
+    let datePieces = fullDateTimeToday.split("T");
+    let dateToday = datePieces[0].replace(/['"]+/g, "");
+    console.log("dateToday:", dateToday);
+    //let dateToday = parseInt(datePieces[0]);
+    //let formattedDateToday = moment(dateToday).format("YYYY-MM-DD");
+    //let fixtureDate = moment(req.body.date).format("YYYY-MM-DD");
+    console.log(
+      "Todays Date:",
+      dateToday,
+      "Updated Fixture Date:",
+      req.body.date
+    );
+
+    function compareDates(d1, d2) {
+      var parts = d1.split("-");
+      var d1 = Number(parts[0] + parts[1] + parts[2]);
+      parts = d2.split("-");
+      var d2 = Number(parts[0] + parts[1] + parts[2]);
+      return d1 < d2;
+    }
+
+    console.log(
+      "Fixture Date is Greater than:",
+      compareDates(dateToday, req.body.date)
+    );
+
+    if (compareDates(dateToday, req.body.date) === true) {
+      Fixture.findOneAndUpdate(
+        //{ user_id: req.body.user_id },
+        {
+          $set: {
+            date: req.body.date,
+            time: req.body.time,
+            playersReq: parseInt(req.body.playersReq),
+            cost: parseFloat(req.body.cost),
+            pitchNo: parseInt(req.body.pitchNo),
+            venue: req.body.venue,
+            comments: req.body.comments
           }
-        )
-          .then(fixture => {
-            if (fixture) {
-              console.log("Fixture updated to this:", req.body);
-              return res.status(200).json({ message: "Updated this fixture" });
-            }
-            console.log("No fixture to update");
-            return res
-              .status(404)
-              .json({ message: "This fixture does not exist" });
-          })
-          .catch(err =>
-            res.status(500).json({ message: "Cannot update fixture" })
-          );
-      } else {
-        return res
-          .status(400)
-          .json({ message: "Cannot change fixture date to one in the past" });
-      }
+        }
+      )
+        .then(fixture => {
+          if (fixture) {
+            console.log("Fixture updated to this:", req.body);
+            return res.status(200).json({ message: "Updated this fixture" });
+          }
+          console.log("No fixture to update");
+          return res
+            .status(404)
+            .json({ message: "This fixture does not exist" });
+        })
+        .catch(err =>
+          res.status(500).json({ message: "Cannot update fixture" })
+        );
+    } else {
+      return res
+        .status(400)
+        .json({ message: "Cannot change fixture date to one in the past" });
     }
   }
 );

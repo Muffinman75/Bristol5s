@@ -37,12 +37,12 @@ class App extends Component {
             <Navbar />
             <div className="container">
               <Route exact path="/" component={Landing} />
-              <Route exact path="/home" component={Home} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/find-players" component={FindGame} />
-              <Route exact path="/add-game" component={CreateGame} />
-              <Route exact path="/update-game/:id" component={UpdateGame} />
+              <Route path="/home" component={Home} />
+              <Route path="/register" component={Register} />
+              <Route path="/login" component={Login} />
+              <Route path="/find-players" component={FindGame} />
+              <Route path="/add-game" component={CreateGame} />
+              <Route path="/update-game/:id" component={UpdateGame} />
             </div>
           </div>
         </Router>

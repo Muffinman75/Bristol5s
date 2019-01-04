@@ -12,7 +12,7 @@ export default class Calendar extends Component {
     };
   }
 
-  /*handleChange(e) {
+  handleChange(e) {
     // this.setState({
     //   fixtureDate: date
     // });
@@ -27,7 +27,7 @@ export default class Calendar extends Component {
     //console.log("Date:", value[0], "Time:", value[1]);
     this.props.callbackFromCalendar("callbackFromCalendar:", date);
     console.log("state:", this.state);
-}*/
+  }
 
   handleDateChange(e) {
     console.log(e.target.value);
@@ -53,11 +53,10 @@ export default class Calendar extends Component {
               name="date"
               id="date"
               value={this.state.date}
-              min={Date.now()}
               max="2019-12-13"
               onChange={e => this.handleDateChange(e)}
             />
-            <label htmlFor="date">Select Date</label>
+            {/*<label htmlFor="date">Select Date</label>*/}
           </div>
           <div className="input-field">
             <i className="material-icons prefix">access_time</i>
@@ -70,7 +69,7 @@ export default class Calendar extends Component {
               value={this.state.time}
               onChange={e => this.handleTimeChange(e)}
             />
-            <label htmlFor="time">Select Time</label>
+            {/*<label htmlFor="time">Select Time</label>*/}
           </div>
           {/*<DatePicker
             selected={this.state.fixtureDate}

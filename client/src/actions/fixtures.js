@@ -140,7 +140,7 @@ export const fetchAllFixtures = () => {
   };
 };
 
-export const fixturesById = id => {
+export const fixtureById = id => {
   //let user_id = localStorage.getItem("user_id");
   return {
     type: GET_GAME_BY_ID,
@@ -150,13 +150,14 @@ export const fixturesById = id => {
   };
 };
 
-export const fetchFixturesById = () => {
+export const fetchFixtureById = () => {
+  console.log("fixtureById inside action");
   return dispatch => {
     let user_id = localStorage.getItem("user_id");
     return axios
       .get(`/api/fixtures/display-games/${user_id}`)
       .then(response => {
-        dispatch(fixturesById(response.data));
+        dispatch(fixtureById(response.data));
       })
       .catch(error => {
         throw error;
