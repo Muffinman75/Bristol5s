@@ -64,16 +64,43 @@ router.post(
             message: "One user cannot have two fixtures at the same time"
           });
         } else {
-          let dateToday = new Date();
-          dateToday =
-            dateToday.getFullYear() +
-            "-" +
-            (dateToday.getMonth() + 1) +
-            "-" +
-            dateToday.getDate();
-          console.log("Todays Date:", dateToday, req.body.date);
-          moment(dateToday).format("YYYY/MM/DD");
-          if (dateToday < req.body.date) {
+          // let dateToday = new Date();
+          // dateToday =
+          //   dateToday.getFullYear() +
+          //   "-" +
+          //   (dateToday.getMonth() + 1) +
+          //   "-" +
+          //   dateToday.getDate();
+          // console.log("Todays Date:", dateToday, req.body.date);
+          // moment(dateToday).format("YYYY/MM/DD");
+          let dateTimeObj = new Date();
+          let fullDateTimeToday = JSON.stringify(dateTimeObj);
+          console.log(
+            "fullDateTimeToday:",
+            typeof fullDateTimeToday,
+            fullDateTimeToday
+          );
+          let datePieces = fullDateTimeToday.split("T");
+          let dateToday = datePieces[0].replace(/['"]+/g, "");
+          console.log("dateToday:", dateToday);
+          console.log(
+            "Todays Date:",
+            dateToday,
+            "Updated Fixture Date:",
+            req.body.date
+          );
+          function compareDates(d1, d2) {
+            var parts = d1.split("-");
+            var d1 = Number(parts[0] + parts[1] + parts[2]);
+            parts = d2.split("-");
+            var d2 = Number(parts[0] + parts[1] + parts[2]);
+            return d1 < d2;
+          }
+          console.log(
+            "Fixture Date is Greater than:",
+            compareDates(dateToday, req.body.date)
+          );
+          if (compareDates(dateToday, req.body.date) === true) {
             console.log("here75");
             Fixture.create({
               user_id: req.user.id,

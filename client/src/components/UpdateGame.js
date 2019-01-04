@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+//import { Redirect } from "react-router-dom";
 // import classnames from "classnames";
 import { fetchFixtureById, updateFixture } from "../actions/fixtures";
 import Calendar from "./Calendar";
@@ -12,6 +13,7 @@ class UpdateGame extends Component {
     super(props);
     this.state = {
       fixture: null
+      //redirect: false
     };
     //console.log("props:", this.props, "state:", this.state);
     // create the stateeeeeeeeeeeeeeeeeeeeeeeeeeee object, with an empty fixture property
@@ -33,6 +35,18 @@ class UpdateGame extends Component {
     // setstate fixture: the matching fixutre
   }
   // componentDidMount that dispatches getFixtureById using this.props.match.params.id
+
+  // setRedirect = () => {
+  //   this.setState({
+  //     redirect: true
+  //   });
+  // };
+  //
+  // renderRedirect = () => {
+  //   if (this.state.redirect) {
+  //     return <Redirect to="/home" />;
+  //   }
+  // };
 
   handleInputChange = e => {
     let fixture = this.state.fixture;
@@ -58,8 +72,10 @@ class UpdateGame extends Component {
       this.state.fixture.comments
     ) {
       this.props.onUpdateFixture(this.state.fixture); // todo update fixture
+      alert("This Fixture Has Been Updated!");
       console.log(this.state.fixture);
       this.handleReset();
+      window.location.href = "/home";
     }
   };
 
@@ -174,7 +190,7 @@ class UpdateGame extends Component {
               value={"" + this.state.fixture.comments + ""}
             />
             {/*<label htmlFor="comments"> Comments For Applicant</label>*/}
-            <button className="btn btn-success">
+            <button type="submit" className="btn btn-success">
               <i className="material-icons right">chevron_right</i>Save Updated
               Fixture
             </button>

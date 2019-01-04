@@ -92,9 +92,6 @@ const mapDispatchToProps = dispatch => {
     fetchAllApplications: () => {
       dispatch(fetchAllApplications());
     },
-    updateFixture: () => {
-      dispatch(updateFixture());
-    },
     removeFixture: () => {
       dispatch(removeFixture());
     }

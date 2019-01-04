@@ -62,8 +62,10 @@ export default class PostGame extends Component {
       this.state.comments.trim()
     ) {
       this.props.onAddFixture(this.state);
+      alert("Success! Fixture Added!");
       console.log(this.state);
       this.handleReset();
+      window.location.href = "/home";
     }
   };
 
@@ -140,7 +142,7 @@ export default class PostGame extends Component {
             />
             <label htmlFor="comments"> Comments For Applicant</label>
             <button className="btn btn-success">
-              <i className="material-icons right">access_time</i>Add Fixture
+              <i className="material-icons right">chevron_right</i>Add Fixture
             </button>
           </div>
         </form>
