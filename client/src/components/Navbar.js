@@ -42,7 +42,7 @@ class Navbar extends Component {
           </Link>
         </li>
         <li>
-          <Link className="nav-link active" to="/find-players">
+          <Link className="nav-link active" to="/find-game">
             Find a Game
           </Link>
         </li>
@@ -76,7 +76,7 @@ class Navbar extends Component {
           </Link>
         </li>
         <li>
-          <Link className="nav-link" to="/find-players">
+          <Link className="nav-link" to="/find-game">
             Find a Game
           </Link>
         </li>
@@ -105,6 +105,11 @@ class Navbar extends Component {
     );
     const moblieGuestLinks = (
       <ul className="sidenav" id="mobile-guest-links">
+        <li>
+          <Link className="nav-link active" to="/">
+            About
+          </Link>
+        </li>
         <li className="nav-item">
           <Link className="nav-link" to="/register">
             Become a Member
@@ -119,6 +124,11 @@ class Navbar extends Component {
     );
     const guestLinks = (
       <ul className="right hide-on-med-and-down">
+        <li>
+          <Link className="nav-link active" to="/">
+            About
+          </Link>
+        </li>
         <li className="nav-item">
           <Link className="nav-link active" to="/register">
             Become a Member

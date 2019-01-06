@@ -10,7 +10,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(PostGame);
+export default connect(mapDispatchToProps)(PostGame);

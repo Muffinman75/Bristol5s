@@ -12,7 +12,9 @@ import Login from "./components/Login";
 import Landing from "./components/Landing";
 import Home from "./components/Home";
 import FindGame from "./components/FindGame";
+import PostGame from "./components/PostGame";
 import UpdateGame from "./components/UpdateGame";
+import AllFixturesList from "./containers/AllFixturesList";
 
 import CreateGame from "./containers/CreateGame";
 
@@ -40,7 +42,7 @@ class App extends Component {
               <Route path="/home" component={Home} />
               <Route path="/register" component={Register} />
               <Route path="/login" component={Login} />
-              <Route path="/find-players" component={FindGame} />
+              <Route path="/find-game" component={FindGame} />
               <Route path="/add-game" component={CreateGame} />
               <Route path="/update-game/:id" component={UpdateGame} />
             </div>

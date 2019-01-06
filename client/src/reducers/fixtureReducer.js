@@ -15,6 +15,7 @@ export default function fixtureReducer(state = initialState, action) {
     case UPDATE_GAME:
       return [...state, action.payload];
     case REMOVE_GAME:
+      console.log("Remove Fixture reducer:");
       return state.filter(fixture => fixture._id !== action.payload.fixtureId);
     case GET_GAME:
       console.log("fixture reducer:", action.fixtures);

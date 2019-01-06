@@ -104,7 +104,8 @@ export const removeFixtureSuccess = fixtureId => {
   };
 };
 
-export const removeFixture = gameId => {
+export const removeFixture = fixtureId => {
+  console.log("Remove Fixture action:", fixtureId);
   return dispatch => {
     return axios
       .put("/api/fixtures/remove-game")

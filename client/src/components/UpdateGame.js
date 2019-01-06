@@ -16,7 +16,7 @@ class UpdateGame extends Component {
       //redirect: false
     };
     //console.log("props:", this.props, "state:", this.state);
-    // create the stateeeeeeeeeeeeeeeeeeeeeeeeeeee object, with an empty fixture property
+    // create the state object, with an empty fixture property
   }
 
   componentDidMount() {
@@ -31,7 +31,7 @@ class UpdateGame extends Component {
       });
       console.log("props:", this.props, "state:", this.state);
     }
-    // loop over this.props.fixtures to find the onnnnnnnnnnnnnne whose id matches params.id
+    // loop over this.props.fixtures to find the one whose id matches params.id
     // setstate fixture: the matching fixutre
   }
   // componentDidMount that dispatches getFixtureById using this.props.match.params.id

@@ -1,9 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import Fixture from "../components/Fixture";
-import ApplicantForGame from "../components/ApplicantForGame";
 import PostApplication from "../components/PostApplication";
-import { fetchAllFixtures } from "../actions/fixtures";
+//import { fetchAllFixtures } from "../actions/fixtures";
 import { createApplicationForGame } from "../actions/applicationForGame";
 
 /*function FixtureList(props) {
@@ -25,15 +24,46 @@ import { createApplicationForGame } from "../actions/applicationForGame";
   );
 }*/
 
-const styles = {
-  margin: "auto"
-};
-
 class AllFixturesList extends React.Component {
   // componentDidMount() {
   //   console.log("Apply to this, props:", this.props);
   //   fetchAllFixtures();
   // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      applicant_id: "",
+      applicant_name: "",
+      game_id: "",
+      gamePoster_id: ""
+    };
+  }
+
+  applyForFixture = () => {
+    let user_id = localStorage.getItem("user_id");
+    let user_name = localStorage.getItem("user_name");
+    {
+      this.props.fixtures.map(fixture => {
+        console.log("props in apply:", this.props);
+        if (fixture._id === this.props.match.params.id) {
+          let game_id = fixture._id;
+          let gamePoster_id = fixture.user_id;
+          this.setState({
+            user_id: user_id,
+            user_name: user_name,
+            game_id,
+            gamePoster_id
+          });
+        }
+      });
+      console.log("props:", this.props, "state:", this.state);
+    }
+    this.props.createApplicationForGame(this.state.application);
+    alert(
+      "The Game Owner knows You want to Play in their Game. Please wait for their response."
+    );
+    window.location.href = "/home";
+  };
 
   render() {
     if (!this.props.fixtures.length) {
@@ -47,27 +77,15 @@ class AllFixturesList extends React.Component {
         <p>that you would like to play in their game.</p>
         {this.props.fixtures.map(fixture => {
           let user_id = localStorage.getItem("user_id");
-          let user_name = localStorage.getItem("user_name");
           if (fixture.user_id !== user_id)
             return (
               <div key={fixture._id}>
-                <Fixture
-                  fixture={fixture}
-                  //onDelete={this.props.dispatch(removeFixture(fixture._id))}
-                  //onDelete={this.props.onRemove}
-                />
+                <Fixture fixture={fixture} />
                 <button
-                  style={styles}
+                  //style={styles}
                   type="button"
-                  onClick={() =>
-                    this.props.createApplicationForGame(
-                      user_id,
-                      user_name,
-                      fixture._id,
-                      fixture.user_id
-                    )
-                  }
                   className="btn teal darken-3"
+                  onClick={this.applyForFixture}
                 >
                   <i className="material-icons right">chevron_right</i>
                   Apply To Play
@@ -88,8 +106,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    createApplicationForGame: () => {
-      dispatch(createApplicationForGame());
+    createApplicationForGame: application => {
+      dispatch(createApplicationForGame(application));
     }
   };
 };
