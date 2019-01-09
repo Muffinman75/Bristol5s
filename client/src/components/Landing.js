@@ -6,7 +6,11 @@ import footySuits from "../img/footy-suits.png";
 export default class Landing extends Component {
   render() {
     return (
-      <section className="container section" id="photos">
+      <section
+        className="container section"
+        id="photos"
+        style={{ marginTop: "50px" }}
+      >
         <div className="row">
           <div className="col s12 l5">
             <img src={team} alt="" className="responsive-img materialboxed" />

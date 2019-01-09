@@ -8,7 +8,7 @@ export default class Home extends Component {
   render() {
     let userName = localStorage.getItem("user_name");
     return (
-      <div>
+      <div style={{ marginTop: "50px" }}>
         <p>Welcome, {userName}!</p>
         <UserFixturesPostedList />
       </div>

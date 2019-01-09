@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Fixture from "../components/Fixture";
-import PostApplication from "../components/PostApplication";
+//import PostApplication from "../components/PostApplication";
 //import { fetchAllFixtures } from "../actions/fixtures";
 import { createApplicationForGame } from "../actions/applicationForGame";
 
@@ -39,26 +39,15 @@ class AllFixturesList extends React.Component {
     };
   }
 
-  applyForFixture = () => {
-    let user_id = localStorage.getItem("user_id");
-    let user_name = localStorage.getItem("user_name");
-    {
-      this.props.fixtures.map(fixture => {
-        console.log("props in apply:", this.props);
-        if (fixture._id === this.props.match.params.id) {
-          let game_id = fixture._id;
-          let gamePoster_id = fixture.user_id;
-          this.setState({
-            user_id: user_id,
-            user_name: user_name,
-            game_id,
-            gamePoster_id
-          });
-        }
-      });
-      console.log("props:", this.props, "state:", this.state);
-    }
-    this.props.createApplicationForGame(this.state.application);
+  applyForFixture = fixture => {
+    let application = {
+      applicant_id: localStorage.getItem("user_id"),
+      applicant_name: localStorage.getItem("user_name"),
+      game_id: fixture._id,
+      gamePoster_id: fixture.user_id
+    };
+
+    this.props.createApplicationForGame(application);
     alert(
       "The Game Owner knows You want to Play in their Game. Please wait for their response."
     );
@@ -85,7 +74,7 @@ class AllFixturesList extends React.Component {
                   //style={styles}
                   type="button"
                   className="btn teal darken-3"
-                  onClick={this.applyForFixture}
+                  onClick={() => this.applyForFixture(fixture)}
                 >
                   <i className="material-icons right">chevron_right</i>
                   Apply To Play

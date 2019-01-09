@@ -51,10 +51,7 @@ class Login extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <div
-        className="container form-group"
-        style={{ marginTop: "50px", width: "700px" }}
-      >
+      <div className="container form-group" style={{ marginTop: "50px" }}>
         <h2 className="center" style={{ marginBottom: "40px" }}>
           Login
         </h2>
@@ -73,7 +70,9 @@ class Login extends Component {
             />
             <label htmlFor="email">Email</label>
             {errors.email && (
-              <div className="invalid-feedback">{errors.email}</div>
+              <div className="invalid-feedback" style={{ color: "red" }}>
+                {errors.email}
+              </div>
             )}
           </div>
           <div className="input-field ">
@@ -90,7 +89,9 @@ class Login extends Component {
             />
             <label htmlFor="password">Password</label>
             {errors.password && (
-              <div className="invalid-feedback">{errors.password}</div>
+              <div className="invalid-feedback" style={{ color: "red" }}>
+                {errors.password}
+              </div>
             )}
           </div>
           <div className="form-group">

@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 //import { Redirect } from "react-router-dom";
 // import classnames from "classnames";
 import { fetchFixtureById, updateFixture } from "../actions/fixtures";
-import Calendar from "./Calendar";
 
 // import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -111,12 +110,9 @@ class UpdateGame extends Component {
       );
     }
     return (
-      <div className="form-group">
+      <div className="form-group" style={{ marginTop: "50px" }}>
+        <h1 className="center">Please Fill In All Fixture Details</h1>
         <form onSubmit={this.handleSubmit}>
-          {/* <Calendar
-            callbackFromDateCalendar={this.fromDateCalendar}
-            callbackFromTimePicker={this.fromTimePicker}
-          /> */}
           <div className="input-field">
             <i className="material-icons prefix">today</i>
             <input
@@ -125,6 +121,7 @@ class UpdateGame extends Component {
               id="date"
               onChange={this.handleInputChange}
               defaultValue={"" + this.state.fixture.date + ""}
+              required
             />
           </div>
           <div className="input-field">
@@ -135,16 +132,18 @@ class UpdateGame extends Component {
               id="time"
               onChange={this.handleInputChange}
               defaultValue={"" + this.state.fixture.time + ""}
+              required
             />
           </div>
           <div className="input-field">
             <i className="material-icons prefix">person_add</i>
             <input
               id="playersReq"
-              type="text"
+              type="number"
               name="playersReq"
               onChange={this.handleInputChange}
               value={"" + this.state.fixture.playersReq + ""}
+              required
             />
             {/*<label htmlFor="playersReq">Num of Players Needed</label>*/}
           </div>
@@ -152,10 +151,12 @@ class UpdateGame extends Component {
             <i className="material-icons prefix">euro_symbol</i>
             <input
               id="cost"
-              type="text"
+              type="number"
               name="cost"
+              step="0.01"
               onChange={this.handleInputChange}
               value={"" + this.state.fixture.cost + ""}
+              required
             />
             {/*<label htmlFor="cost">Price to Play</label>*/}
           </div>
@@ -163,10 +164,11 @@ class UpdateGame extends Component {
             <i className="material-icons prefix">filter_5</i>
             <input
               id="pitchNo"
-              type="text"
+              type="number"
               name="pitchNo"
               onChange={this.handleInputChange}
               value={"" + this.state.fixture.pitchNo + ""}
+              required
             />
             {/*<label htmlFor="pitchNo">Pitch No.</label>*/}
           </div>
@@ -178,6 +180,7 @@ class UpdateGame extends Component {
               name="venue"
               onChange={this.handleInputChange}
               value={"" + this.state.fixture.venue + ""}
+              required
             />
             {/*<label htmlFor="venue">Venue</label>*/}
           </div>

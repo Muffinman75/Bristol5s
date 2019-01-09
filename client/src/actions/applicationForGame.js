@@ -9,7 +9,7 @@ export const createApplicationForGame = ({
 }) => {
   return dispatch => {
     return axios
-      .post("/api/applicationForGame/apply", {
+      .post("/api/applications/apply", {
         applicant_id,
         applicant_name,
         game_id,

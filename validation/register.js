@@ -13,11 +13,11 @@ module.exports = function validateRegisterInput(data) {
     : "";
 
   if (!Validator.isLength(data.userName, { min: 2, max: 30 })) {
-    errors.userName = "Name must be between 2 to 30 chars";
+    errors.userName = "Username must be between 2 to 30 chars";
   }
 
   if (Validator.isEmpty(data.userName)) {
-    errors.userName = "Name field is required";
+    errors.userName = "Username is required";
   }
 
   if (!Validator.isEmail(data.email)) {

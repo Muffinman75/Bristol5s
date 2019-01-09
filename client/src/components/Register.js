@@ -56,7 +56,7 @@ class Register extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <div className="container" style={{ marginTop: "50px", width: "700px" }}>
+      <div className="container" style={{ marginTop: "50px" }}>
         <h2 className="center" style={{ marginBottom: "40px" }}>
           Registration
         </h2>
@@ -64,18 +64,20 @@ class Register extends Component {
           <div className="form-group input-field">
             <i className="material-icons prefix">person_pin</i>
             <input
-              id="name"
+              id="userName"
               type="text"
               className={classnames("form-control form-control-lg", {
-                "is-invalid": errors.name
+                "is-invalid": errors.userName
               })}
-              name="name"
+              name="userName"
               onChange={this.handleInputChange}
-              value={this.state.name}
+              value={this.state.userName}
             />
-            <label htmlFor="name">Username</label>
-            {errors.name && (
-              <div className="invalid-feedback">{errors.name}</div>
+            <label htmlFor="userName">Username</label>
+            {errors.userName && (
+              <div className="invalid-feedback" style={{ color: "red" }}>
+                {errors.userName}
+              </div>
             )}
           </div>
           <div className="form-group input-field">
@@ -92,7 +94,9 @@ class Register extends Component {
             />
             <label htmlFor="email">Email</label>
             {errors.email && (
-              <div className="invalid-feedback">{errors.email}</div>
+              <div className="invalid-feedback" style={{ color: "red" }}>
+                {errors.email}
+              </div>
             )}
           </div>
           <div className="form-group input-field">
@@ -109,7 +113,9 @@ class Register extends Component {
             />
             <label htmlFor="password">Password</label>
             {errors.password && (
-              <div className="invalid-feedback">{errors.password}</div>
+              <div className="invalid-feedback" style={{ color: "red" }}>
+                {errors.password}
+              </div>
             )}
           </div>
           <div className="form-group input-field">
@@ -126,7 +132,9 @@ class Register extends Component {
             />
             <label htmlFor="password_confirm">Confirm Password</label>
             {errors.password_confirm && (
-              <div className="invalid-feedback">{errors.password_confirm}</div>
+              <div className="invalid-feedback" style={{ color: "red" }}>
+                {errors.password_confirm}
+              </div>
             )}
           </div>
           <div className="form-group">

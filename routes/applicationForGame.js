@@ -58,8 +58,8 @@ router.post(
             .then(() => {
               console.log("now I'm here!");
               Application.create({
-                applicant_id: req.body._id,
-                applicant_name: req.body.userName,
+                applicant_id: req.body.applicant_id,
+                applicant_name: req.body.applicant_name,
                 game_id: req.body.game_id,
                 gamePoster_id: req.body.gamePoster_id
               });
@@ -69,7 +69,7 @@ router.post(
               return (newApplication = dbResponse);
             })
             .then(() => {
-              return User.findOne({ _id: req.body.user_id });
+              return User.findOne({ _id: req.body.applicant_id });
             })
             .then(user => {
               console.log("Applicant Username:", user.userName);
