@@ -62,11 +62,15 @@ export default class PostGame extends Component {
       this.state.venue.trim() &&
       this.state.comments.trim()
     ) {
-      this.props.onAddFixture(this.state);
-      alert("Success! Fixture Added!");
-      console.log(this.state);
-      this.handleReset();
-      window.location.href = "/home";
+      this.props.onAddFixture(this.state, (passed, response) => {
+        if (passed) {
+          alert("Success! Fixture Added!");
+          this.handleReset();
+          this.props.history.push("/home");
+        } else {
+          alert(response);
+        }
+      });
     }
   };
 
@@ -86,7 +90,7 @@ export default class PostGame extends Component {
       <div className="form-group" style={{ marginTop: "50px" }}>
         <h1 className="center">Please Fill In All Fixture Details</h1>
         <form onSubmit={this.handleSubmit}>
-          <div className="input-field">
+          <div className="col l5 input-field">
             <i className="material-icons prefix">today</i>
             <input
               type="date"
@@ -97,7 +101,7 @@ export default class PostGame extends Component {
               required
             />
           </div>
-          <div className="input-field">
+          <div className="col l5 input-field">
             <i className="material-icons prefix">access_time</i>
             <input
               type="time"
@@ -108,7 +112,7 @@ export default class PostGame extends Component {
               required
             />
           </div>
-          <div className="input-field">
+          <div className="col l5 input-field">
             <i className="material-icons prefix">person_add</i>
             <input
               id="playersReq"
@@ -120,7 +124,7 @@ export default class PostGame extends Component {
             />
             <label htmlFor="playersReq">Num of players needed</label>
           </div>
-          <div className="input-field">
+          <div className="col l5 input-field">
             <i className="material-icons prefix">euro_symbol</i>
             <input
               id="cost"
@@ -133,7 +137,7 @@ export default class PostGame extends Component {
             />
             <label htmlFor="cost">Price to Play</label>
           </div>
-          <div className="input-field">
+          <div className="col l5 input-field">
             <i className="material-icons prefix">filter_5</i>
             <input
               id="pitchNo"
@@ -145,7 +149,7 @@ export default class PostGame extends Component {
             />
             <label htmlFor="pitchNo">Pitch No.</label>
           </div>
-          <div className="input-field">
+          <div className="col l5 input-field">
             <i className="material-icons prefix">near_me</i>
             <input
               id="venue"
@@ -157,7 +161,7 @@ export default class PostGame extends Component {
             />
             <label htmlFor="venue">Venue</label>
           </div>
-          <div className="input-field">
+          <div className="col l5 input-field">
             <i className="material-icons prefix">message</i>
             <textarea
               id="comments"

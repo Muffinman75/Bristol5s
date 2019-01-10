@@ -24,13 +24,17 @@ import { fetchAllApplications } from "../actions/applicationForGame";
   );
 }*/
 
-const styles = {
-  margin: ".75rem auto"
-};
+// const styles = {
+//   margin: ".75rem auto"
+// };
 
 class UserFixturesPostedList extends React.Component {
   componentDidMount() {
     this.props.fetchAllApplications();
+  }
+
+  removeFixture(fixture) {
+    this.props.removeFixture(fixture);
   }
   render() {
     if (!this.props.fixtures.length) {
@@ -56,7 +60,7 @@ class UserFixturesPostedList extends React.Component {
                 />
                 <Link to={"/update-game/" + fixture._id}>
                   <button
-                    style={styles}
+                    style={{ marginRight: "14px" }}
                     fixture={fixture}
                     //onClick={() => this.props.updateFixture()}
                     className="btn teal darken-3"
@@ -66,8 +70,8 @@ class UserFixturesPostedList extends React.Component {
                   </button>
                 </Link>
                 <button
-                  style={styles}
-                  onClick={this.props.removeFixture}
+                  style={{ marginRight: "14px" }}
+                  onClick={() => this.removeFixture(fixture)}
                   className="btn teal darken-3"
                 >
                   <i className="material-icons right Tiny">delete</i>
@@ -92,8 +96,8 @@ const mapDispatchToProps = dispatch => {
     fetchAllApplications: () => {
       dispatch(fetchAllApplications());
     },
-    removeFixture: () => {
-      dispatch(removeFixture());
+    removeFixture: fixture => {
+      dispatch(removeFixture(fixture));
     }
   };
 };

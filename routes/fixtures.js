@@ -56,14 +56,18 @@ router.post(
     Fixture.findOne({
       user_id: req.user.id,
       date: req.body.date,
-      time: req.body.time
+      time: req.body.time,
+      archive: false
     })
       .then(fixture => {
+        console.log("then fixutre");
         if (fixture) {
+          console.log("if fixture");
           return res.status(400).json({
             message: "One user cannot have two fixtures at the same time"
           });
         } else {
+          console.log("else fixture");
           // let dateToday = new Date();
           // dateToday =
           //   dateToday.getFullYear() +

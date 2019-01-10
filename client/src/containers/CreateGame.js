@@ -2,12 +2,19 @@ import { connect } from "react-redux";
 import { createFixture } from "../actions/fixtures";
 import PostGame from "../components/PostGame";
 
+const mapStateToProps = state => {
+  return {};
+};
+
 const mapDispatchToProps = dispatch => {
   return {
-    onAddFixture: fixture => {
-      dispatch(createFixture(fixture));
+    onAddFixture: (fixture, cb) => {
+      dispatch(createFixture(fixture, cb));
     }
   };
 };
 
-export default connect(mapDispatchToProps)(PostGame);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PostGame);

@@ -7,31 +7,31 @@ import {
   REMOVE_GAME
 } from "./types";
 
-export const createFixture = ({
-  date,
-  time,
-  playersReq,
-  cost,
-  venue,
-  pitchNo,
-  comments
-}) => {
+export const createFixture = (fixture, cb) => {
   return dispatch => {
     return axios
       .post("/api/fixtures/add-game", {
-        date,
-        time,
-        playersReq,
-        cost,
-        venue,
-        pitchNo,
-        comments
+        date: fixture.date,
+        time: fixture.time,
+        playersReq: fixture.playersReq,
+        cost: fixture.cost,
+        venue: fixture.venue,
+        pitchNo: fixture.pitchNo,
+        comments: fixture.comments
       })
       .then(response => {
-        dispatch(createFixtureSuccess(response.data));
+        console.log(response.status);
+        if (response.data.hasOwnProperty("message")) {
+          //something went wrong
+          cb(false, response.data.message);
+        } else {
+          dispatch(createFixtureSuccess(response.data));
+          cb(true, response.data);
+        }
       })
       .catch(error => {
-        throw error;
+        cb(false, "There is already a fixture on that day and time");
+        //throw error;
       });
   };
 };
@@ -95,22 +95,22 @@ export const updateFixtureSuccess = data => {
   };
 };
 
-export const removeFixtureSuccess = fixtureId => {
+export const removeFixtureSuccess = fixture => {
   return {
     type: REMOVE_GAME,
     payload: {
-      fixtureId
+      fixture
     }
   };
 };
 
-export const removeFixture = fixtureId => {
-  console.log("Remove Fixture action:", fixtureId);
+export const removeFixture = fixture => {
+  console.log("Remove Fixture action:", fixture);
   return dispatch => {
     return axios
-      .put("/api/fixtures/remove-game")
+      .put("/api/fixtures/remove-game", { _id: fixture._id })
       .then(response => {
-        dispatch(removeFixtureSuccess(response.data));
+        dispatch(removeFixtureSuccess(fixture));
       })
       .catch(error => {
         throw error;

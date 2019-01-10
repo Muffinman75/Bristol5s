@@ -10,7 +10,10 @@ class ApplicantForGame extends Component {
     return (
       <div>
         {this.props.applications.map(application => {
-          if (application.game_id === this.props.fixtureID) {
+          if (
+            application.game_id === this.props.fixtureID &&
+            application.applicant_id !== localStorage.getItem("user_id")
+          ) {
             return (
               <div className="applicant" key={application._id}>
                 <h4 className="card-panel red darken-1 pulse">
@@ -19,6 +22,7 @@ class ApplicantForGame extends Component {
                 <button
                   className="btn teal darken-3"
                   onClick={this.props.updateApprovalAccept}
+                  style={{ marginRight: "14px" }}
                 >
                   <i className="material-icons right">check</i>
                   Accept
@@ -26,6 +30,7 @@ class ApplicantForGame extends Component {
                 <button
                   className="btn teal darken-3"
                   onClick={this.props.updateApprovalReject}
+                  style={{ marginRight: "14px" }}
                 >
                   <i className="material-icons right">clear</i>
                   Reject
