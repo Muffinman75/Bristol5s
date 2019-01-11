@@ -76,11 +76,12 @@ router.put(
     console.log("Approve applicant for game:" + JSON.stringify(req.body));
     return Application.findOneAndUpdate(
       {
-        game_id: req.body.fixtureID
+        game_id: req.body.game_id
       },
       {
         $set: {
-          approved: true
+          approved: true,
+          archive: true
         }
       },
       {

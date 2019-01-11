@@ -26,7 +26,7 @@ export const updateApprovalAcceptSuccess = data => {
 export const updateApprovalReject = () => {
   return dispatch => {
     return axios
-      .put("/api/approvalForGame/reject")
+      .put("/api/applications/reject")
       .then(response => {
         dispatch(updateApprovalRejectSuccess(response.data));
       })

@@ -6,7 +6,7 @@ export default class FindGame extends Component {
   render() {
     return (
       <div>
-        <AllFixturesList />
+        <AllFixturesList {...this.props} />
       </div>
     );
   }

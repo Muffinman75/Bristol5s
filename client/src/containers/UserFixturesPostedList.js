@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Fixture from "../components/Fixture";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 import { removeFixture, updateFixture } from "../actions/fixtures";
 import { fetchAllApplications } from "../actions/applicationForGame";
 
@@ -30,12 +32,31 @@ import { fetchAllApplications } from "../actions/applicationForGame";
 
 class UserFixturesPostedList extends React.Component {
   componentDidMount() {
+    console.log("homenow", this.props);
     this.props.fetchAllApplications();
   }
 
   removeFixture(fixture) {
-    this.props.removeFixture(fixture);
+    confirmAlert({
+      title: "Delete This Fixture!",
+      message: "Delete this fixture? Are you sure?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            this.props.removeFixture(fixture);
+            alert("This fixture has now been deleted!");
+          }
+        },
+        {
+          label: "No",
+          onClick: () => alert("Fixture not deleted!")
+        }
+      ]
+    });
+    this.props.history.push("/home");
   }
+
   render() {
     if (!this.props.fixtures.length) {
       return (

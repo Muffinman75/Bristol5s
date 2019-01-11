@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import Fixture from "../components/Fixture";
 //import PostApplication from "../components/PostApplication";
 //import { fetchAllFixtures } from "../actions/fixtures";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 import { createApplicationForGame } from "../actions/applicationForGame";
 
 /*function FixtureList(props) {
@@ -46,12 +48,25 @@ class AllFixturesList extends React.Component {
       game_id: fixture._id,
       gamePoster_id: fixture.user_id
     };
+    confirmAlert({
+      title: "Apply To This Fixture!",
+      message: "Apply to this fixture? Are you sure?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            this.props.createApplicationForGame(application);
+            alert("Application sent to Game Owner!");
+          }
+        },
+        {
+          label: "No",
+          onClick: () => alert("Application not sent!")
+        }
+      ]
+    });
 
-    this.props.createApplicationForGame(application);
-    alert(
-      "The Game Owner knows You want to Play in their Game. Please wait for their response."
-    );
-    window.location.href = "/home";
+    this.props.history.push("/home");
   };
 
   render() {
@@ -65,22 +80,53 @@ class AllFixturesList extends React.Component {
         <p>The owner of the game will be immediately notified</p>
         <p>that you would like to play in their game.</p>
         {this.props.fixtures.map(fixture => {
+          let userApplied = false;
           let user_id = localStorage.getItem("user_id");
-          if (fixture.user_id !== user_id)
+          if (fixture.user_id !== user_id) {
+            console.log("apps in allfixtures props", this.props);
             return (
               <div key={fixture._id}>
                 <Fixture fixture={fixture} />
-                <button
-                  //style={styles}
-                  type="button"
-                  className="btn teal darken-3"
-                  onClick={() => this.applyForFixture(fixture)}
-                >
-                  <i className="material-icons right">chevron_right</i>
-                  Apply To Play
-                </button>
+                {this.props.applications.map(application => {
+                  if (
+                    application.game_id === fixture._id &&
+                    application.applicant_name ===
+                      localStorage.getItem("user_name")
+                  ) {
+                    let userApplied = true;
+                  }
+
+                  {
+                    if (userApplied == true) {
+                      return (
+                        <button
+                          //style={styles}
+                          type="button"
+                          className="btn teal darken-3 disabled"
+                          onClick={() => this.applyForFixture(fixture)}
+                        >
+                          <i className="material-icons right">chevron_right</i>
+                          Already Applied
+                        </button>
+                      );
+                    } else {
+                      return (
+                        <button
+                          //style={styles}
+                          type="button"
+                          className="btn teal darken-3"
+                          onClick={() => this.applyForFixture(fixture)}
+                        >
+                          <i className="material-icons right">chevron_right</i>
+                          Apply To Play
+                        </button>
+                      );
+                    }
+                  }
+                })}
               </div>
             );
+          }
         })}
       </div>
     );
@@ -89,7 +135,8 @@ class AllFixturesList extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    fixtures: state.fixture
+    fixtures: state.fixture,
+    applications: state.application
   };
 };
 

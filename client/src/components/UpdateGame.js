@@ -113,86 +113,94 @@ class UpdateGame extends Component {
       <div className="form-group" style={{ marginTop: "50px" }}>
         <h1 className="center">Please Fill In All Fixture Details</h1>
         <form onSubmit={this.handleSubmit}>
-          <div className="input-field">
-            <i className="material-icons prefix">today</i>
-            <input
-              type="date"
-              name="date"
-              id="date"
-              onChange={this.handleInputChange}
-              defaultValue={"" + this.state.fixture.date + ""}
-              required
-            />
+          <div className="row">
+            <div className="col l5 input-field">
+              <i className="material-icons prefix">today</i>
+              <input
+                type="date"
+                name="date"
+                id="date"
+                onChange={this.handleInputChange}
+                defaultValue={"" + this.state.fixture.date + ""}
+                required
+              />
+            </div>
+            <div className="col l5 input-field">
+              <i className="material-icons prefix">access_time</i>
+              <input
+                type="time"
+                name="time"
+                id="time"
+                onChange={this.handleInputChange}
+                defaultValue={"" + this.state.fixture.time + ""}
+                required
+              />
+            </div>
           </div>
-          <div className="input-field">
-            <i className="material-icons prefix">access_time</i>
-            <input
-              type="time"
-              name="time"
-              id="time"
-              onChange={this.handleInputChange}
-              defaultValue={"" + this.state.fixture.time + ""}
-              required
-            />
+          <div className="row">
+            <div className="col l5 input-field">
+              <i className="material-icons prefix">person_add</i>
+              <input
+                id="playersReq"
+                type="number"
+                name="playersReq"
+                onChange={this.handleInputChange}
+                value={"" + this.state.fixture.playersReq + ""}
+                required
+              />
+              {/*<label htmlFor="playersReq">Num of Players Needed</label>*/}
+            </div>
+            <div className="col l5 input-field">
+              <i className="material-icons prefix">euro_symbol</i>
+              <input
+                id="cost"
+                type="number"
+                name="cost"
+                step="0.01"
+                onChange={this.handleInputChange}
+                value={"" + this.state.fixture.cost + ""}
+                required
+              />
+              {/*<label htmlFor="cost">Price to Play</label>*/}
+            </div>
           </div>
-          <div className="input-field">
-            <i className="material-icons prefix">person_add</i>
-            <input
-              id="playersReq"
-              type="number"
-              name="playersReq"
-              onChange={this.handleInputChange}
-              value={"" + this.state.fixture.playersReq + ""}
-              required
-            />
-            {/*<label htmlFor="playersReq">Num of Players Needed</label>*/}
+          <div className="row">
+            <div className="col l5 input-field">
+              <i className="material-icons prefix">filter_5</i>
+              <input
+                id="pitchNo"
+                type="number"
+                name="pitchNo"
+                onChange={this.handleInputChange}
+                value={"" + this.state.fixture.pitchNo + ""}
+                required
+              />
+              {/*<label htmlFor="pitchNo">Pitch No.</label>*/}
+            </div>
+            <div className="col l5 input-field">
+              <i className="material-icons prefix">near_me</i>
+              <input
+                id="venue"
+                type="text"
+                name="venue"
+                onChange={this.handleInputChange}
+                value={"" + this.state.fixture.venue + ""}
+                required
+              />
+              {/*<label htmlFor="venue">Venue</label>*/}
+            </div>
           </div>
-          <div className="input-field">
-            <i className="material-icons prefix">euro_symbol</i>
-            <input
-              id="cost"
-              type="number"
-              name="cost"
-              step="0.01"
-              onChange={this.handleInputChange}
-              value={"" + this.state.fixture.cost + ""}
-              required
-            />
-            {/*<label htmlFor="cost">Price to Play</label>*/}
-          </div>
-          <div className="input-field">
-            <i className="material-icons prefix">filter_5</i>
-            <input
-              id="pitchNo"
-              type="number"
-              name="pitchNo"
-              onChange={this.handleInputChange}
-              value={"" + this.state.fixture.pitchNo + ""}
-              required
-            />
-            {/*<label htmlFor="pitchNo">Pitch No.</label>*/}
-          </div>
-          <div className="input-field">
-            <i className="material-icons prefix">near_me</i>
-            <input
-              id="venue"
-              type="text"
-              name="venue"
-              onChange={this.handleInputChange}
-              value={"" + this.state.fixture.venue + ""}
-              required
-            />
-            {/*<label htmlFor="venue">Venue</label>*/}
-          </div>
-          <div className="input-field">
-            <i className="material-icons prefix">message</i>
-            <textarea
-              id="comments"
-              name="comments"
-              onChange={this.handleInputChange}
-              value={"" + this.state.fixture.comments + ""}
-            />
-            {/*<label htmlFor="comments"> Comments For Applicant</label>*/}
+          <div className="row">
+            <div className="col l5 input-field">
+              <i className="material-icons prefix">message</i>
+              <textarea
+                id="comments"
+                name="comments"
+                onChange={this.handleInputChange}
+                value={"" + this.state.fixture.comments + ""}
+              />
+              {/*<label htmlFor="comments"> Comments For Applicant</label>*/}
+            </div>
             <button type="submit" className="btn btn-success">
               <i className="material-icons right">chevron_right</i>Save Updated
               Fixture

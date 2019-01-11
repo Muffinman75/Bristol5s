@@ -30,7 +30,7 @@ export const createFixture = (fixture, cb) => {
         }
       })
       .catch(error => {
-        cb(false, "There is already a fixture on that day and time");
+        cb(false, "Try again! Fixture Not Added!");
         //throw error;
       });
   };
