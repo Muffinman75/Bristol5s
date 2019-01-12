@@ -36,7 +36,7 @@ function approvalEmail(email, name, applicant, date, time, venue) {
       name: "Manoj Modhwadia"
     },
 
-    text: `Hi there ${applicant}, ${name} wishes you to play in their game on ${date} at ${time}.
+    text: `Hi there ${applicant}! Get that kit washed! ${name} has accepted your request to play in their game on ${date} (year-month-day!). See you there at ${time}!
            Venue: ${venue}
            Please visit Bristol5s for more details.`,
 
@@ -62,9 +62,10 @@ function rejectionEmail(email, applicant, date, time, venue) {
       name: "Manoj Modhwadia"
     },
 
-    text: `Hi there ${applicant}, unfortunately you have not been selected to play in the game on ${date}
-           at ${time}.
+    text: `Hi there ${applicant}, unfortunately you have not been selected to play in this game on ${date}
+           at ${time}
            Venue: ${venue}
+           But there are other games to choose from, so chin up and get back in there!!
            Please login to Bristol5s to find another game to play in.`,
 
     subject: "Please apply for a different 5-a-side game"

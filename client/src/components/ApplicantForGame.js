@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 import {
   updateApprovalAccept,
   updateApprovalReject
@@ -7,22 +9,62 @@ import {
 
 class ApplicantForGame extends Component {
   updateApprovalAccept = (fixtureID, applicantName) => {
-    console.log("b4 invoke approve:");
-    this.props.updateApprovalAccept(fixtureID, applicantName);
-    console.log("after invoke approve:");
-    alert(`You have approved
-      ${applicantName}
-      play in your game!`);
-    console.log("props in approve:", this.props);
-    //this.props.history.push("/home");
-    window.location.href = "/home";
+    confirmAlert({
+      title: `Accept ${applicantName} For Your Game!`,
+      message: `You definately want ${applicantName} to play? Are you sure?`,
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            console.log("b4 invoke approve:");
+            this.props.updateApprovalAccept(fixtureID, applicantName);
+            console.log("after invoke approve:");
+            alert(`OK! ${applicantName} will see you at the game!`);
+            console.log("props in approve:", this.props);
+            //this.props.history.push("/home");
+            window.location.href = "/home";
+          }
+        },
+        {
+          label: "No",
+          onClick: () => {
+            console.log("after invoke approve:");
+            alert(
+              `You have chosen NOT to accept ${applicantName} for your game!`
+            );
+            console.log("props in approve:", this.props);
+            this.props.history.push("/home");
+            //window.location.href = "/home";
+          }
+        }
+      ]
+    });
   };
 
   updateApprovalReject = (fixtureID, applicantName) => {
-    this.props.updateApprovalReject(fixtureID, applicantName);
-    alert(`${applicantName} will NOT be playing in your game!`);
-    //this.props.history.push("/home");
-    window.location.href = "/home";
+    confirmAlert({
+      title: `Reject ${applicantName} For Your Game!`,
+      message: `Really? You want to reject ${applicantName}? Are you sure? `,
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            this.props.updateApprovalReject(fixtureID, applicantName);
+            alert(`You have rejected ${applicantName} for your game!`);
+            //this.props.history.push("/home");
+            window.location.href = "/home";
+          }
+        },
+        {
+          label: "No",
+          onClick: () => {
+            this.props.history.push("/home");
+            //window.location.href = "/home";
+            alert(`You have not rejected ${applicantName} for your game!`);
+          }
+        }
+      ]
+    });
   };
 
   render() {
