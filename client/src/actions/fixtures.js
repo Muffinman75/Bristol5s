@@ -30,7 +30,7 @@ export const createFixture = (fixture, cb) => {
         }
       })
       .catch(error => {
-        cb(false, "Try again! Fixture Not Added!");
+        cb(false, "Can't add a fixture that is in the past!");
         //throw error;
       });
   };
@@ -51,31 +51,34 @@ export const createFixtureSuccess = data => {
   };
 };
 
-export const updateFixture = ({
-  date,
-  time,
-  playersReq,
-  cost,
-  venue,
-  pitchNo,
-  comments
-}) => {
+export const updateFixture = (fixture, cb) => {
+  console.log("ud b4 dispatch", fixture);
   return dispatch => {
+    console.log("ud after dispatch", fixture);
     return axios
       .put("/api/fixtures/update-game", {
-        date,
-        time,
-        playersReq,
-        cost,
-        venue,
-        pitchNo,
-        comments
+        id: fixture._id,
+        date: fixture.date,
+        time: fixture.time,
+        playersReq: fixture.playersReq,
+        cost: fixture.cost,
+        venue: fixture.venue,
+        pitchNo: fixture.pitchNo,
+        comments: fixture.comments
       })
       .then(response => {
-        dispatch(updateFixtureSuccess(response.data));
+        console.log("response status in update:", response.status);
+        if (response.data.hasOwnProperty("message")) {
+          cb(false, response.data.message);
+        } else {
+          dispatch(updateFixtureSuccess(response.data));
+          console.log("data in ud", response.data);
+          cb(true, response.data);
+        }
       })
       .catch(error => {
-        throw error;
+        console.log("cb", cb);
+        cb(false, "Can't update to a fixture that is in the past!");
       });
   };
 };

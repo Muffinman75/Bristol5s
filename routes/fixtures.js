@@ -90,7 +90,7 @@ router.post(
           console.log(
             "Todays Date:",
             dateToday,
-            "Updated Fixture Date:",
+            "Added Fixture Date:",
             req.body.date
           );
           function compareDates(d1, d2) {
@@ -140,7 +140,7 @@ router.put(
   "/update-game",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log("post:" + JSON.stringify(req.body));
+    console.log("updatefool:" + JSON.stringify(req.body));
     //const { errors, isValid } = validateAddGameInput(req.body);
 
     // if (!isValid) {
@@ -186,8 +186,8 @@ router.put(
     );
 
     if (compareDates(dateToday, req.body.date) === true) {
-      Fixture.findOneAndUpdate(
-        //{ user_id: req.body.user_id },
+      Fixture.update(
+        { _id: req.body.id },
         {
           $set: {
             date: req.body.date,
@@ -202,8 +202,7 @@ router.put(
       )
         .then(fixture => {
           if (fixture) {
-            console.log("Fixture updated to this:", req.body);
-            return res.status(200).json({ message: "Updated this fixture" });
+            return res.sendStatus(200);
           }
           console.log("No fixture to update");
           return res

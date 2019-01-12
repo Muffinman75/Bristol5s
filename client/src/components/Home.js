@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import UserFixturesPostedList from "../containers/UserFixturesPostedList";
 
-export default class Home extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
   }
@@ -18,3 +18,11 @@ export default class Home extends Component {
     );
   }
 }
+// make a dispatch in componentDidMount to get all fixtures from the store
+const mapStateToProps = state => {
+  return {
+    fixtures: state.fixture
+  };
+};
+
+export default connect(mapStateToProps)(Home);

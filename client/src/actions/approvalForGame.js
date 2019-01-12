@@ -1,10 +1,12 @@
 import { ACCEPT_APPLICANT, REJECT_APPLICANT } from "./types";
 import axios from "axios";
 
-export const updateApprovalAccept = fixtureID => {
+export const updateApprovalAccept = (fixtureID, applicantName) => {
+  console.log("approve b4", fixtureID, applicantName);
   return dispatch => {
+    console.log("approve after", fixtureID, applicantName);
     return axios
-      .put("/api/applications/approve", { fixtureID })
+      .put("/api/applications/approve", { fixtureID, applicantName })
       .then(response => {
         dispatch(updateApprovalAcceptSuccess(response.data));
       })
@@ -23,10 +25,12 @@ export const updateApprovalAcceptSuccess = data => {
   };
 };
 
-export const updateApprovalReject = () => {
+export const updateApprovalReject = (fixtureID, applicantName) => {
+  console.log("approve b4", fixtureID, applicantName);
   return dispatch => {
+    console.log("approve after", fixtureID, applicantName);
     return axios
-      .put("/api/applications/reject")
+      .put("/api/applications/reject", { fixtureID, applicantName })
       .then(response => {
         dispatch(updateApprovalRejectSuccess(response.data));
       })

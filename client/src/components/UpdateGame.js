@@ -70,11 +70,14 @@ class UpdateGame extends Component {
       this.state.fixture.venue &&
       this.state.fixture.comments
     ) {
-      this.props.onUpdateFixture(this.state.fixture); // todo update fixture
-      alert("This Fixture Has Been Updated!");
-      console.log(this.state.fixture);
-      this.handleReset();
-      window.location.href = "/home";
+      this.props.onUpdateFixture(this.state.fixture, (passed, response) => {
+        if (passed) {
+          alert("This Fixture Has Been Updated!");
+          this.props.history.push("/home");
+        } else {
+          alert(response);
+        }
+      }); // todo update fixture
     }
   };
 
@@ -224,8 +227,8 @@ const mapDispatchToProps = dispatch => {
     fetchFixtureById: () => {
       dispatch(fetchFixtureById());
     },
-    onUpdateFixture: fixture => {
-      dispatch(updateFixture(fixture));
+    onUpdateFixture: (fixture, cb) => {
+      dispatch(updateFixture(fixture, cb));
     }
   };
 };

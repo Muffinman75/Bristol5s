@@ -6,14 +6,34 @@ import {
 } from "../actions/approvalForGame";
 
 class ApplicantForGame extends Component {
+  updateApprovalAccept = (fixtureID, applicantName) => {
+    this.props.updateApprovalAccept(fixtureID, applicantName);
+    alert(
+      { applicantName },
+      "approved!",
+      { applicantName },
+      "will be playing in your game!"
+    );
+    this.props.history.push("/home");
+  };
+
+  updateApprovalReject = (fixtureID, applicantName) => {
+    this.props.updateApprovalReject(fixtureID, applicantName);
+    alert({ applicantName }, "will NOT be playing in your game!");
+    this.props.history.push("/home");
+  };
+
   render() {
     return (
       <div>
         {this.props.applications.map(application => {
           if (
+            application.archive === false &&
             application.game_id === this.props.fixtureID &&
             application.applicant_id !== localStorage.getItem("user_id")
           ) {
+            let applicantName = application.applicant_name;
+            let fixtureID = this.props.fixtureID;
             return (
               <div className="applicant" key={application._id}>
                 <h4 className="card-panel red darken-1 pulse">
@@ -21,7 +41,9 @@ class ApplicantForGame extends Component {
                 </h4>
                 <button
                   className="btn teal darken-3"
-                  onClick={this.props.updateApprovalAccept}
+                  onClick={() =>
+                    this.props.updateApprovalAccept(fixtureID, applicantName)
+                  }
                   style={{ marginRight: "14px" }}
                 >
                   <i className="material-icons right">check</i>
@@ -29,7 +51,9 @@ class ApplicantForGame extends Component {
                 </button>
                 <button
                   className="btn teal darken-3"
-                  onClick={this.props.updateApprovalReject}
+                  onClick={() =>
+                    this.props.updateApprovalReject(fixtureID, applicantName)
+                  }
                   style={{ marginRight: "14px" }}
                 >
                   <i className="material-icons right">clear</i>
@@ -53,11 +77,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateApprovalAccept: () => {
-      dispatch(updateApprovalAccept());
+    updateApprovalAccept: (fixtureID, applicantName) => {
+      dispatch(updateApprovalAccept(fixtureID, applicantName));
     },
-    updateApprovalReject: () => {
-      dispatch(updateApprovalReject());
+    updateApprovalReject: (fixtureID, applicantName) => {
+      dispatch(updateApprovalReject(fixtureID, applicantName));
     }
   };
 };

@@ -9,23 +9,25 @@ import M from "materialize-css";
 
 class Navbar extends Component {
   componentDidMount() {
-    // ReactDOM.findDOMNode(this).addEventListener(
-    //   "material-icons",
-    //   this._handleEvent
-    // );
-    // (function() {
-    //   const sidenav = document.querySelector(".sidenav");
-    //   const nav = document.querySelector("#" + sidenav.dataset.target);
-    //   sidenav.addEventListener("click", function() {
-    //     sidenav.classList.toggle("is-active");
-    //     nav.classList.toggle("is-active");
-    //   });
-    // })();
-    // document.addEventListener("DOMContentLoaded", function() {
-    //   console.log("inside listener:");
-    //   var elems = document.querySelectorAll(".sidenav");
-    //   var instances = M.Sidenav.init(elems);
-    // });
+    ReactDOM.findDOMNode(this).addEventListener(
+      "material-icons",
+      this._handleEvent
+    );
+    (function() {
+      const sidenav = document.querySelector(".sidenav");
+      console.log(sidenav.dataset);
+      //const nav = document.querySelector("#" + sidenav.dataset.target);
+      //const nav = document.querySelector("#mobile-guest-links");
+      sidenav.addEventListener("click", function() {
+        sidenav.classList.toggle("is-active");
+        //nav.classList.toggle("is-active");
+      });
+    })();
+    document.addEventListener("DOMContentLoaded", function() {
+      console.log("inside listener:");
+      var elems = document.querySelectorAll(".sidenav");
+      var instances = M.Sidenav.init(elems);
+    });
   }
   onLogout(e) {
     e.preventDefault();
@@ -35,111 +37,113 @@ class Navbar extends Component {
   render() {
     const { isAuthenticated, user } = this.props.auth;
     const authLinks = (
-      <ul className="right hide-on-med-and-down">
-        <li>
-          <Link className="nav-link active" to="/">
-            About
-          </Link>
-        </li>
-        <li>
-          <Link className="nav-link active" to="/find-game">
-            Find a Game
-          </Link>
-        </li>
-        <li>
-          <Link className="nav-link active" to="/add-game">
-            Find Players
-          </Link>
-        </li>
-        <li>
-          <button
-            className="nav-link active btn"
-            onClick={this.onLogout.bind(this)}
-          >
-            <img
-              src={user.avatar}
-              alt={user.name}
-              title={user.name}
-              className="rounded-circle"
-              style={{ width: "25px", marginRight: "5px" }}
-            />
-            Logout
-          </button>
-        </li>
-      </ul>
-    );
-    const mobileAuthLinks = (
-      <ul className="sidenav" id="mobile-auth-links">
-        <li>
-          <Link className="nav-link" to="/">
-            About
-          </Link>
-        </li>
-        <li>
-          <Link className="nav-link" to="/find-game">
-            Find a Game
-          </Link>
-        </li>
-        <li>
-          <Link className="nav-link" to="/add-game">
-            Find Players
-          </Link>
-        </li>
-        <li>
-          <a
-            href="#"
-            className="nav-link waves-effect waves-light btn-small"
-            onClick={this.onLogout.bind(this)}
-          >
-            <img
-              src={user.avatar}
-              alt={user.name}
-              title={user.name}
-              className="rounded-circle right"
-              style={{ width: "25px", marginRight: "5px" }}
-            />
-            Logout
-          </a>
-        </li>
-      </ul>
-    );
-    const moblieGuestLinks = (
-      <ul className="sidenav" id="mobile-guest-links">
-        <li>
-          <Link className="nav-link active" to="/">
-            About
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/register">
-            Become a Member
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/login">
-            Sign In
-          </Link>
-        </li>
-      </ul>
+      <div className="authLinks">
+        <ul className="right hide-on-med-and-down">
+          <li>
+            <Link className="nav-link active" to="/">
+              About
+            </Link>
+          </li>
+          <li>
+            <Link className="nav-link active" to="/find-game">
+              Find a Game
+            </Link>
+          </li>
+          <li>
+            <Link className="nav-link active" to="/add-game">
+              Find Players
+            </Link>
+          </li>
+          <li>
+            <button
+              className="nav-link active btn"
+              onClick={this.onLogout.bind(this)}
+            >
+              <img
+                src={user.avatar}
+                alt={user.name}
+                title={user.name}
+                className="rounded-circle"
+                style={{ width: "25px", marginRight: "5px" }}
+              />
+              Logout
+            </button>
+          </li>
+        </ul>
+
+        <ul className="sidenav" id="mobile-auth-links">
+          <li>
+            <Link className="nav-link" to="/">
+              About
+            </Link>
+          </li>
+          <li>
+            <Link className="nav-link" to="/find-game">
+              Find a Game
+            </Link>
+          </li>
+          <li>
+            <Link className="nav-link" to="/add-game">
+              Find Players
+            </Link>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="nav-link waves-effect waves-light btn-small"
+              onClick={this.onLogout.bind(this)}
+            >
+              <img
+                src={user.avatar}
+                alt={user.name}
+                title={user.name}
+                className="rounded-circle right"
+                style={{ width: "25px", marginRight: "5px" }}
+              />
+              Logout
+            </a>
+          </li>
+        </ul>
+      </div>
     );
     const guestLinks = (
-      <ul className="right hide-on-med-and-down">
-        <li>
-          <Link className="nav-link active" to="/">
-            About
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link active" to="/register">
-            Become a Member
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link active" to="/login">
-            Sign In
-          </Link>
-        </li>
-      </ul>
+      <div className="guestLinks">
+        <ul className="sidenav" id="mobile-guest-links">
+          <li>
+            <Link className="nav-link active" to="/">
+              About
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/register">
+              Become a Member
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/login">
+              Sign In
+            </Link>
+          </li>
+        </ul>
+
+        <ul className="right hide-on-med-and-down">
+          <li className="nav-item">
+            <Link className="nav-link active" to="/">
+              About
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link active" to="/register">
+              Become a Member
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link active" to="/login">
+              Sign In
+            </Link>
+          </li>
+        </ul>
+      </div>
     );
     return (
       <nav className="nav-wraper indigo">

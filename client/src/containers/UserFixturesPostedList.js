@@ -107,9 +107,7 @@ class UserFixturesPostedList extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    fixtures: state.fixture
-  };
+  return {};
 };
 
 const mapDispatchToProps = dispatch => {

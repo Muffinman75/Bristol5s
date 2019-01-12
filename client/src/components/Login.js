@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../actions/authentication";
 import classnames from "classnames";
+//import { fetchAllFixtures } from "../actions/fixtures";
+//import store from "../store";
 
 class Login extends Component {
   constructor() {
@@ -24,6 +26,7 @@ class Login extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    console.log("loginprops", this.props);
     const user = {
       email: this.state.email,
       password: this.state.password
@@ -33,6 +36,7 @@ class Login extends Component {
 
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
+      //store.dispatch(fetchAllFixtures());
       this.props.history.push("/");
     }
   }
@@ -115,6 +119,14 @@ const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
 });
+
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     fetchAllFixtures: () => {
+//       dispatch(fetchAllFixtures());
+//     }
+//   };
+// };
 
 export default connect(
   mapStateToProps,

@@ -21,8 +21,8 @@ router.put(
     Application.findOneAndUpdate(
       {
         $and: [
-          { gamePoster_id: req.body.gamePoster_id },
-          { applicant_id: req.body.applicant_id }
+          { game_id: req.body.fixtureID },
+          { applicant_name: req.body.applicantName }
         ]
       },
       {
@@ -52,6 +52,7 @@ router.put(
       })
       .then(() => {
         console.log("Sending rejection email to:", applicant, "at:", email);
+        console.log("poobear", email, userName, applicant, date, time, venue);
         rejectionEmail(email, userName, applicant, date, time, venue);
         return res.status(200).json({ message: `email sent to ${applicant}` });
       })
@@ -76,7 +77,10 @@ router.put(
     console.log("Approve applicant for game:" + JSON.stringify(req.body));
     return Application.findOneAndUpdate(
       {
-        game_id: req.body.game_id
+        $and: [
+          { game_id: req.body.fixtureID },
+          { applicant_name: req.body.applicantName }
+        ]
       },
       {
         $set: {
@@ -89,16 +93,14 @@ router.put(
       }
     )
       .then(application => {
-        gameId = application.game_id;
+        gameId = req.body.fixtureID;
         console.log("Application approval status:", application.approved);
-        return application;
-      })
-      .then(application => {
-        console.log("Game Poster Id:", application.gamePoster_id);
         return User.findOne({ _id: application.gamePoster_id });
       })
       .then(user => {
-        console.log("Game Poster Username:", user.userName);
+        applicant = req.body.applicantName;
+        userName = user.userName;
+        console.log("Game Poster Username:", userName);
         return (userName = user.userName);
       })
       .then(() => {
@@ -109,8 +111,9 @@ router.put(
         return User.findOne({ _id: application.applicant_id });
       })
       .then(user => {
+        email = user.email;
         console.log("Applicants Email", user.email);
-        return (email = user.email), (applicant = user.userName);
+        return;
       })
       .then(() => {
         return Fixture.findOneAndUpdate(
@@ -120,14 +123,13 @@ router.put(
         );
       })
       .then(fixture => {
+        date = fixture.date;
+        time = fixture.time;
+        venue = fixture.venue;
         if (fixture.playersReq < 1) {
           fixture.update({ archive: true });
         }
         console.log("The Game in question:", fixture);
-
-        return (
-          (date = fixture.date), (time = fixture.time), (venue = fixture.venue)
-        );
       })
       .then(() => {
         console.log("Sending approval email to:", applicant, "at:", email);
