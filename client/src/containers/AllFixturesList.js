@@ -55,8 +55,16 @@ class AllFixturesList extends React.Component {
         {
           label: "Yes",
           onClick: () => {
-            this.props.createApplicationForGame(application);
-            alert("Application sent to Game Owner!");
+            this.props.createApplicationForGame(
+              application,
+              (passed, response) => {
+                if (passed) {
+                  alert("Application sent to Game Owner!");
+                } else {
+                  alert(response);
+                }
+              }
+            );
           }
         },
         {
@@ -83,47 +91,18 @@ class AllFixturesList extends React.Component {
           let userApplied = false;
           let user_id = localStorage.getItem("user_id");
           if (fixture.user_id !== user_id) {
-            console.log("apps in allfixtures props", this.props);
             return (
               <div key={fixture._id}>
                 <Fixture fixture={fixture} />
-                {this.props.applications.map(application => {
-                  if (
-                    application.game_id === fixture._id &&
-                    application.applicant_name ===
-                      localStorage.getItem("user_name")
-                  ) {
-                    let userApplied = true;
-                  }
-
-                  {
-                    if (userApplied == true) {
-                      return (
-                        <button
-                          //style={styles}
-                          type="button"
-                          className="btn teal darken-3 disabled"
-                          onClick={() => this.applyForFixture(fixture)}
-                        >
-                          <i className="material-icons right">chevron_right</i>
-                          Already Applied
-                        </button>
-                      );
-                    } else {
-                      return (
-                        <button
-                          //style={styles}
-                          type="button"
-                          className="btn teal darken-3"
-                          onClick={() => this.applyForFixture(fixture)}
-                        >
-                          <i className="material-icons right">chevron_right</i>
-                          Apply To Play
-                        </button>
-                      );
-                    }
-                  }
-                })}
+                <button
+                  //style={styles}
+                  type="button"
+                  className="btn teal darken-3"
+                  onClick={() => this.applyForFixture(fixture)}
+                >
+                  <i className="material-icons right">chevron_right</i>
+                  Apply To Play
+                </button>
               </div>
             );
           }
@@ -142,8 +121,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    createApplicationForGame: application => {
-      dispatch(createApplicationForGame(application));
+    createApplicationForGame: (application, cb) => {
+      dispatch(createApplicationForGame(application, cb));
     }
   };
 };

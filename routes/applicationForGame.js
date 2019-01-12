@@ -109,9 +109,11 @@ router.post(
                 time,
                 venue
               );
-              res
-                .status(201)
-                .json({ message: `email sent to ${user.userName}` });
+              res.status(201).json({
+                message: `${
+                  user.userName
+                }, the game owner knows you want to play! You will receive an email response soon.`
+              });
             });
         }
       })

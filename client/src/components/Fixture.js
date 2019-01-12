@@ -16,7 +16,10 @@ class Fixture extends Component {
           <p className="">Pitch No: {this.props.fixture.pitchNo}</p>
           <p className="">Venue: {this.props.fixture.venue}</p>
           <p className="">Comments: {this.props.fixture.comments}</p>
-          <ApplicantForGame fixtureID={this.props.fixture._id} />
+          <ApplicantForGame
+            fixtureID={this.props.fixture._id}
+            {...this.props}
+          />
         </div>
       </div>
     );

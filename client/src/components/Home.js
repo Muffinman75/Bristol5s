@@ -9,10 +9,8 @@ class Home extends Component {
     super(props);
   }
   render() {
-    let userName = localStorage.getItem("user_name");
     return (
       <div style={{ marginTop: "50px" }}>
-        <h3>Welcome, {userName}!</h3>
         <UserFixturesPostedList {...this.props} />
       </div>
     );

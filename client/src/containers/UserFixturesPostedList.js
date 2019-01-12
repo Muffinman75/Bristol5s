@@ -61,12 +61,15 @@ class UserFixturesPostedList extends React.Component {
     if (!this.props.fixtures.length) {
       return (
         <div>
+          <h3>Welcome, {localStorage.getItem("user_name")}!</h3>
           <h2>You Have Not Posted Any Fixtures</h2>
+          <p>You can apply to play a game </p>
         </div>
       );
     }
     return (
       <div>
+        <h3>Welcome, {localStorage.getItem("user_name")}!</h3>
         <h2>Your Posted Games</h2>
         {this.props.fixtures.map(fixture => {
           let user_id = localStorage.getItem("user_id");
@@ -78,6 +81,7 @@ class UserFixturesPostedList extends React.Component {
                   //onDelete={this.props.dispatch(removeFixture(fixture._id))}
                   //onDelete={this.props.onRemove}
                   displayApps="true"
+                  {...this.props}
                 />
                 <Link to={"/update-game/" + fixture._id}>
                   <button

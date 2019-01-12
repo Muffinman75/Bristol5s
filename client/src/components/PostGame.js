@@ -66,7 +66,8 @@ export default class PostGame extends Component {
         if (passed) {
           alert("Success! Fixture Added!");
           this.handleReset();
-          this.props.history.push("/home");
+          //this.props.history.push("/home");
+          window.location.href = "/home";
         } else {
           alert(response);
         }

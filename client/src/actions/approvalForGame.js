@@ -6,7 +6,10 @@ export const updateApprovalAccept = (fixtureID, applicantName) => {
   return dispatch => {
     console.log("approve after", fixtureID, applicantName);
     return axios
-      .put("/api/applications/approve", { fixtureID, applicantName })
+      .put("/api/applications/approve", {
+        fixtureID,
+        applicantName
+      })
       .then(response => {
         dispatch(updateApprovalAcceptSuccess(response.data));
       })
@@ -30,7 +33,10 @@ export const updateApprovalReject = (fixtureID, applicantName) => {
   return dispatch => {
     console.log("approve after", fixtureID, applicantName);
     return axios
-      .put("/api/applications/reject", { fixtureID, applicantName })
+      .put("/api/applications/reject", {
+        fixtureID,
+        applicantName
+      })
       .then(response => {
         dispatch(updateApprovalRejectSuccess(response.data));
       })

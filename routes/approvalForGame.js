@@ -39,7 +39,7 @@ router.put(
       })
       .then(user => {
         console.log("Rejected Applicant:", user.userName);
-        return (applicant = user.userName), (email = user.email);
+        return (applicant = req.body.applicantName), (email = user.email);
       })
       .then(() => {
         return Fixture.findOne({ _id: gameId });
@@ -51,9 +51,9 @@ router.put(
         );
       })
       .then(() => {
+        console.log("poobear", email, applicant, date, time, venue);
         console.log("Sending rejection email to:", applicant, "at:", email);
-        console.log("poobear", email, userName, applicant, date, time, venue);
-        rejectionEmail(email, userName, applicant, date, time, venue);
+        rejectionEmail(email, applicant, date, time, venue);
         return res.status(200).json({ message: `email sent to ${applicant}` });
       })
       .catch(err => {
@@ -104,7 +104,12 @@ router.put(
         return (userName = user.userName);
       })
       .then(() => {
-        return Application.findOne({});
+        return Application.findOne({
+          $and: [
+            { game_id: req.body.fixtureID },
+            { applicant_name: req.body.applicantName }
+          ]
+        });
       })
       .then(application => {
         console.log("Applicant Id:", application.applicant_id);

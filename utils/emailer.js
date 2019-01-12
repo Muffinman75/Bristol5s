@@ -52,7 +52,8 @@ function approvalEmail(email, name, applicant, date, time, venue) {
   });
 }
 
-function rejectionEmail(email, name, applicant, date, time, venue) {
+function rejectionEmail(email, applicant, date, time, venue) {
+  console.log("inside rjemail:");
   const message = {
     to: email, //email variable
 

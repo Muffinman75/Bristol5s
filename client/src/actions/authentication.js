@@ -50,5 +50,6 @@ export const logoutUser = history => dispatch => {
   localStorage.removeItem("user_name");
   setAuthToken(false);
   dispatch(setCurrentUser({}));
-  history.push("/login");
+  //history.push("/login");
+  window.location.href = "/";
 };
