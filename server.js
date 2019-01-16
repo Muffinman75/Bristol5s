@@ -41,6 +41,11 @@ app.use("/api/users", users);
 app.use("/api/fixtures", fixtures, fixtureAndApplicationChecker);
 app.use("/api/applications", applicationForGame, approvalForGame);
 
+// Express only serves static assets in production
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
 // app.use(timings.start("routing"));
 // app.use(require("./routes"));
 // app.use(timings.end("routing"));
