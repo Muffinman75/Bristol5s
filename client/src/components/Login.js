@@ -37,8 +37,8 @@ class Login extends Component {
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
       //store.dispatch(fetchAllFixtures());
-      //this.props.history.push("/");
-      window.location.href = "/";
+      this.props.history.push("/");
+      //window.location.href = "/";
     }
   }
 

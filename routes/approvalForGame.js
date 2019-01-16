@@ -121,19 +121,20 @@ router.put(
         return;
       })
       .then(() => {
-        return Fixture.findOneAndUpdate(
-          { _id: gameId },
-          { $inc: { "fixture.playersReq": -1 } },
-          { new: true }
-        );
+        return Fixture.findOne({ _id: gameId });
+        console.log("fixture before", fixture);
       })
       .then(fixture => {
         date = fixture.date;
         time = fixture.time;
         venue = fixture.venue;
+        fixture.playersReq--;
+        console.log("fixture after", fixture);
         if (fixture.playersReq < 1) {
-          fixture.update({ archive: true });
+          fixture.updateOne({ archive: true });
+          fixture.save();
         }
+        fixture.save();
         console.log("The Game in question:", fixture);
       })
       .then(() => {

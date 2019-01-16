@@ -71,7 +71,7 @@ class Navbar extends Component {
           </li>
         </ul>
 
-        <ul className="sidenav" id="mobile-auth-links">
+        <ul className="sidenav" style={{ width: "60%" }} id="mobile-auth-links">
           <li>
             <Link className="nav-link" to="/">
               About
@@ -108,7 +108,11 @@ class Navbar extends Component {
     );
     const guestLinks = (
       <div className="guestLinks">
-        <ul className="sidenav" id="mobile-guest-links">
+        <ul
+          className="sidenav"
+          style={{ width: "60%" }}
+          id="mobile-guest-links"
+        >
           <li>
             <Link className="nav-link active" to="/">
               About
