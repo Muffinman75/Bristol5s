@@ -26,6 +26,11 @@ class Navbar extends Component {
       M.Sidenav.init(elems);
     });
   }
+
+  findGame() {
+    window.location.href = "/find-game";
+  }
+
   onLogout(e) {
     e.preventDefault();
     this.props.logoutUser(this.props.history);
@@ -42,9 +47,9 @@ class Navbar extends Component {
             </Link>
           </li>
           <li>
-            <Link className="nav-link active" to="/find-game">
+            <a className="nav-link active" onClick={() => this.findGame()}>
               Find a Game
-            </Link>
+            </a>
           </li>
           <li>
             <Link className="nav-link active" to="/add-game">
@@ -75,9 +80,9 @@ class Navbar extends Component {
             </Link>
           </li>
           <li>
-            <Link className="nav-link" to="/find-game">
+            <a className="nav-link" onClick={() => this.findGame()}>
               Find a Game
-            </Link>
+            </a>
           </li>
           <li>
             <Link className="nav-link" to="/add-game">
@@ -150,10 +155,10 @@ class Navbar extends Component {
       <nav className="nav-wraper indigo">
         <div className="container">
           <Link className="brand-logo" to="/home">
-            <i class="fas fa-volleyball-ball" />
+            <i className="fas fa-volleyball-ball" />
             <span
               className="home-logo hide-on-small-only"
-              style={{ "max-width": "30%" }}
+              style={{ maxWidth: "30%" }}
             >
               Bristol5s
             </span>

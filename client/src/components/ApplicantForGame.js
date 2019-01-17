@@ -72,9 +72,9 @@ class ApplicantForGame extends Component {
       <div>
         {this.props.applications.map(application => {
           if (
+            application.applicant_id !== localStorage.getItem("user_id") &&
             application.archive === false &&
-            application.game_id === this.props.fixtureID &&
-            application.applicant_id !== localStorage.getItem("user_id")
+            application.game_id === this.props.fixtureID
           ) {
             let applicantName = application.applicant_name;
             let fixtureID = this.props.fixtureID;

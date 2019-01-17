@@ -57,7 +57,7 @@ class AllFixturesList extends React.Component {
       return (
         <div
           className="center headings light-blue-text darken-1 flow-text"
-          Style={{ marginTop: "20px" }}
+          style={{ marginTop: "20px" }}
         >
           There are no Games to play in, please check again later
         </div>
