@@ -28,9 +28,9 @@
     "validator": "^10.9.0"
   },
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client \"",
+    "start": "npm run server",
     "client": "node start-client.js",
-    "server": "nodemon --exec babel-node server.js",
+    "server": "babel-node server.js",
     "test": "mocha",
     "lint": "eslint",
     "heroku-postbuild": "cd client && npm install && npm run build"
