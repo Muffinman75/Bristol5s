@@ -9,7 +9,7 @@ import { fetchAllApplications } from "../actions/applicationForGame";
 
 class UserFixturesPostedList extends React.Component {
   componentDidMount() {
-    console.log("homenow", this.props);
+    console.log("homesnow", this.props);
     this.props.fetchAllApplications();
   }
 
