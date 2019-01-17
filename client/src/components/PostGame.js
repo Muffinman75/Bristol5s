@@ -151,11 +151,8 @@ export default class PostGame extends Component {
               <label htmlFor="comments"> Comments For Player</label>
             </div>
           </div>
-          <div className="center align">
-            <button
-              className="btn light-blue darken-1 waves"
-              style={{ "margin-bottom": "15px" }}
-            >
+          <div className="center align" style={{ "margin-bottom": "15px" }}>
+            <button className="btn light-blue darken-1 waves">
               <i className="material-icons right">chevron_right</i>Add Fixture
             </button>
           </div>

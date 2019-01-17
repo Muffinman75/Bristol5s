@@ -183,12 +183,8 @@ class UpdateGame extends Component {
               {/*<label htmlFor="comments"> Comments For Applicant</label>*/}
             </div>
           </div>
-          <div className="center-align">
-            <button
-              type="submit"
-              className="btn light-blue darken-1 waves"
-              style={{ "margin-bottom": "15px" }}
-            >
+          <div className="center-align" style={{ "margin-bottom": "15px" }}>
+            <button type="submit" className="btn light-blue darken-1 waves">
               <i className="material-icons right">chevron_right</i>Save Updated
               Fixture
             </button>
