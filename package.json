@@ -33,7 +33,7 @@
     "server": "babel-node server.js",
     "test": "mocha",
     "lint": "eslint",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install"
   },
   "devDependencies": {
     "chai": "^4.2.0",
