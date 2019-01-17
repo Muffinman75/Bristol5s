@@ -28,3 +28,9 @@ Update Page
 
 ![Update Page](https://github.com/Muffinman75/Bristol5s/blob/master/client/public/screenshots/update.png)
 
+This is a MERN stack app designed for users to be able to post football matches that require additional players
+and for users to search available football matches to play in.
+
+The next iteration will include a rating system based on whether players turn up or not.
+
+Other technologies used include passport, bcrypt, sendgrid, jwt.
