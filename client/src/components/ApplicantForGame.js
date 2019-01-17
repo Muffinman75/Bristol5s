@@ -125,7 +125,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     updateApprovalAccept: (fixtureID, applicantName) => {
-      console.log("in mapDispatchToProps approve");
+      console.log("in mapDispatchToProps approves");
       dispatch(updateApprovalAccept(fixtureID, applicantName));
     },
     updateApprovalReject: (fixtureID, applicantName) => {
