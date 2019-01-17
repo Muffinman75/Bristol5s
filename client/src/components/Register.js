@@ -57,7 +57,10 @@ class Register extends Component {
     const { errors } = this.state;
     return (
       <div className="container" style={{ marginTop: "50px" }}>
-        <h2 className="center" style={{ marginBottom: "40px" }}>
+        <h2
+          className="center headings light-blue-text darken-1"
+          style={{ marginBottom: "40px" }}
+        >
           Registration
         </h2>
         <form onSubmit={this.handleSubmit}>
@@ -137,8 +140,11 @@ class Register extends Component {
               </div>
             )}
           </div>
-          <div className="form-group">
-            <button type="submit" className="btn btn-primary">
+          <div
+            className="form-group center-align"
+            style={{ marginTop: "15px" }}
+          >
+            <button type="submit" className="btn light-blue darken-1 waves">
               Register User
             </button>
           </div>

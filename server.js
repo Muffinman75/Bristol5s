@@ -46,10 +46,6 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-// app.use(timings.start("routing"));
-// app.use(require("./routes"));
-// app.use(timings.end("routing"));
-
 let server;
 
 function runServer() {
@@ -96,9 +92,3 @@ if (require.main === module) {
 }
 
 module.exports = { app, runServer, closeServer };
-
-// const PORT = process.env.PORT || 8000;
-//
-// app.listen(PORT, () => {
-//   console.log(`Server is running on PORT ${PORT}`);
-// });

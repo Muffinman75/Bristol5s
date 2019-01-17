@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
@@ -80,29 +80,33 @@ class ApplicantForGame extends Component {
             let fixtureID = this.props.fixtureID;
             return (
               <div className="applicant" key={application._id}>
-                <h4 className="card-panel red darken-1">
-                  {application.applicant_name} Wants To Play In Your Game!
+                <h4 className="card-panel red accent-2 center-align">
+                  <span className="applicantHeading">
+                    {application.applicant_name} Wants To Play In Your Game!
+                  </span>
                 </h4>
-                <button
-                  className="btn teal darken-3"
-                  onClick={() =>
-                    this.updateApprovalAccept(fixtureID, applicantName)
-                  }
-                  style={{ marginRight: "14px" }}
-                >
-                  <i className="material-icons right">check</i>
-                  Accept
-                </button>
-                <button
-                  className="btn teal darken-3"
-                  onClick={() =>
-                    this.updateApprovalReject(fixtureID, applicantName)
-                  }
-                  style={{ marginRight: "14px" }}
-                >
-                  <i className="material-icons right">clear</i>
-                  Reject
-                </button>
+                <div className="row center-align">
+                  <button
+                    className="btn light-blue darken-1 waves"
+                    onClick={() =>
+                      this.updateApprovalAccept(fixtureID, applicantName)
+                    }
+                    style={{ marginRight: "14px", marginBottom: "12px" }}
+                  >
+                    <i className="material-icons right">check</i>
+                    Accept
+                  </button>
+                  <button
+                    className="btn light-blue darken-1 waves"
+                    onClick={() =>
+                      this.updateApprovalReject(fixtureID, applicantName)
+                    }
+                    style={{ marginRight: "14px", marginBottom: "12px" }}
+                  >
+                    <i className="material-icons right">clear</i>
+                    Reject
+                  </button>
+                </div>
               </div>
             );
           }
@@ -111,7 +115,6 @@ class ApplicantForGame extends Component {
     );
   }
 }
-ApplicantForGame.propTypes = {};
 
 const mapStateToProps = state => {
   return {

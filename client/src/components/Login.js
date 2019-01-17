@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../actions/authentication";
 import classnames from "classnames";
-//import { fetchAllFixtures } from "../actions/fixtures";
-//import store from "../store";
 
 class Login extends Component {
   constructor() {
@@ -36,16 +34,13 @@ class Login extends Component {
 
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
-      //store.dispatch(fetchAllFixtures());
-      this.props.history.push("/");
-      //window.location.href = "/";
+      this.props.history.push("/home");
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      //this.props.history.push("/");
-      window.location.href = "/";
+      window.location.href = "/home";
     }
     if (nextProps.errors) {
       this.setState({
@@ -58,7 +53,10 @@ class Login extends Component {
     const { errors } = this.state;
     return (
       <div className="container form-group" style={{ marginTop: "50px" }}>
-        <h2 className="center" style={{ marginBottom: "40px" }}>
+        <h2
+          className="center headings light-blue-text darken-1"
+          style={{ marginBottom: "40px" }}
+        >
           Login
         </h2>
         <form onSubmit={this.handleSubmit}>
@@ -100,10 +98,18 @@ class Login extends Component {
               </div>
             )}
           </div>
-          <div className="form-group">
-            <button type="submit" className="btn btn-primary">
+          <div className="form-group center-align">
+            <button type="submit" className="btn light-blue darken-1 waves">
               Login User
             </button>
+            <h2 className="flow-text center-align">Test User Login Details</h2>
+            <p className="flow-text center-align">
+              Email: slenderprince75@gmail.com
+            </p>
+            <p className="flow-text center-align">
+              Email: tstalcupjr@gmail.com
+            </p>
+            <p className="flow-text center-align">Password: 123456</p>
           </div>
         </form>
       </div>
@@ -121,14 +127,6 @@ const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
 });
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     fetchAllFixtures: () => {
-//       dispatch(fetchAllFixtures());
-//     }
-//   };
-// };
 
 export default connect(
   mapStateToProps,

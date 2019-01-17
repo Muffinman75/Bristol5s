@@ -31,7 +31,6 @@ export const createFixture = (fixture, cb) => {
       })
       .catch(error => {
         cb(false, "Can't add a fixture that is in the past!");
-        //throw error;
       });
   };
 };
@@ -145,7 +144,6 @@ export const fetchAllFixtures = () => {
 };
 
 export const fixtureById = id => {
-  //let user_id = localStorage.getItem("user_id");
   return {
     type: GET_GAME_BY_ID,
     payload: {

@@ -1,8 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-// import classnames from "classnames";
-
-// import "bootstrap/dist/css/bootstrap.min.css";
 
 export default class PostGame extends Component {
   constructor(props) {
@@ -24,33 +20,6 @@ export default class PostGame extends Component {
     });
   };
 
-  // fromDateCalendar = dateFromCalendar => {
-  //   console.log("Date From Calendar:", dateFromCalendar);
-  //   this.setState({
-  //     date: dateFromCalendar
-  //   });
-  // };
-  //
-  // fromTimePicker = timeFromCalendar => {
-  //   console.log("Time From Calendar:", timeFromCalendar);
-  //   this.setState({
-  //     time: timeFromCalendar
-  //   });
-  // };
-  // handleCalendarChange = value => {
-  //   value.split(" ");
-  //   let date = value[0];
-  //   let time = value[1];
-  //   //console.log("Date:", value[0], "Time:", value[1]);
-  //   this.setState(
-  //     {
-  //       date: date,
-  //       time: time
-  //     },
-  //     () => console.log("calendar date:", this.state.date)
-  //   );
-  // };
-
   handleSubmit = e => {
     e.preventDefault();
     if (
@@ -66,7 +35,6 @@ export default class PostGame extends Component {
         if (passed) {
           alert("Success! Fixture Added!");
           this.handleReset();
-          //this.props.history.push("/home");
           window.location.href = "/home";
         } else {
           alert(response);
@@ -89,10 +57,12 @@ export default class PostGame extends Component {
   render() {
     return (
       <div className="form-group" style={{ marginTop: "50px" }}>
-        <h1 className="center">Please Fill In All Fixture Details</h1>
+        <h1 className="center headings light-blue-text darken-1">
+          Please Fill In All Fixture Details
+        </h1>
         <form onSubmit={this.handleSubmit}>
           <div className="row">
-            <div className="col l5 input-field">
+            <div className="col s12 l5 input-field">
               <i className="material-icons prefix">today</i>
               <input
                 type="date"
@@ -103,7 +73,7 @@ export default class PostGame extends Component {
                 required
               />
             </div>
-            <div className="col l5 input-field">
+            <div className="col s12 l5 input-field right">
               <i className="material-icons prefix">access_time</i>
               <input
                 type="time"
@@ -116,7 +86,7 @@ export default class PostGame extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="col l5 input-field">
+            <div className="col s12 l5 input-field">
               <i className="material-icons prefix">person_add</i>
               <input
                 id="playersReq"
@@ -128,7 +98,7 @@ export default class PostGame extends Component {
               />
               <label htmlFor="playersReq">Num of players needed</label>
             </div>
-            <div className="col l5 input-field">
+            <div className="col s12 l5 input-field right">
               <i className="material-icons prefix">euro_symbol</i>
               <input
                 id="cost"
@@ -143,7 +113,7 @@ export default class PostGame extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="col l5 input-field">
+            <div className="col s12 l5 input-field">
               <i className="material-icons prefix">filter_5</i>
               <input
                 id="pitchNo"
@@ -155,7 +125,7 @@ export default class PostGame extends Component {
               />
               <label htmlFor="pitchNo">Pitch No.</label>
             </div>
-            <div className="col l5 input-field">
+            <div className="col s12 l5 input-field right">
               <i className="material-icons prefix">near_me</i>
               <input
                 id="venue"
@@ -169,7 +139,7 @@ export default class PostGame extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="col l5 input-field">
+            <div className="col s12 l12 input-field">
               <i className="material-icons prefix">message</i>
               <textarea
                 id="comments"
@@ -180,7 +150,9 @@ export default class PostGame extends Component {
               />
               <label htmlFor="comments"> Comments For Player</label>
             </div>
-            <button className="btn btn-success">
+          </div>
+          <div className="center align">
+            <button className="btn light-blue darken-1 waves">
               <i className="material-icons right">chevron_right</i>Add Fixture
             </button>
           </div>

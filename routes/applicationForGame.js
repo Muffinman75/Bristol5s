@@ -7,18 +7,6 @@ const User = require("../models/User");
 const Application = require("../models/ApplicationForGame");
 const { applicationEmail } = require("../utils/emailer");
 
-// router.get("/fixtures", (req, res) => {
-//   Fixture.find().then(fixtures => {
-//     res.send(fixtures);
-//   });
-// });
-//
-// router.get("/fixtures/:id", (req, res) => {
-//   Fixture.findOne({ _id: req.params.id }).then(fixtures => {
-//     res.send(fixtures);
-//   });
-// });
-
 router.get("/applicationForGame", (req, res) => {
   Application.find().then(applications => {
     res.send(applications);

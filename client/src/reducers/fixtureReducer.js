@@ -26,7 +26,6 @@ export default function fixtureReducer(state = initialState, action) {
       let user_id = localStorage.getItem("user_id");
       console.log("user Id in reducer:", user_id);
       return state.filter(fixture => fixture.user_id === user_id);
-    //return action.id;
     default:
       return state;
   }

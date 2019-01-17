@@ -48,11 +48,6 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     console.log("post:", req.body);
-    //const { errors, isValid } = validateAddGameInput(req.body);
-
-    // if (!isValid) {
-    //   return res.status(400).json(errors);
-    // }
     Fixture.findOne({
       user_id: req.user.id,
       date: req.body.date,
@@ -68,15 +63,6 @@ router.post(
           });
         } else {
           console.log("else fixture");
-          // let dateToday = new Date();
-          // dateToday =
-          //   dateToday.getFullYear() +
-          //   "-" +
-          //   (dateToday.getMonth() + 1) +
-          //   "-" +
-          //   dateToday.getDate();
-          // console.log("Todays Date:", dateToday, req.body.date);
-          // moment(dateToday).format("YYYY/MM/DD");
           let dateTimeObj = new Date();
           let fullDateTimeToday = JSON.stringify(dateTimeObj);
           console.log(
@@ -141,11 +127,6 @@ router.put(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     console.log("updatefool:" + JSON.stringify(req.body));
-    //const { errors, isValid } = validateAddGameInput(req.body);
-
-    // if (!isValid) {
-    //   return res.status(400).json(errors);
-    //} else {
     let dateTimeObj = new Date();
     let fullDateTimeToday = JSON.stringify(dateTimeObj);
     console.log(
@@ -153,18 +134,9 @@ router.put(
       typeof fullDateTimeToday,
       fullDateTimeToday
     );
-    // dateToday =
-    //   dateToday.getFullYear() +
-    //   "-" +
-    //   (dateToday.getMonth() + 1) +
-    //   "-" +
-    //   dateToday.getDate();
     let datePieces = fullDateTimeToday.split("T");
     let dateToday = datePieces[0].replace(/['"]+/g, "");
     console.log("dateToday:", dateToday);
-    //let dateToday = parseInt(datePieces[0]);
-    //let formattedDateToday = moment(dateToday).format("YYYY-MM-DD");
-    //let fixtureDate = moment(req.body.date).format("YYYY-MM-DD");
     console.log(
       "Todays Date:",
       dateToday,

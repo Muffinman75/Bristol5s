@@ -16,17 +16,14 @@ class Navbar extends Component {
     (function() {
       const sidenav = document.querySelector(".sidenav");
       console.log(sidenav.dataset);
-      //const nav = document.querySelector("#" + sidenav.dataset.target);
-      //const nav = document.querySelector("#mobile-guest-links");
       sidenav.addEventListener("click", function() {
         sidenav.classList.toggle("is-active");
-        //nav.classList.toggle("is-active");
       });
     })();
     document.addEventListener("DOMContentLoaded", function() {
       console.log("inside listener:");
       var elems = document.querySelectorAll(".sidenav");
-      var instances = M.Sidenav.init(elems);
+      M.Sidenav.init(elems);
     });
   }
   onLogout(e) {
@@ -56,7 +53,7 @@ class Navbar extends Component {
           </li>
           <li>
             <button
-              className="nav-link active btn"
+              className="nav-link light-blue darken-1 waves btn"
               onClick={this.onLogout.bind(this)}
             >
               <img
@@ -90,7 +87,7 @@ class Navbar extends Component {
           <li>
             <a
               href="#"
-              className="nav-link waves-effect waves-light btn-small"
+              className="nav-link light-blue darken-1 waves btn-small"
               onClick={this.onLogout.bind(this)}
             >
               <img
@@ -153,7 +150,13 @@ class Navbar extends Component {
       <nav className="nav-wraper indigo">
         <div className="container">
           <Link className="brand-logo" to="/home">
-            Bristol5s
+            <i class="fas fa-volleyball-ball" />
+            <span
+              className="home-logo hide-on-small-only"
+              style={{ "max-width": "30%" }}
+            >
+              Bristol5s
+            </span>
           </Link>
           <div>
             {isAuthenticated ? (

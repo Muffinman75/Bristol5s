@@ -1,25 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
-//import { Redirect } from "react-router-dom";
-// import classnames from "classnames";
 import { fetchFixtureById, updateFixture } from "../actions/fixtures";
-
-// import "bootstrap/dist/css/bootstrap.min.css";
 
 class UpdateGame extends Component {
   constructor(props) {
     super(props);
     this.state = {
       fixture: null
-      //redirect: false
     };
-    //console.log("props:", this.props, "state:", this.state);
-    // create the state object, with an empty fixture property
   }
 
   componentDidMount() {
-    //this.props.fetchFixtureById(this.props.match.params.id);
     {
       this.props.fixtures.map(fixture => {
         if (fixture._id === this.props.match.params.id) {
@@ -30,22 +21,7 @@ class UpdateGame extends Component {
       });
       console.log("props:", this.props, "state:", this.state);
     }
-    // loop over this.props.fixtures to find the one whose id matches params.id
-    // setstate fixture: the matching fixutre
   }
-  // componentDidMount that dispatches getFixtureById using this.props.match.params.id
-
-  // setRedirect = () => {
-  //   this.setState({
-  //     redirect: true
-  //   });
-  // };
-  //
-  // renderRedirect = () => {
-  //   if (this.state.redirect) {
-  //     return <Redirect to="/home" />;
-  //   }
-  // };
 
   handleInputChange = e => {
     let fixture = this.state.fixture;
@@ -114,10 +90,12 @@ class UpdateGame extends Component {
     }
     return (
       <div className="form-group" style={{ marginTop: "50px" }}>
-        <h1 className="center">Please Fill In All Fixture Details</h1>
+        <h1 className="center headings light-blue-text darken-1">
+          Please Fill In All Fixture Details
+        </h1>
         <form onSubmit={this.handleSubmit}>
           <div className="row">
-            <div className="col l5 input-field">
+            <div className="col s12 l5 input-field">
               <i className="material-icons prefix">today</i>
               <input
                 type="date"
@@ -128,7 +106,7 @@ class UpdateGame extends Component {
                 required
               />
             </div>
-            <div className="col l5 input-field">
+            <div className="col s12 l5 input-field right">
               <i className="material-icons prefix">access_time</i>
               <input
                 type="time"
@@ -141,7 +119,7 @@ class UpdateGame extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="col l5 input-field">
+            <div className="col s12 l5 input-field">
               <i className="material-icons prefix">person_add</i>
               <input
                 id="playersReq"
@@ -153,7 +131,7 @@ class UpdateGame extends Component {
               />
               {/*<label htmlFor="playersReq">Num of Players Needed</label>*/}
             </div>
-            <div className="col l5 input-field">
+            <div className="col s12 l5 input-field right">
               <i className="material-icons prefix">euro_symbol</i>
               <input
                 id="cost"
@@ -168,7 +146,7 @@ class UpdateGame extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="col l5 input-field">
+            <div className="col s12 l5 input-field">
               <i className="material-icons prefix">filter_5</i>
               <input
                 id="pitchNo"
@@ -180,7 +158,7 @@ class UpdateGame extends Component {
               />
               {/*<label htmlFor="pitchNo">Pitch No.</label>*/}
             </div>
-            <div className="col l5 input-field">
+            <div className="col s12 l5 input-field right">
               <i className="material-icons prefix">near_me</i>
               <input
                 id="venue"
@@ -194,7 +172,7 @@ class UpdateGame extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="col l5 input-field">
+            <div className="col s12 l12 input-field">
               <i className="material-icons prefix">message</i>
               <textarea
                 id="comments"
@@ -204,7 +182,9 @@ class UpdateGame extends Component {
               />
               {/*<label htmlFor="comments"> Comments For Applicant</label>*/}
             </div>
-            <button type="submit" className="btn btn-success">
+          </div>
+          <div className="center-align">
+            <button type="submit" className="btn light-blue darken-1 waves">
               <i className="material-icons right">chevron_right</i>Save Updated
               Fixture
             </button>
@@ -221,7 +201,6 @@ const mapStateToProps = state => {
   };
 };
 
-//map dispatch to props for getFixtureById
 const mapDispatchToProps = dispatch => {
   return {
     fetchFixtureById: () => {

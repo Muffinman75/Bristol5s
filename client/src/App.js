@@ -12,9 +12,7 @@ import Login from "./components/Login";
 import Landing from "./components/Landing";
 import Home from "./components/Home";
 import FindGame from "./components/FindGame";
-import PostGame from "./components/PostGame";
 import UpdateGame from "./components/UpdateGame";
-import AllFixturesList from "./containers/AllFixturesList";
 
 import CreateGame from "./containers/CreateGame";
 
