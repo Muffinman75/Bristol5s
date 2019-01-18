@@ -27,8 +27,20 @@ class Navbar extends Component {
     });
   }
 
+  about() {
+    window.location.href = "/";
+  }
   findGame() {
     window.location.href = "/find-game";
+  }
+  addGame() {
+    window.location.href = "/add-game";
+  }
+  login() {
+    window.location.href = "/login";
+  }
+  register() {
+    window.location.href = "/register";
   }
 
   onLogout(e) {
@@ -42,19 +54,31 @@ class Navbar extends Component {
       <div className="authLinks">
         <ul className="right hide-on-med-and-down">
           <li>
-            <Link className="nav-link active" to="/">
+            <a
+              href="#"
+              className="nav-link active headings"
+              onClick={() => this.about()}
+            >
               About
-            </Link>
-          </li>
-          <li>
-            <a className="nav-link active" onClick={() => this.findGame()}>
-              Find a Game
             </a>
           </li>
           <li>
-            <Link className="nav-link active" to="/add-game">
-              Find Players
-            </Link>
+            <a
+              href="#"
+              className="nav-link active headings"
+              onClick={() => this.findGame()}
+            >
+              Join Game
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="nav-link active headings"
+              onClick={() => this.addGame()}
+            >
+              Add a Game
+            </a>
           </li>
           <li>
             <button
@@ -68,26 +92,38 @@ class Navbar extends Component {
                 className="rounded-circle"
                 style={{ width: "25px", marginRight: "5px" }}
               />
-              Logout
+              <span className="headings">Logout</span>
             </button>
           </li>
         </ul>
 
         <ul className="sidenav" style={{ width: "60%" }} id="mobile-auth-links">
           <li>
-            <Link className="nav-link" to="/">
+            <a
+              href="#"
+              className="nav-link headings"
+              onClick={() => this.about()}
+            >
               About
-            </Link>
-          </li>
-          <li>
-            <a className="nav-link" onClick={() => this.findGame()}>
-              Find a Game
             </a>
           </li>
           <li>
-            <Link className="nav-link" to="/add-game">
-              Find Players
-            </Link>
+            <a
+              href="#"
+              className="nav-link headings"
+              onClick={() => this.findGame()}
+            >
+              Join Game
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="nav-link headings"
+              onClick={() => this.addGame()}
+            >
+              Add a Game
+            </a>
           </li>
           <li>
             <a
@@ -102,7 +138,7 @@ class Navbar extends Component {
                 className="rounded-circle right"
                 style={{ width: "25px", marginRight: "5px" }}
               />
-              Logout
+              <span className="headings">Logout</span>
             </a>
           </li>
         </ul>
@@ -116,37 +152,61 @@ class Navbar extends Component {
           id="mobile-guest-links"
         >
           <li>
-            <Link className="nav-link active" to="/">
+            <a
+              href="#"
+              className="nav-link active headings"
+              onClick={() => this.about()}
+            >
               About
-            </Link>
+            </a>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/register">
+            <a
+              href="#"
+              className="nav-link active headings"
+              onClick={() => this.register()}
+            >
               Become a Member
-            </Link>
+            </a>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/login">
+            <a
+              href="#"
+              className="nav-link active headings"
+              onClick={() => this.login()}
+            >
               Sign In
-            </Link>
+            </a>
           </li>
         </ul>
 
         <ul className="right hide-on-med-and-down">
           <li className="nav-item">
-            <Link className="nav-link active" to="/">
+            <a
+              href="#"
+              className="nav-link active headings"
+              onClick={() => this.about()}
+            >
               About
-            </Link>
+            </a>
           </li>
           <li className="nav-item">
-            <Link className="nav-link active" to="/register">
+            <a
+              href="#"
+              className="nav-link active headings"
+              onClick={() => this.register()}
+            >
               Become a Member
-            </Link>
+            </a>
           </li>
           <li className="nav-item">
-            <Link className="nav-link active" to="/login">
+            <a
+              href="#"
+              className="nav-link active headings"
+              onClick={() => this.login()}
+            >
               Sign In
-            </Link>
+            </a>
           </li>
         </ul>
       </div>

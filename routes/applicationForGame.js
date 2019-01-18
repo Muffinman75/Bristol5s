@@ -98,9 +98,9 @@ router.post(
                 venue
               );
               res.status(201).json({
-                message: `${
+                message: `Ok ${applicant}, you have applied to play in ${
                   user.userName
-                }, the game owner knows you want to play! You will receive an email response soon.`
+                }'s game. You will receive an email response soon.`
               });
             });
         }

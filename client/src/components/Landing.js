@@ -44,8 +44,8 @@ export default class Landing extends Component {
           </h2>
           <p className="center-align flow-text">
             Want to meet other footy loving loons? Share your passion with
-            others! No pint tastes as good as the post-match pint! (What!? Could
-            be non-alcoholic!) Join now! Get involved!
+            others! No pint tastes as good as the post-match pint. Fact. (What!?
+            Could be non-alcoholic!) Join now! Get involved!
           </p>
         </div>
         <div className="col s12 l8">

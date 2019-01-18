@@ -34,7 +34,7 @@ class AllFixturesList extends React.Component {
               application,
               (passed, response) => {
                 if (passed) {
-                  alert("Application sent to Game Owner!");
+                  window.location.href = "/find-game";
                 } else {
                   alert(response);
                 }
@@ -44,22 +44,34 @@ class AllFixturesList extends React.Component {
         },
         {
           label: "No",
-          onClick: () => alert("Application not sent!")
+          onClick: () => this.props.history.push("/find-game")
         }
       ]
     });
-
-    this.props.history.push("/home");
   };
 
   render() {
     if (!this.props.fixtures.length) {
       return (
         <div
-          className="center headings light-blue-text darken-1 flow-text"
-          style={{ marginTop: "20px" }}
+          className="valign-wrapper center-align"
+          style={{ "margin-top": "200px" }}
         >
-          There are no Games to play in, please check again later
+          <div className="container">
+            <div className="preloader-wrapper big active">
+              <div className="spinner-layer spinner-blue">
+                <div className="circle-clipper left">
+                  <div className="circle" />
+                </div>
+                <div className="gap-patch">
+                  <div className="circle" />
+                </div>
+                <div className="circle-clipper right">
+                  <div className="circle" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       );
     }
@@ -68,13 +80,13 @@ class AllFixturesList extends React.Component {
         <h1 className="center headings light-blue-text darken-1">
           Wanna Play ?
         </h1>
-        <p className="center light-blue-text darken-1 flow-text">
+        <p className="center headings light-blue-text darken-1 flow-text">
           Please select a game from below to play in.
         </p>
-        <p className="center light-blue-text darken-1 flow-text">
+        <p className="center headings light-blue-text darken-1 flow-text">
           The owner of the game will be immediately notified
         </p>
-        <p className="center light-blue-text darken-1 flow-text">
+        <p className="center headings light-blue-text darken-1 flow-text">
           that you would like to play in their game.
         </p>
         {this.props.fixtures.map(fixture => {

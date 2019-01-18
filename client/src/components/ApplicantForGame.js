@@ -11,16 +11,13 @@ class ApplicantForGame extends Component {
   updateApprovalAccept = (fixtureID, applicantName) => {
     confirmAlert({
       title: `Accept ${applicantName} For Your Game!`,
-      message: `You definately want ${applicantName} to play? Are you sure?`,
+      message: `You definitely want ${applicantName} to play? Are you sure?`,
       buttons: [
         {
           label: "Yes",
           onClick: () => {
             console.log("b4 invoke approve:");
             this.props.updateApprovalAccept(fixtureID, applicantName);
-            console.log("after invoke approve:");
-            alert(`OK! ${applicantName} will see you at the game!`);
-            console.log("props in approve:", this.props);
             //this.props.history.push("/home");
             window.location.href = "/home";
           }
@@ -28,11 +25,6 @@ class ApplicantForGame extends Component {
         {
           label: "No",
           onClick: () => {
-            console.log("after invoke approve:");
-            alert(
-              `You have chosen NOT to accept ${applicantName} for your game!`
-            );
-            console.log("props in approve:", this.props);
             this.props.history.push("/home");
             //window.location.href = "/home";
           }
@@ -50,7 +42,6 @@ class ApplicantForGame extends Component {
           label: "Yes",
           onClick: () => {
             this.props.updateApprovalReject(fixtureID, applicantName);
-            alert(`You have rejected ${applicantName} for your game!`);
             //this.props.history.push("/home");
             window.location.href = "/home";
           }
@@ -60,7 +51,6 @@ class ApplicantForGame extends Component {
           onClick: () => {
             this.props.history.push("/home");
             //window.location.href = "/home";
-            alert(`You have not rejected ${applicantName} for your game!`);
           }
         }
       ]
@@ -82,7 +72,8 @@ class ApplicantForGame extends Component {
               <div className="applicant" key={application._id}>
                 <h4 className="card-panel red accent-2 center-align">
                   <span className="applicantHeading">
-                    {application.applicant_name} Wants To Play In Your Game!
+                    Hi! I'm {application.applicant_name}, I Want To Play In Your
+                    Game!
                   </span>
                 </h4>
                 <div className="row center-align">
