@@ -3,8 +3,8 @@ import { GET_ERRORS, SET_CURRENT_USER } from "./types";
 import setAuthToken from "../setAuthToken";
 import jwt_decode from "jwt-decode";
 
+// action creators for dispatching actions for authentication errors, registering, logging in/out a user
 export const registerUser = (user, history) => dispatch => {
-  console.log("inside of RegisterUser action with user: ", user);
   axios
     .post("/api/users/register", user)
     .then(res => history.push("/login"))
@@ -24,7 +24,6 @@ export const loginUser = user => dispatch => {
       localStorage.setItem("jwtToken", token);
       setAuthToken(token);
       const decoded = jwt_decode(token);
-      console.log("Decoded Token:", decoded);
       localStorage.setItem("user_id", decoded.id);
       localStorage.setItem("user_name", decoded.userName);
       dispatch(setCurrentUser(decoded));
@@ -50,6 +49,5 @@ export const logoutUser = history => dispatch => {
   localStorage.removeItem("user_name");
   setAuthToken(false);
   dispatch(setCurrentUser({}));
-  //history.push("/login");
   window.location.href = "/";
 };

@@ -5,9 +5,9 @@ const cron = require("node-cron");
 
 const Fixture = require("../models/Fixture");
 
+// Archives old games
 router.get("/fixtureAndApplicationChecker", (req, res) => {
   let dateToday = new Date();
-  console.log("Todays Date:", dateToday);
   dateToday.getFullYear() +
     "/" +
     (dateToday.getMonth() + 1) +
@@ -21,7 +21,6 @@ router.get("/fixtureAndApplicationChecker", (req, res) => {
         .json({ message: "Old fixtures and applications archived" });
     }
   );
-  console.log("hello");
   res.send(200);
 });
 

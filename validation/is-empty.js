@@ -1,5 +1,4 @@
 // This function will check if the passed value is undefined or null or object or string‘s length is 0
-
 const isEmpty = value => {
   return (
     value === undefined ||

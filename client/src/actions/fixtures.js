@@ -7,6 +7,7 @@ import {
   REMOVE_GAME
 } from "./types";
 
+// action creators for dispatching actions for CRUD operations for a fixture
 export const createFixture = (fixture, cb) => {
   return dispatch => {
     return axios
@@ -20,9 +21,7 @@ export const createFixture = (fixture, cb) => {
         comments: fixture.comments
       })
       .then(response => {
-        console.log(response.status);
         if (response.data.hasOwnProperty("message")) {
-          //something went wrong
           cb(false, response.data.message);
         } else {
           dispatch(createFixtureSuccess(response.data));
@@ -51,9 +50,7 @@ export const createFixtureSuccess = data => {
 };
 
 export const updateFixture = (fixture, cb) => {
-  console.log("ud b4 dispatch", fixture);
   return dispatch => {
-    console.log("ud after dispatch", fixture);
     return axios
       .put("/api/fixtures/update-game", {
         id: fixture._id,
@@ -66,17 +63,14 @@ export const updateFixture = (fixture, cb) => {
         comments: fixture.comments
       })
       .then(response => {
-        console.log("response status in update:", response.status);
         if (response.data.hasOwnProperty("message")) {
           cb(false, response.data.message);
         } else {
           dispatch(updateFixtureSuccess(response.data));
-          console.log("data in ud", response.data);
           cb(true, response.data);
         }
       })
       .catch(error => {
-        console.log("cb", cb);
         cb(false, "Can't update to a fixture that is in the past!");
       });
   };
@@ -107,7 +101,6 @@ export const removeFixtureSuccess = fixture => {
 };
 
 export const removeFixture = fixture => {
-  console.log("Remove Fixture action:", fixture);
   return dispatch => {
     return axios
       .put("/api/fixtures/remove-game", { _id: fixture._id })
@@ -128,13 +121,10 @@ export const fetchFixtures = fixtures => {
 };
 
 export const fetchAllFixtures = () => {
-  console.log("fixture here");
   return dispatch => {
-    console.log("fixture here2");
     return axios
       .get("/api/fixtures/display-games")
       .then(response => {
-        console.log("fixture response");
         dispatch(fetchFixtures(response.data));
       })
       .catch(error => {
@@ -153,7 +143,6 @@ export const fixtureById = id => {
 };
 
 export const fetchFixtureById = () => {
-  console.log("fixtureById inside action");
   return dispatch => {
     let user_id = localStorage.getItem("user_id");
     return axios

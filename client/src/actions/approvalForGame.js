@@ -1,10 +1,9 @@
 import { ACCEPT_APPLICANT, REJECT_APPLICANT } from "./types";
 import axios from "axios";
 
+// action creators for dispatching actions for accept or reject applicant
 export const updateApprovalAccept = (fixtureID, applicantName) => {
-  console.log("approve b4", fixtureID, applicantName);
   return dispatch => {
-    console.log("approve after", fixtureID, applicantName);
     return axios
       .put("/api/applications/approve", {
         fixtureID,
@@ -29,9 +28,7 @@ export const updateApprovalAcceptSuccess = data => {
 };
 
 export const updateApprovalReject = (fixtureID, applicantName) => {
-  console.log("approve b4", fixtureID, applicantName);
   return dispatch => {
-    console.log("approve after", fixtureID, applicantName);
     return axios
       .put("/api/applications/reject", {
         fixtureID,

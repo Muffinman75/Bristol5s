@@ -7,12 +7,11 @@ const Fixture = require("../models/Fixture");
 const User = require("../models/User");
 const validateAddGameInput = require("../validation/add-game");
 
+// Authenticated CRUD operations for fixtures
 router.get(
   "/display-games",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log("getAllFixtures:" + JSON.stringify(req.body));
-
     Fixture.find({ archive: false }).then(fixtures => {
       if (!fixtures) {
         return res.status(400).json({ message: "No fixtures to see here" });
@@ -27,8 +26,6 @@ router.get(
   "/display-games/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log("getAllFixturesById:" + JSON.stringify(req.body));
-
     Fixture.find({ $and: [{ user_id: req.user.id }, { archive: false }] }).then(
       fixtures => {
         if (!fixtures) {
@@ -47,7 +44,6 @@ router.post(
   "/add-game",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log("post:", req.body);
     Fixture.findOne({
       user_id: req.user.id,
       date: req.body.date,
@@ -55,30 +51,15 @@ router.post(
       archive: false
     })
       .then(fixture => {
-        console.log("then fixutre");
         if (fixture) {
-          console.log("if fixture");
           return res.status(400).json({
             message: "One user cannot have two fixtures at the same time"
           });
         } else {
-          console.log("else fixture");
           let dateTimeObj = new Date();
           let fullDateTimeToday = JSON.stringify(dateTimeObj);
-          console.log(
-            "fullDateTimeToday:",
-            typeof fullDateTimeToday,
-            fullDateTimeToday
-          );
           let datePieces = fullDateTimeToday.split("T");
           let dateToday = datePieces[0].replace(/['"]+/g, "");
-          console.log("dateToday:", dateToday);
-          console.log(
-            "Todays Date:",
-            dateToday,
-            "Added Fixture Date:",
-            req.body.date
-          );
           function compareDates(d1, d2) {
             var parts = d1.split("-");
             var d1 = Number(parts[0] + parts[1] + parts[2]);
@@ -86,12 +67,7 @@ router.post(
             var d2 = Number(parts[0] + parts[1] + parts[2]);
             return d1 < d2;
           }
-          console.log(
-            "Fixture Date is Greater than:",
-            compareDates(dateToday, req.body.date)
-          );
           if (compareDates(dateToday, req.body.date) === true) {
-            console.log("here75");
             Fixture.create({
               user_id: req.user.id,
               date: req.body.date,
@@ -116,7 +92,6 @@ router.post(
         }
       })
       .catch(err => {
-        console.log("err:", err);
         res.send(500).json({ message: "Cannot find fixture...dunno why" });
       });
   }
@@ -126,24 +101,10 @@ router.put(
   "/update-game",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log("updatefool:" + JSON.stringify(req.body));
     let dateTimeObj = new Date();
     let fullDateTimeToday = JSON.stringify(dateTimeObj);
-    console.log(
-      "fullDateTimeToday:",
-      typeof fullDateTimeToday,
-      fullDateTimeToday
-    );
     let datePieces = fullDateTimeToday.split("T");
     let dateToday = datePieces[0].replace(/['"]+/g, "");
-    console.log("dateToday:", dateToday);
-    console.log(
-      "Todays Date:",
-      dateToday,
-      "Updated Fixture Date:",
-      req.body.date
-    );
-
     function compareDates(d1, d2) {
       var parts = d1.split("-");
       var d1 = Number(parts[0] + parts[1] + parts[2]);
@@ -151,12 +112,6 @@ router.put(
       var d2 = Number(parts[0] + parts[1] + parts[2]);
       return d1 < d2;
     }
-
-    console.log(
-      "Fixture Date is Greater than:",
-      compareDates(dateToday, req.body.date)
-    );
-
     if (compareDates(dateToday, req.body.date) === true) {
       Fixture.update(
         { _id: req.body.id },
@@ -176,7 +131,6 @@ router.put(
           if (fixture) {
             return res.sendStatus(200);
           }
-          console.log("No fixture to update");
           return res
             .status(404)
             .json({ message: "This fixture does not exist" });
@@ -204,12 +158,10 @@ router.put(
     )
       .then(fixture => {
         if (fixture) {
-          console.log("This fixture has been removed:", req.body);
           return res
             .status(201)
             .json({ message: "This fixture has now been removed" });
         }
-        console.log("No fixture to remove:", req.body);
         return res
           .status(404)
           .json({ message: "Cannot remove this fixture, it does not exist" });

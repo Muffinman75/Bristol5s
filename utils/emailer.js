@@ -2,6 +2,7 @@ const SGmail = require("@sendgrid/mail");
 require("dotenv").config();
 SGmail.setApiKey(process.env.SENDGRID_API_KEY);
 
+// Sendgrid emailer for all my email needs!
 function applicationEmail(email, name, applicant, date, time, venue) {
   const message = {
     to: email, //email variable
@@ -73,7 +74,7 @@ function rejectionEmail(email, applicant, date, time, venue) {
 
   SGmail.send(message).then(sent => {
     if (sent) {
-      console.log(message);
+      console.log("message:", message);
     } else {
       console.log("message not sent");
     }

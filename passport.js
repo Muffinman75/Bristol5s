@@ -1,5 +1,4 @@
 // create passports jwt strategy for authentication
-
 const JWTStrategy = require("passport-jwt").Strategy;
 const ExtractJWT = require("passport-jwt").ExtractJwt;
 const mongoose = require("mongoose");

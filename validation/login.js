@@ -1,5 +1,4 @@
 // validator function to check the input values and based on the values, if the values are empty or not formatted correctly, or length is not defined in the rules then, it fills an error object and sends back to the client
-
 const Validator = require("validator");
 const isEmpty = require("./is-empty");
 

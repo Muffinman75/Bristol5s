@@ -55,6 +55,7 @@ class Navbar extends Component {
         <ul className="right hide-on-med-and-down">
           <li>
             <a
+              // eslint-disable-line no-alert
               href="#"
               className="nav-link active headings"
               onClick={() => this.about()}
@@ -64,6 +65,7 @@ class Navbar extends Component {
           </li>
           <li>
             <a
+              // eslint-disable-line no-alert
               href="#"
               className="nav-link active headings"
               onClick={() => this.findGame()}
@@ -73,6 +75,7 @@ class Navbar extends Component {
           </li>
           <li>
             <a
+              // eslint-disable-line no-alert
               href="#"
               className="nav-link active headings"
               onClick={() => this.addGame()}
@@ -100,6 +103,7 @@ class Navbar extends Component {
         <ul className="sidenav" style={{ width: "60%" }} id="mobile-auth-links">
           <li>
             <a
+              // eslint-disable-line no-alert
               href="#"
               className="nav-link headings"
               onClick={() => this.about()}
@@ -109,6 +113,7 @@ class Navbar extends Component {
           </li>
           <li>
             <a
+              // eslint-disable-line no-alert
               href="#"
               className="nav-link headings"
               onClick={() => this.findGame()}
@@ -118,6 +123,7 @@ class Navbar extends Component {
           </li>
           <li>
             <a
+              // eslint-disable-line no-alert
               href="#"
               className="nav-link headings"
               onClick={() => this.addGame()}
@@ -127,6 +133,7 @@ class Navbar extends Component {
           </li>
           <li>
             <a
+              // eslint-disable-line no-alert
               href="#"
               className="nav-link light-blue darken-1 waves btn-small"
               onClick={this.onLogout.bind(this)}
@@ -153,6 +160,7 @@ class Navbar extends Component {
         >
           <li>
             <a
+              // eslint-disable-line no-alert
               href="#"
               className="nav-link active headings"
               onClick={() => this.about()}
@@ -162,6 +170,7 @@ class Navbar extends Component {
           </li>
           <li className="nav-item">
             <a
+              // eslint-disable-line no-alert
               href="#"
               className="nav-link active headings"
               onClick={() => this.register()}
@@ -171,6 +180,7 @@ class Navbar extends Component {
           </li>
           <li className="nav-item">
             <a
+              // eslint-disable-line no-alert
               href="#"
               className="nav-link active headings"
               onClick={() => this.login()}
@@ -183,6 +193,7 @@ class Navbar extends Component {
         <ul className="right hide-on-med-and-down">
           <li className="nav-item">
             <a
+              // eslint-disable-line no-alert
               href="#"
               className="nav-link active headings"
               onClick={() => this.about()}
@@ -192,6 +203,7 @@ class Navbar extends Component {
           </li>
           <li className="nav-item">
             <a
+              // eslint-disable-line no-alert
               href="#"
               className="nav-link active headings"
               onClick={() => this.register()}
@@ -201,6 +213,7 @@ class Navbar extends Component {
           </li>
           <li className="nav-item">
             <a
+              // eslint-disable-line no-alert
               href="#"
               className="nav-link active headings"
               onClick={() => this.login()}

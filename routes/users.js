@@ -11,11 +11,11 @@ const validateLoginInput = require("../validation/login");
 
 const User = require("../models/User");
 
+// Endpoints for creating and logging in a user
 router.post("/register", function(req, res) {
   const { errors, isValid } = validateRegisterInput(req.body);
 
   if (!isValid) {
-    console.log(errors);
     return res.status(400).json(errors);
   }
   User.findOne({
@@ -23,10 +23,9 @@ router.post("/register", function(req, res) {
   })
     .then(user => {
       if (user) {
-        console.log("Username or Email already exists");
-        return res.status(400).json({
-          register: "Username or Email already exists"
-        });
+        errors.userName = "Username or Email already exists";
+        errors.email = "Username or Email already exists";
+        return res.status(400).json(errors);
       } else {
         const avatar = gravatar.url(req.body.email, {
           s: "200",

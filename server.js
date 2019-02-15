@@ -68,21 +68,9 @@ function closeServer() {
     server.close(err => {
       if (err) {
         reject(err);
-        // so we don't also call `resolve()`
         return;
       }
       resolve();
-    });
-  });
-}
-
-function runCron(app) {
-  cron.schedule("*/5 * * * * *", () => {
-    console.log("cron running");
-    app.runMiddleware("/api/fixtures/fixtureAndApplicationChecker", function(
-      response
-    ) {
-      console.log("Cron Response:", response);
     });
   });
 }

@@ -129,7 +129,6 @@ class UpdateGame extends Component {
                 value={"" + this.state.fixture.playersReq + ""}
                 required
               />
-              {/*<label htmlFor="playersReq">Num of Players Needed</label>*/}
             </div>
             <div className="col s12 l5 input-field right">
               <i className="material-icons prefix">euro_symbol</i>
@@ -142,7 +141,6 @@ class UpdateGame extends Component {
                 value={"" + this.state.fixture.cost + ""}
                 required
               />
-              {/*<label htmlFor="cost">Price to Play</label>*/}
             </div>
           </div>
           <div className="row">
@@ -156,7 +154,6 @@ class UpdateGame extends Component {
                 value={"" + this.state.fixture.pitchNo + ""}
                 required
               />
-              {/*<label htmlFor="pitchNo">Pitch No.</label>*/}
             </div>
             <div className="col s12 l5 input-field right">
               <i className="material-icons prefix">near_me</i>
@@ -168,7 +165,6 @@ class UpdateGame extends Component {
                 value={"" + this.state.fixture.venue + ""}
                 required
               />
-              {/*<label htmlFor="venue">Venue</label>*/}
             </div>
           </div>
           <div className="row">
@@ -180,10 +176,9 @@ class UpdateGame extends Component {
                 onChange={this.handleInputChange}
                 value={"" + this.state.fixture.comments + ""}
               />
-              {/*<label htmlFor="comments"> Comments For Applicant</label>*/}
             </div>
           </div>
-          <div className="center-align" style={{ "margin-bottom": "15px" }}>
+          <div className="center-align" style={{ marginBottom: "15px" }}>
             <button type="submit" className="btn light-blue darken-1 waves">
               <i className="material-icons right">chevron_right</i>Save Updated
               Fixture

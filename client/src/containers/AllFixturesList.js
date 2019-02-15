@@ -55,7 +55,7 @@ class AllFixturesList extends React.Component {
       return (
         <div
           className="valign-wrapper center-align"
-          style={{ "margin-top": "200px" }}
+          style={{ marginTop: "200px" }}
         >
           <div className="container">
             <div className="preloader-wrapper big active">
@@ -97,7 +97,7 @@ class AllFixturesList extends React.Component {
                 <Fixture fixture={fixture} />
                 <div className="center-align">
                   <button
-                    style={{ "margin-bottom": "10px" }}
+                    style={{ marginBottom: "10px" }}
                     type="button"
                     className="btn light-blue darken-1 waves"
                     onClick={() => this.applyForFixture(fixture)}

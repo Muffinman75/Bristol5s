@@ -7,6 +7,8 @@ const User = require("../models/User");
 const Application = require("../models/ApplicationForGame");
 const { applicationEmail } = require("../utils/emailer");
 
+// Routes for get all applications and for posting an application for a fixture and
+// sending an email to the game poster
 router.get("/applicationForGame", (req, res) => {
   Application.find().then(applications => {
     res.send(applications);
@@ -25,12 +27,10 @@ router.post(
     let time;
     let venue;
     let gamePoster;
-    console.log("Apply for game:" + JSON.stringify(req.body));
     Application.findOne({
       $and: [{ game_id: req.body.game_id }, { applicant_id: req.user._id }]
     })
       .then(application => {
-        console.log("inside the then:", application);
         if (application) {
           return res
             .status(302)
@@ -40,11 +40,9 @@ router.post(
             _id: req.body.game_id
           })
             .then(fixture => {
-              console.log("fixture in apply:", fixture);
               return (gamePoster = fixture.user_id);
             })
             .then(() => {
-              console.log("now I'm here!");
               Application.create({
                 applicant_id: req.body.applicant_id,
                 applicant_name: req.body.applicant_name,
@@ -53,25 +51,18 @@ router.post(
               });
             })
             .then(dbResponse => {
-              console.log("application created");
               return (newApplication = dbResponse);
             })
             .then(() => {
               return User.findOne({ _id: req.body.applicant_id });
             })
             .then(user => {
-              console.log("Applicant Username:", user.userName);
               return (applicant = user.userName);
             })
             .then(() => {
-              console.log("fixture findOne", req.body.game_id);
               return Fixture.findOne({ _id: req.body.game_id });
             })
             .then(fixture => {
-              console.log(
-                "fixture after application created:",
-                fixture.user_id
-              );
               return (
                 (id = fixture.user_id),
                 (date = fixture.date),
@@ -83,12 +74,6 @@ router.post(
               return User.findOne({ _id: id });
             })
             .then(user => {
-              console.log(
-                "Sending email to:",
-                user.userName,
-                "at:",
-                user.email
-              );
               applicationEmail(
                 user.email,
                 user.userName,
