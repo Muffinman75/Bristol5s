@@ -11,6 +11,8 @@ const validateLoginInput = require("../validation/login");
 
 const User = require("../models/User");
 
+require("dotenv").config();
+
 // Endpoints for creating and logging in a user
 router.post("/register", function(req, res) {
   const { errors, isValid } = validateRegisterInput(req.body);
